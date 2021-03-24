@@ -1,0 +1,73 @@
+{
+    "el": {
+        "depparse": {
+            "gdt": {
+                "md5": "",
+                "dependencies": [
+                    {
+                        "model": "pretrain",
+                        "package": "gdt"
+                    }
+                ]
+            }
+        },
+        "lemma": {
+            "gdt": {
+                "md5": ""
+            }
+        },
+        "mwt": {
+            "gdt": {
+                "md5": ""
+            }
+        },
+        "pos": {
+            "gdt": {
+                "md5": "",
+                "dependencies": [
+                    {
+                        "model": "pretrain",
+                        "package": "gdt"
+                    }
+                ]
+            }
+        },
+        "pretrain": {
+            "gdt": {
+                "md5": ""
+            }
+        },
+        "tokenize": {
+            "gdt": {
+                "md5": ""
+            }
+        },
+        "default_processors": {
+            "tokenize": "gdt",
+            "mwt": "gdt",
+            "lemma": "gdt",
+            "pos": "gdt",
+            "depparse": "gdt"
+        },
+        "default_dependencies": {
+            "pos": [
+                {
+                    "model": "pretrain",
+                    "package": "gdt"
+                }
+            ],
+            "depparse": [
+                {
+                    "model": "pretrain",
+                    "package": "gdt"
+                }
+            ]
+        },
+        "default_md5": "",
+        "lang_name": "Greek"
+    },
+    "greek": {
+        "alias": "el"
+    },
+    "url": "http://nlp.stanford.edu/software/stanza"
+}

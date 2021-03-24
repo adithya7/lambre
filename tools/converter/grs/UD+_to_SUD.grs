@@ -1,0 +1,643 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The "irregular_expr.grs" file includes packages applying a specific treatment to multi-word expressions (MWE), titles and translated. What they have in common is the fact that their syntactic behaviour towards the outside world is not regular.
+include "irregular_expr.grs"
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Remove all information specific to Enhanced UD.
+package eud_to_ud {
+  rule deep { % remove add enhanced relations
+    pattern { e:N -[re"E:.*"]-> M }
+    commands { del_edge e}
+  }
+
+  rule empty { % remove empty nodes
+    pattern { N [_UD_empty=Yes] }
+    commands { del_node N }
+  }
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Move the dependents of a conjunction from the left conjunct to the right conjunct. Dependencies CONJ, DISCOURSE, PARATAXIS and PUNCT are not moved.
+package minimize_conj_dep {
+  rule minimize {
+    pattern {
+      C1 -[1=conj]-> C2;
+      e:C1 -[^conj|conj:emb|discourse|parataxis|punct]-> D; C2 << D}
+    without { C1 -[1=conj]-> C; C2 << C ; C << D} % Ex :fr-ud-train_03266, fr-ud-train_02016
+    commands { add_edge e:C2 -> D; del_edge e; D.Shared=Yes }
+  }
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% All aux, case, cop and mark relations are reversed.
+% The reverse procedure consists of 4 step
+% 1) package [normalize_caus_pass]: change aux:caus into caus relations and aux:pass into pass relations (doing this we have all relations to be reversed at the same top level);
+% 2) package [reverse_edges]: reverse edges, add the edge feature deep=REV. shift_in are done and shift_out is done only on the subsets of reversable relations (case, cop, caus, pass, aux, mark); other shift_out operations are postponed to another package;
+% 3) package [shift_out_edges]: generic rules for selection of relations that should move from the old head onto the new head;
+% 4) rule [remove_rev]: remove the @REV extension;
+% 5) package [restore_caus_pass]: symetric to step 1, change caus into aux:caus and pass into aux:pass
+package reverse_relations{
+  package normalize_caus_pass {
+    rule caus {
+      pattern { e:M -[aux:caus]-> N }
+      commands { del_edge e; add_edge M -[caus]-> N }
+    }
+
+    rule pass {
+      pattern { e:M -[aux:pass]-> N }
+      commands { del_edge e; add_edge M -[pass]-> N }
+    }
+  }
+
+%%%%%%%%%%%%%%%%%%%%%
+% When several dependents compete for replacing the same head, the rule of starting with the closest dependent does not work in the cases of extraposition of the predicate.
+% Ex: fr-ud-test_00067-  ... ce que nous avons été ...
+% Ex: fr-ud-train_00086- ... quelle que soit la nature de ses pratiques, ...
+% The rule that works in all cases is based on an order between types of relations that must be reversed.
+%The order chosen below is the following:
+% (1) case < aux, caus < aux,  cop < aux, pass < aux;
+% (2) case < caus, cop < caus;
+% (3) case < cop ;
+% (4) aux < mark, case < mark, caus < mark, cop < mark, pass < mark;
+% (5) aux <> aux, case <> case, caus <> caus, cop <> cop, mark <> mark, pass <> pass; the order is determined by the order of proximity with respect the head
+  package reverse_edges {
+    rule aux {
+      pattern { e:H -[1=aux, !deep]-> AUX }
+      without { H -[1=case|cop|caus|pass, !deep]-> AUX1 } % rule (1) above
+      without { H -[1=aux, !deep]-> AUX1; AUX << AUX1 ; AUX1 << H } % rule (5) above
+      without { H -[1=aux, !deep]-> AUX1; AUX >> AUX1 ; AUX1 >> H } % rule (5) above
+      commands {
+        e.deep=REV;
+        add_edge e: AUX -> H;
+        del_edge e;
+        shift_in H =[^TITLE|MWE]=> AUX;
+        shift_out H =[1=aux|mark,!deep]=> AUX;
+      }
+    }
+
+    rule case {
+      pattern { e:H -[1=case, !deep]-> AUX }
+      without { H -[1=case, !deep]-> AUX1; AUX << AUX1 ; AUX1 << H } % rule (5) above
+      without { H -[1=case, !deep]-> AUX1; AUX >> AUX1 ; AUX1 >> H } % rule (5) above
+      commands {
+        e.deep=REV;
+        add_edge e: AUX -> H;
+        del_edge e;
+        shift_in H =[^TITLE|MWE]=> AUX;
+        shift_out H =[1=aux|case|caus|cop|mark|pass,!deep]=> AUX;
+      }
+    }
+
+    rule caus {
+      pattern { e:H -[1=caus, !deep]-> AUX }
+      without { H -[1=case|cop, !deep]-> AUX1 } % rule (2) above
+      without { H -[1=caus, !deep]-> AUX1; AUX << AUX1 ; AUX1 << H } % rule (5) above
+      without { H -[1=caus, !deep]-> AUX1; AUX >> AUX1 ; AUX1 >> H } % rule (5) above
+      commands {
+        e.deep=REV;
+        add_edge e: AUX -> H;
+        del_edge e;
+        shift_in H =[^TITLE|MWE]=> AUX;
+        shift_out H =[1=aux|caus|mark|pass,!deep]=> AUX;
+      }
+    }
+
+    rule cop {
+      pattern { e:H -[1=cop, !deep]-> AUX }
+      without { H -[1=case, !deep]-> AUX1 } % rule (3) above
+      without { H -[1=cop, !deep]-> AUX1; AUX << AUX1 ; AUX1 << H } % rule (5) above
+      without { H -[1=cop, !deep]-> AUX1; AUX >> AUX1 ; AUX1 >> H } % rule (5) above
+      commands {
+        e.deep=REV;
+        add_edge e: AUX -> H;
+        del_edge e;
+        shift_in H =[^TITLE|MWE]=> AUX;
+        shift_out H =[1=aux|caus|cop|mark|pass,!deep]=> AUX;
+      }
+    }
+
+    rule mark {
+      pattern { e:H -[1=mark, !deep]-> AUX }
+      without { H -[1=aux|case|caus|cop|pass, !deep]-> AUX1 } % rule (4) above
+      without { H -[1=mark, !deep]-> AUX1; AUX << AUX1 ; AUX1 << H } % rule (5) above
+      without { H -[1=mark, !deep]-> AUX1; AUX >> AUX1 ; AUX1 >> H } % rule (5) above
+      commands {
+        e.deep=REV;
+        add_edge e: AUX -> H;
+        del_edge e;
+        shift_in H =[^TITLE|MWE]=> AUX;
+        shift_out H =[1=mark,!deep]=> AUX;
+      }
+    }
+
+    rule pass {
+      pattern { e:H -[1=pass, !deep]-> AUX }
+     % without { H -[1=case|cop|caus, !deep]-> AUX1 }
+      without { H -[1=pass, !deep]-> AUX1; AUX << AUX1 ; AUX1 << H } % rule (5) above
+      without { H -[1=pass, !deep]-> AUX1; AUX >> AUX1 ; AUX1 >> H } % rule (5) above
+      commands {
+        e.deep=REV;
+        add_edge e: AUX -> H;
+        del_edge e;
+        shift_in H =[^TITLE|MWE]=> AUX;
+        shift_out H =[1=aux|caus|case|cop|mark|pass,!deep]=> AUX;
+      }
+    }
+  }
+
+%%%%%%%%%%%%%%%%%%%%%
+% The source of some relations must rise from the old head D to the new head H.
+package shift_out_edges{
+% All relations that rise without any restriction.
+  rule all{
+    pattern {H -[deep=REV]-> D;e: D -[cc|discourse|vocative]-> D1}
+    commands{add_edge e: H -> D1;del_edge e}}
+
+% Oblique agent relations in causative constructions.
+  rule caus_agent {
+    pattern{H -[1=caus,deep=REV]-> D; e: D -[1=iobj|obj|obl, 2=agent]-> D1}
+    commands{add_edge e: H -> D1;del_edge e}
+  }
+
+% All relations that rise inside a clause.
+  rule all_mark_embedded{
+    pattern {
+      H -[1<>mark,deep=REV]-> D;
+      e: D -[1=advcl|csubj|dislocated|expl|nsubj|parataxis|vocative]-> D1;
+    }
+    commands{add_edge e: H -> D1;del_edge e}
+  }
+
+  
+% Relations with their source D after the head of a subordinated clause and their dependent D1 before.
+  rule all_mark_outside_left{
+    pattern {
+      H -[1=mark,deep=REV]-> D;
+      e: D -[1=csubj|dislocated|expl|nsubj|vocative]-> D1;
+      D1 << H; H << D
+    }
+    commands{add_edge e: H -> D1;del_edge e}
+  }
+
+% Relations with their source D before the head of a subordinated clause and their dependent D1 afterwards.
+  rule all_mark_outside_right{
+    pattern {
+      H -[1=mark,deep=REV]-> D;
+      e: D -[1=csubj|dislocated|expl|nsubj]-> D1;
+      D1 >> H; H >> D
+    }
+    commands{add_edge e: H -> D1;del_edge e}
+  }
+
+% Relations that rise when their source D is on the right of H and when their dependent D1 is on the right of D.
+  rule H_D_D1{
+    pattern{
+      H -[deep=REV]-> D;  H << D;
+      e: D -[1=advmod|punct|obl]-> D1; D << D1}
+    without{H -[1=case]-> D;  D -[advmod]-> D1}
+    without{H -[1=mark]-> D;  D -[1=advmod|obl]-> D1}
+    without{D -[obl:agent|obl:arg]-> D1}
+    without{D -> D2; D1 << D2} 
+    without{D -[punct]-> D2; D2 << D; D -[punct]-> D1; D1.lemma = D2.lemma}
+    without{D -[punct]-> D2; D2 << D; D -[punct]-> D1; D1.lemma = ")"; D2.lemma = "("}
+    without{D -[punct]-> D2; D2 << D; D -[punct]-> D1; D1.lemma = "»"; D2.lemma = "«"}
+    without{D -[punct]-> D2; D2 << D; D -[punct]-> D1; D1.lemma = "]"; D2.lemma = "["}
+    commands{add_edge e: H -> D1; del_edge e}
+  }
+
+% Relations that rise when their source D is on the right of H and when their dependent D1 is between D and H.
+  rule H_D1_D{
+    pattern{
+      H -[1=aux|caus|cop|pass,deep=REV]-> D;
+      e: D -[1=advmod|obl]-> D1;
+      H << D1; D1 << D}
+    %without{ H -[1=aux|cop]-> D; D -[advmod]-> D1 }
+    without{ D -> D2; H << D2; D2 << D1}
+    commands{add_edge e: H -> D1; del_edge e}
+  }
+
+% Relations that rise when their source D is on the left of H and when their dependent D1 is on the right of H.
+  rule D_H_D1{
+    pattern{H -[deep=REV]-> D;  H >> D; e: D -[1=advcl|advmod|obl|punct]-> D1; D1 >> H}
+    without{D -[obl:agent|obl:arg]-> D1}
+    commands{add_edge e: H -> D1; del_edge e}
+  }
+
+% Relations that rise when their source D is on the right of H and when their dependent D1 is on the left of H.
+  rule D1_H_D{
+    pattern{
+      H -[deep=REV]-> D;  H << D;
+      e: D -[1=advcl|advmod|nmod|obl|orphan|punct]-> D1; D1 << H}
+    without{D -[obl:agent|obl:arg]-> D1}
+    commands{add_edge e: H -> D1; del_edge e}
+  }
+
+% Relations that rise when their source D is on the left of H and when their dependent D1 is on the left of D.
+  rule D1_D_H{
+    pattern{
+      H -[deep=REV]-> D;  H >> D;
+      e: D -[1=advmod|obl|punct]-> D1; D >> D1
+    }
+%    without{H -[1=mark]-> D;  D -[1=obl|advmod]-> D1}
+    without{D -[obl:agent|obl:arg]-> D1}
+%    without{D -> D2; D1 >> D2}
+    commands{add_edge e: H -> D1; del_edge e}
+  }
+
+% Conj relations in the general case.
+  rule conj{
+    pattern{
+      H -[deep=REV]-> D; % H << D;
+      e: D -[1=conj]-> D1;
+      D.upos <> D1.upos;
+    }
+    without{D[upos=NOUN|PRON|PROPN|X]; D1[upos=NOUN|PRON|PROPN|X]}
+    without{D[upos=ADJ]; D1[upos=VERB,VerbForm=Part]}
+    without{D1[upos=ADJ]; D[upos=VERB,VerbForm=Part]}
+    without{D[upos=AUX|VERB]; D1[upos=AUX|VERB]}
+    commands{add_edge e: H -> D1; del_edge e}
+  }
+
+% Conj relations when the conjunct heads are verbs.
+  rule conj_verb{
+    pattern{
+      H -[deep=REV]-> D;  H << D;
+      e: D -[1=conj]-> D1;
+      D[upos=AUX|VERB,VerbForm]; D1[upos=AUX|VERB, VerbForm];
+       D.VerbForm <> D1.VerbForm
+    }
+    commands{add_edge e: H -> D1; del_edge e}
+  }
+}
+
+%%%%%%%%%%%%%%%%%%%%%
+% Removing the mark REV for reversed relations.
+  rule remove_rev {
+    pattern { e: M -[deep=REV]-> N }
+    commands{del_feat e.deep}
+  }
+
+%%%%%%%%%%%%%%%%%%%%%
+% Restoring the initial names of caus and pass relations
+  package restore_caus_pass {
+    rule caus {
+      pattern { e:M -[caus]-> N }
+      commands { del_edge e; add_edge M -[aux:caus]-> N }
+    }
+
+    rule pass {
+      pattern { e:M -[pass]-> N }
+      commands { del_edge e; add_edge M -[aux:pass]-> N }
+    }
+  }
+
+%%%%%%%%%%%%%%%%%%%%%
+  strat main {
+    Seq (
+      Onf (normalize_caus_pass),
+      Onf (reverse_edges),
+      Onf (shift_out_edges),
+      Onf (remove_rev),
+      Onf (restore_caus_pass),
+      )
+  }
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% UD sub-relations are renamed as SUD sub-relations.
+% The rules are arranged int the alphabetic order of the resulting relations.
+package sub_relations {
+  rule comp {
+    pattern { e:H -[advcl:cleft|ccomp:obj|ccomp:obl]-> D; }
+    commands {e.1=comp}
+  }
+  
+% Relation betweew a verb and a clitic expressing a pronominal passive construction.
+% Ex: Les voitures se vendent bien. - Que tu renonces se discute. - Il s'est vendu une grande maison aujourd'hui  - Il se dit que tu viendras.
+  rule comp_pass {
+    pattern {e: H -[expl:pass]-> D}
+    commands {del_edge e;add_edge H -[comp@pass]-> D}
+  }
+
+% In an impersonal pronominal passive construction, the deep subject, which is a NSUBJ or CSUBJ dependent in UD, becomes a simple direct object in SUD.
+% Ex: Il s'est vendu une grande maison aujourd'hui  - Il se dit que tu viendras.
+  rule comp_obj {
+    pattern {
+      e:H -[1=csubj|nsubj, 2=pass]-> D;
+      H -[expl:subj]-> S;
+      H -[comp@pass]-> *;
+    }
+    commands { del_edge e; add_edge H -[comp:obj]-> D; }
+  }
+
+% In an impersonal active construction, the deep subject, which is a NSUBJ or CSUBJ dependent in UD, becomes a direct object in SUD with the deep extension expl.
+% Ex: Il arrive deux personnes. - Il m'arrive de faire des erreurs.
+  rule comp_obj_expl {
+    pattern { e:H -[csubj:expl|nsubj:expl]-> D; }
+    commands {e.1=comp; e.2=obj; e.deep=expl}
+  }
+
+% In an impersonal passive construction, the deep passive subject, which is a NSUBJ:PASS or CSUBJ:PASS dependent in UD, becomes a direct object in SUD with the deep extension expl.
+% Ex: Il a été vendu une grande maison aujourd'hui -  Il est prévu de continuer.
+  rule comp_obj_expl_pass {
+    pattern {
+      e:H -[1=csubj|nsubj, 2=pass]-> D;
+      H -[expl:subj]-> S
+    }
+    without { H -[comp@pass]-> * }
+    commands { del_edge e; add_edge H -[comp:obj@pass]-> D; }
+  }
+
+  rule comp_obl {
+    pattern { e:H -[1=obl, 2=arg|comp]-> D; } % comp pour Spoken
+    commands {e.1=comp; e.2=obl}
+  }
+
+% An expletive complement, which is an EXPL:COMP dependent in UD, becomes a COMP@EXPL in SUD
+% Ex: Les gens s'enfuient - Il s'agit d'un accident. - Les voitures se vendent bien. - Il s'est vendu une grande maison aujourd'hui. -  Il se dit que tu viendras.
+  rule comp_expl {
+    pattern { e:H -[expl:comp]-> D; }
+    commands {e.1=comp; e.deep=expl; del_feat e.2}
+  }
+
+  rule mod {
+    pattern { e:H -[obl:mod]-> D; }
+    commands {e.1=mod; del_feat e.2}
+  }
+
+% In an impersonal construction, the impersonal subject, which is an EXPL dependent in UD, becomes an  explicit subject in SUD with the deep extension expl.
+% Ex: Il arrive deux personnes. - Il faut un bilan. - Il s'agit d'une erreur. - Il a été vendu une grande maison. - il se dit que tu viendras.
+  rule subj_expl {
+    pattern { e:H -[expl:subj]-> D; }
+    without { H -[nsubj:pass|csubj:pass]-> * } % ensure to apply after [comp_obj_expl_pass] if needed
+    commands {e.1=subj;e.deep=expl; del_feat e.2}
+  }
+
+  rule other_expl {
+    pattern { e:H -[1=expl, 2<>subj|comp|pass]-> D; }
+    commands {
+      del_edge e;
+      add_edge H -[unk@expl]-> D;
+    }
+  }
+
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% UD extensions of relations are transformed into deep extensions of SUD relations and deep extensions "reversed" are deleted.
+% Examples of cop extensions: cop:locat in UD_Polish-LFG and cop:own in UD_Finnish-* and UD_Karelian-KKPP
+package rel_extensions {
+% When a relation with an extension is different from COMP, its extension is transformed into a deep extension.
+  rule change_ext{
+    pattern{e: H -[1=*,2=*]-> D}
+    without{ H -[1=comp|subj]-> D}
+    without{ H -[conj:emb]-> D}
+    commands{ add_edge H -[1=e.1,deep=e.2]-> D; del_edge e}
+  }
+
+% When a relation has a deep=reversed extension, this extension is deleted.
+  rule del_reversed{
+    pattern{e: H -[deep=reversed]-> D}
+    commands{del_feat e.deep}
+  }
+
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% UD relations are renamed as SUD relations or sub-relations.
+% Rem: the order of the rules follows the alphabetic order of the names of the resulting relations.
+package relations {
+
+% comp:aux
+%=========
+  rule comp_aux {
+    pattern { e:H -[1=aux]-> D; }
+    commands { e.1=comp;e.2=aux }
+  }
+
+%comp:obj
+%=========
+  rule comp_obj {
+    pattern { e:H -[1=case|mark|obj]-> D; }
+    commands { e.1=comp;e.2=obj }
+  }
+
+  rule comp_obj_agent {
+    pattern { e:H -[1=nsubj|csubj]-> D; H -[subj@expl]-> * }
+    without { H -[comp@pass]-> * }
+    commands { del_edge e; add_edge H -[comp:obj@agent]-> D }
+  }
+
+  rule comp_obj_2 {
+    pattern { e:H -[1=nsubj|csubj]-> D; H -[subj@expl]-> *; H -[comp@pass]-> * }
+    commands { del_edge e; add_edge H -[comp:obj]-> D }
+  }
+
+% We make the assumption that a clausal complement that is not introduced with an adposition is a direct object.
+  rule comp_obj_ccomp {
+    pattern { e:H -[1=ccomp]-> D; D[upos <> ADP]; }
+    without{H -[1=comp,2=obj]-> D1}
+    without{H -[1=obj]-> D1}
+    commands {e.1=comp;e.2=obj}
+  }
+
+  rule comp_obj_x {
+    pattern { e:H -[1=xcomp]-> D;D[upos=AUX|VERB,VerbForm=Inf] }
+    commands {e.1=comp;e.2=obj;e.deep=x}
+  }
+
+% comp:obl
+%=========
+  rule comp_obl_ccomp {
+    pattern { e:H -[1=ccomp]-> D; D[upos = ADP]; }
+    commands {e.1=comp;e.2=obl}
+  }
+
+  rule comp_obl_ccomp-dir {
+    pattern {
+      e:H -[1=ccomp]-> D; D[upos <> ADP];
+      H -[1=comp,2=obj]-> D1
+    }
+    commands {e.1=comp;e.2=obl}
+  }
+  
+  rule comp_obl {
+    pattern { e:H -[1=iobj]-> D; }
+    commands {e.1=comp;e.2=obl}
+  }
+
+  rule comp_obl_x {
+    pattern { e:H -[1=xcomp]-> D; D[upos=ADP]}
+    commands {e.1=comp;e.2=obl;e.deep=x}
+  }
+  
+  rule comp_obl-dir_x {
+    pattern {
+      e:H -[1=xcomp]-> D;D[upos=AUX|VERB,VerbForm=Inf];
+       H -[1=comp,2=obj]-> D1}
+    commands {e.1=comp;e.2=obl;e.deep=x}
+  }
+
+  rule comp_obl_agent {
+    pattern { e:H -[1=obl,deep=agent]-> D }
+    commands {e.1=comp;e.2=obl;e.deep=agent}
+  }
+
+% comp:pred
+%==========
+% A direct argument with the control of its subject is considered  as a predicative complement in SUD.
+  rule comp_pred {
+    pattern { e:H -[1=xcomp]-> D; D[upos<>ADP]}
+    without{D[upos=AUX|VERB] }
+    commands {e.1=comp;e.2=pred}
+  }
+  
+  rule comp_pred_part {
+    pattern { e:H -[1=xcomp]-> D; D[upos=AUX|VERB,VerbForm=Part]}
+    commands {add_edge H -[comp:pred@x]-> D; del_edge e}
+  }
+
+  rule comp_pred_cop {
+    pattern { e:H -[1=cop]-> D; }
+    commands {e.1=comp;e.2=pred}
+  }
+
+% mod
+%====
+% This rule is too strong for nummod, because in many languages, the relation is DET when D precedes H.
+  rule mod {
+    pattern { e:H -[1=advcl|advmod|amod|nummod]-> D; }
+    commands {e.1=mod}
+  }
+
+% An ACL or NMOD complement of a noun that is not introduced with an adposition or a conjunction is a modifier.
+  rule mod_noun {
+    pattern { e:H -[1=acl|nmod]-> D}
+    without{ D[upos=ADP|SCONJ]}
+    commands {e.1=mod}
+  }
+
+% subj
+%=====
+  rule subj {
+    pattern { e:H -[1=nsubj|csubj]-> D}
+    without { H -[subj@expl]-> * } % if so: nsubj becomes comp:obj@agent, see rule [comp_obj_agent]
+    commands {e.1=subj}
+  }
+
+% udep
+%=====
+% An ACL or NMOD complement of a noun that is introduced with an adposition or a conjunction is a modifier or an argument.
+  rule udep {
+    pattern { e:H -[1=acl|nmod]-> D; D[upos=ADP|SCONJ]}
+    commands {e.1=udep}
+  }
+
+% TODO: replace next to rules by "without { e.deep=agent }"
+  rule udep_obl1 {
+    pattern { e:H -[1=obl, !deep]-> D}
+    commands {e.1=udep}
+  }
+  rule udep_obl2 {
+    pattern { e:H -[1=obl, deep<>agent]-> D}
+    commands {e.1=udep}
+  }
+
+% unk
+%=====
+  rule unk {
+    pattern { e:H -[1=dep]-> D; }
+    commands {e.1=unk}
+  }
+
+  rule unk_expl {
+    pattern { e:H -[expl]-> D; }
+    commands {
+      del_edge e;
+      add_edge H -[unk@expl]-> D;
+    }
+  }
+
+  rule unk_fixed {
+    pattern { e:H -[fixed]-> D; }
+    commands {e.1=unk; e.deep=fixed}
+  }
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Mark embedded conj relations with the extension "emb".
+rule add_conj_emb{
+  pattern {
+    N1 -[conj|conj:emb]-> N2;
+    e: N2 -[conj]-> N3;
+  }
+  commands {
+    del_edge e; add_edge N2 -[conj:emb]-> N3;
+  }
+
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Dependencies of type CONJ, FIXED and FLAT:NAME grouped into a bouquet are reorganized into a chain.
+package chained_relations {
+  rule conj {
+    pattern {H -[1=conj]-> D1;e: H -[1=conj]-> D2;D1 << D2}
+    without {H -[1=conj]-> D;D1 << D; D << D2}
+    without {H -[1=conj]-> D;D2 << D}
+    commands {add_edge e:D1 -> D2;del_edge e;}
+  }
+
+  rule fixed {
+    pattern {H -[unk@fixed]-> D1;e: H -[unk@fixed]-> D2;D1 << D2}
+    without {H -[unk@fixed]-> D;D1 << D; D << D2}
+    without {H -[unk@fixed]-> D;D2 << D;}
+    commands {del_edge e;add_edge D1 -[unk@fixed]-> D2}
+  }
+
+  rule flat_name {
+    pattern {H -[flat@name]-> D1;e: H -[flat@name]-> D2;D1 << D2}
+    without {H -[flat@name]-> D;D1 << D; D << D2}
+    without {H -[flat@name]-> D;D2 << D}
+    commands {del_edge e;add_edge D1 -[flat@name]-> D2}
+  }
+
+  rule flat_foreign {
+    pattern {H -[flat@foreign]-> D1;e: H -[flat@foreign]-> D2;D1 << D2}
+    without {H -[flat@foreign]-> D;D1 << D; D << D2}
+    without {H -[flat@foreign]-> D;D2 << D}
+    commands {del_edge e;add_edge D1 -[flat@foreign]-> D2}
+  }
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+rule remove_useless_emb {
+  pattern { e: M -[conj:emb]-> N }
+  without { _ -[1=conj]-> M }
+  commands { del_feat e.2 }
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% For the internal elements of MWE, feature INMWE=Yes is replaced with the deep extension fixed on the incoming relation.
+rule add_deep_fixed{
+  pattern { e:H -> D;D[_MISC_INMWE=Yes] }
+  commands {e.deep=fixed; del_feat D._MISC_INMWE}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+strat main {
+  Seq (
+    Onf (eud_to_ud),
+    specific_expr_init, % Initialization of a specific treatment for MWE, titles and translated words.
+    reverse_relations.main, % Reversing aux, case, cop and mark relations.
+    Onf (minimize_conj_dep),
+    Onf (sub_relations), % Package SUB_RELATIONS must precede package REL_EXTENSIONS because this package swat extensions on level 2.
+    Onf (rel_extensions),
+    Onf (relations), % Package RELATIONS must follow package GOV_RISE because this package entails the change of category for the source and the target of some relations.
+    Onf (add_conj_emb), % Package ADD_CONJ_EMB must follow REVERSE_RELATIONS.MAIN because it depends on head changes ; Ex: UD_French-GSD fr-ud-dev_00751
+    Onf (chained_relations),% Package CHAINED_RELATIONS must follow package GOV_RISE because it can entail a wrong coordination between two elements because of errors in head changes (UD_French-GS: fr-ud-dev_00131).
+    specific_expr_close, % Closing a specific treatment for MWE, titles and translated words.
+    Onf(remove_useless_emb),
+    Onf(add_deep_fixed), % in SUD, INMWE becomes @fixed
+  )
+}

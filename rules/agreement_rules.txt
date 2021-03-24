@@ -1,0 +1,175 @@
+# lang:cs
+comp:obj-NOUN-ADP	Case|0.97|87612
+comp:obj-NOUN-VERB	Polarity|0.93|35165
+comp:obj-PROPN-ADP	Case|0.99|9915
+comp:pred-ADJ-AUX	Number|0.91|8410
+conj-NOUN-NOUN	Case|0.97|15443	Polarity|0.99|15779
+conj-VERB-VERB	Voice|1.00|8729
+det-DET-NOUN	Case|1.00|17446	Number|1.00|17765
+flat-PROPN-NOUN	Animacy|1.00|8235	Case|1.00|8495	Gender|1.00|8950	Number|1.00|8505	Polarity|1.00|8958
+flat-PROPN-PROPN	Gender|0.99|7146	Polarity|1.00|7174
+mod-ADJ-NOUN	Animacy|1.00|48652	Case|1.00|115076	Gender|1.00|115436	Number|1.00|115124	Polarity|0.98|112229
+mod-ADV-VERB	Polarity|0.90|9209
+mod-NOUN-NOUN	Polarity|1.00|61338
+mod-PROPN-NOUN	Polarity|1.00|11407
+mod-VERB-NOUN	Polarity|0.93|9871
+subj-NOUN-AUX	Number|0.93|8118
+subj-NOUN-VERB	Polarity|0.91|33578
+subj-PROPN-VERB	Polarity|0.94|7459
+
+# lang:de
+comp:obj-NOUN-ADP	Case|0.99|20383
+conj-NOUN-NOUN	Person|1.00|25871
+det-DET-NOUN	Case|0.99|25515	Gender|1.00|227245	Number|1.00|291621	Person|1.00|14664
+det-PRON-NOUN	Number|1.00|14086	Person|0.92|14358
+flat-X-X	Foreign|1.00|17778	Person|1.00|17458
+flat@name-PROPN-NOUN	Number|0.95|17790	Person|1.00|29124
+flat@name-PROPN-PROPN	Person|1.00|14136
+mod-ADJ-NOUN	Gender|1.00|58055	Number|1.00|132105
+mod-NOUN-NOUN	Person|1.00|59002
+mod-NUM-NOUN	Person|1.00|44116
+subj-NOUN-AUX	Number|0.98|40065	Person|1.00|42012
+subj-NOUN-VERB	Number|0.98|51014	Person|1.00|53408
+subj-PRON-AUX	Number|0.97|19302	Person|1.00|19320
+subj-PRON-VERB	Number|1.00|24471	Person|1.00|24492
+subj-PROPN-AUX	Person|1.00|13847
+subj-PROPN-VERB	Number|0.95|15791	Person|1.00|21512
+subj@pass-NOUN-AUX	Number|0.98|17404	Person|1.00|17947
+
+# lang:el
+conj-NOUN-NOUN	Case|0.98|488
+det-DET-NOUN	Case|1.00|5667	Gender|1.00|5667	Number|1.00|5667
+det-DET-PROPN	Case|0.99|805	Gender|0.99|805	Number|0.99|805
+mod-ADJ-NOUN	Case|0.99|2495	Gender|0.99|2495	Number|0.99|2495
+subj-NOUN-VERB	Number|0.97|724
+
+# lang:en
+comp:pred-NOUN-AUX	Number|0.96|839
+compound-PROPN-PROPN	Number|0.91|2137
+conj-ADJ-ADJ	Degree|0.97|395
+conj-AUX-AUX	Mood|0.99|463	VerbForm|1.00|828
+conj-AUX-VERB	Mood|0.98|342	VerbForm|0.97|507
+conj-PROPN-PROPN	Number|0.95|687
+conj-VERB-AUX	Mood|0.99|410	VerbForm|0.95|488
+conj-VERB-VERB	Mood|0.99|836	Tense|0.92|829	VerbForm|0.98|1499
+det-DET-NOUN	Number|0.99|1102
+flat-PROPN-PROPN	Number|0.99|1380
+subj-NOUN-AUX	Number|0.99|1103
+subj-NOUN-VERB	Number|0.98|690
+subj-PRON-AUX	Number|1.00|1454	Person|0.91|1140
+subj-PRON-VERB	Number|1.00|468	Person|0.99|356
+subj-PROPN-AUX	Number|0.99|448
+
+# lang:es
+det-DET-NOUN	Gender|1.00|41802	Number|1.00|48017
+mod-ADJ-NOUN	Gender|1.00|13552	Number|1.00|21150
+subj-NOUN-VERB	Number|0.98|8256
+
+# lang:et
+appos-PROPN-NOUN	Number|0.95|1652
+comp:pred-ADJ-AUX	Number|0.97|2168
+conj-ADJ-ADJ	Case|0.98|975	Degree|0.95|1046
+conj-PROPN-PROPN	Case|0.92|1261	Number|0.99|1261
+conj-VERB-VERB	Mood|0.97|2806	Person|0.94|2200	Tense|0.96|2972	VerbForm|0.99|3526	Voice|0.94|3055
+det-DET-NOUN	Case|0.91|4764	Number|0.98|4765
+flat-PROPN-PROPN	Number|1.00|2910
+mod-ADJ-NOUN	Number|0.99|18309
+mod-NUM-NOUN	Number|0.98|3320
+subj-NOUN-AUX	Number|0.91|1582
+subj-NOUN-VERB	Number|0.94|8836
+subj-PRON-VERB	Number|0.99|3753	Person|1.00|2100
+subj-PROPN-VERB	Number|0.95|2239
+subj@cop-PRON-AUX	Number|0.96|1217
+
+# lang:fi
+comp:aux-VERB-AUX	Number|0.94|2311
+comp:pred-ADJ-AUX	Number|0.96|1146
+conj-VERB-VERB	Mood|0.98|1396	Number|0.94|1623	Tense|0.98|1279	VerbForm|0.99|1841	Voice|0.95|1802
+det-PRON-NOUN	Case|0.96|2574	Number|0.94|2574
+flat@name-PROPN-PROPN	Number|0.99|2049
+mod-ADJ-NOUN	Case|0.98|7609	Number|0.99|7603
+mod-NUM-NOUN	Number|0.99|853
+mod-VERB-NOUN	Case|0.95|2537	Number|0.97|2752
+subj-NOUN-AUX	Number|0.92|1152
+subj-NOUN-VERB	Number|0.90|4104
+subj-PRON-VERB	Number|0.94|1722
+subj-PROPN-VERB	Number|0.93|1344
+
+# lang:fr
+det-DET-NOUN	Gender|1.00|46348	Number|1.00|46902
+mod-ADJ-NOUN	Gender|0.99|16977	Number|0.99|16982
+mod-VERB-NOUN	Number|0.98|2710
+subj-NOUN-AUX	Number|0.97|3018
+subj-NOUN-VERB	Number|0.97|3870
+subj-PRON-VERB	Number|1.00|3838	Person|1.00|3579
+
+# lang:hi
+comp:aux-AUX-AUX	Number|0.99|2600
+comp:aux-VERB-AUX	Gender|0.99|1749	Number|1.00|6037	Person|1.00|3453
+comp:aux@pass-AUX-AUX	Number|1.00|1974
+comp:aux@pass-VERB-AUX	Gender|1.00|3161	Number|1.00|5298	Person|1.00|2773
+comp:obj-ADP-ADP	AdpType|1.00|5993
+comp:obj-NOUN-VERB	Person|0.98|2087
+comp:obj-VERB-ADP	Number|1.00|2075
+comp:pred-NOUN-AUX	Number|0.98|1372
+compound-NOUN-NOUN	Person|1.00|4938
+compound-NOUN-VERB	Person|0.98|3058
+compound-PROPN-PROPN	Number|0.99|10853	Person|1.00|10803
+conj-PROPN-PROPN	Case|0.94|1505	Number|0.99|1504	Person|1.00|1504
+det-DET-NOUN	Case|0.93|3852	Number|0.99|3814	Person|0.99|3570
+mod-ADJ-NOUN	Case|0.98|9470	Gender|0.97|2117	Number|0.97|2098
+mod-NOUN-PROPN	Number|0.96|1978	Person|1.00|1980
+mod-PRON-NOUN	Gender|0.98|2177	Person|0.92|1545
+mod-PROPN-NOUN	Person|1.00|2324
+subj-NOUN-AUX	Gender|0.97|1903	Number|0.97|3347	Person|1.00|1735
+subj-NOUN-VERB	Number|0.96|1421
+subj-PRON-AUX	Number|0.91|1600
+subj-PRON-VERB	Number|0.95|1589
+udep-ADP-NOUN	Case|0.96|14668	Gender|0.98|14629	Number|0.98|14631
+
+# lang:it
+comp:aux@pass-VERB-AUX	Number|1.00|1706
+det-DET-NOUN	Gender|1.00|31741	Number|1.00|34876
+mod-ADJ-NOUN	Gender|0.99|9295	Number|1.00|13366
+mod-VERB-NOUN	Gender|0.98|1509	Number|0.98|1609
+subj-NOUN-AUX	Number|0.98|3150
+subj-NOUN-VERB	Number|0.97|3267
+
+# lang:ru
+conj-NOUN-NOUN	Animacy|0.95|13428	Case|0.98|13424
+conj-VERB-VERB	Mood|0.99|8507	Person|0.93|3497	VerbForm|0.97|11169
+det-DET-NOUN	Case|0.99|16496	Gender|1.00|11112	Number|0.99|16497
+flat@name-PROPN-PROPN	Animacy|1.00|4045	Case|1.00|4045	Gender|0.99|4045	Number|1.00|4046
+mod-ADJ-NOUN	Animacy|1.00|6815	Case|1.00|64682	Gender|1.00|42267	Number|0.99|64682
+mod-VERB-NOUN	Case|0.98|8565	Gender|0.99|4690	Number|0.98|8612
+subj-NOUN-VERB	Gender|0.95|7996	Number|0.95|26414
+subj-PRON-VERB	Number|0.99|9185	Person|1.00|3662
+subj-PROPN-VERB	Number|0.95|3703
+subj@pass-NOUN-VERB	Number|0.96|3264
+
+# lang:tr
+comp:obj-NOUN-NOUN	Person|1.00|116
+comp:pred-ADJ-AUX	Number|0.91|147
+compound-NOUN-NOUN	Person|1.00|242
+conj-NOUN-NOUN	Person[psor]|0.95|103	Person|1.00|487
+conj-NOUN-VERB	Number|0.91|81
+conj-PROPN-PROPN	Number|1.00|62	Person|1.00|62
+conj-VERB-VERB	Case|0.92|72	Polite|1.00|70	VerbForm|0.95|115
+flat-NOUN-PROPN	Number|0.94|68	Person|1.00|68
+flat-NUM-NUM	NumType|0.99|102
+flat-PROPN-PROPN	Number|1.00|154	Person|1.00|154
+mod-ADJ-NOUN	Person|1.00|148
+mod-NOUN-NOUN	Person|1.00|618
+mod-PROPN-NOUN	Person|1.00|66
+mod@poss-ADJ-NOUN	Person|1.00|108
+mod@poss-NOUN-ADJ	Person|1.00|232
+mod@poss-NOUN-NOUN	Person|1.00|1100
+mod@poss-PROPN-NOUN	Person|1.00|216
+subj-ADJ-VERB	Person|0.99|76
+subj-NOUN-AUX	Person|0.98|148
+subj-NOUN-NOUN	Person|1.00|118
+subj-NOUN-VERB	Person|0.96|643
+subj-PRON-VERB	Number|0.94|186	Person|0.95|186
+subj-PROPN-VERB	Number|0.96|245	Person|0.98|245
+udep-NOUN-ADJ	Person|1.00|64
+

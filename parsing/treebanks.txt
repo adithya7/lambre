@@ -1,0 +1,7 @@
+cs ces UD_Czech-PDT cs_pdt
+et est UD_Estonian-EDT et_edt
+fi fin UD_Finnish-TDT fi_tdt
+de deu UD_German-HDT de_hdt
+el ell UD_Greek-GDT el_gdt
+ru rus UD_Russian-SynTagRus ru_syntagrus
+tr tur UD_Turkish-IMST tr_imst

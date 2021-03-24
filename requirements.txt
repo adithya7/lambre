@@ -1,0 +1,3 @@
+pyconll
+scipy
+stanza

@@ -1,0 +1,12 @@
+SUD_Czech-PDT/cs_pdt-sud-train.conllu
+SUD_English-EWT/en_ewt-sud-train.conllu
+SUD_Estonian-EDT/et_edt-sud-train.conllu
+SUD_Finnish-TDT/fi_tdt-sud-train.conllu
+SUD_French-GSD/fr_gsd-sud-train.conllu
+SUD_German-HDT/de_hdt-sud-train.conllu
+SUD_Greek-GDT/el_gdt-sud-train.conllu
+SUD_Hindi-HDTB/hi_hdtb-sud-train.conllu
+SUD_Italian-ISDT/it_isdt-sud-train.conllu
+SUD_Russian-SynTagRus/ru_syntagrus-sud-train.conllu
+SUD_Spanish-AnCora/es_ancora-sud-train.conllu
+SUD_Turkish-IMST/tr_imst-sud-train.conllu
