@@ -42,7 +42,7 @@ Install [Grew](https://grew.fr/usage/install/) to use the UD2SUD converter. We i
 grew help
 ```
 
-Download pre-trained Stanza models that are robust to morphology related errors in input text. Refer to our [Github releases](/releases/latest) to download these models.
+Download pre-trained Stanza models that are robust to morphology related errors in input text. Refer to our [Github releases](https://github.com/adithya7/lambre/releases/latest) to download these models.
 
 ### Compute L'AMBRE
 
@@ -113,7 +113,7 @@ The rules used with L'AMBRE are human-readable and for a guide on understanding 
 
 We provide tools to automatically extract morpho-syntactic rules for a new language. While the rules can be extracted from any dependency treebank, we recommend using the [Surface-Syntactic dependency treebanks](https://surfacesyntacticud.github.io/data/). However, same tools can be used on the [Universal Dependency treebanks](https://universaldependencies.org/). For more details, refer to [Extracting Rules](extract_rules).
 
-To work with L'AMBRE, dependency parsers need to be robust towards morpho-syntactic errors in text. We use the [Stanza](https://stanfordnlp.github.io/stanza/training.html) to train new morphological taggers and dependency parsers. In addition to our pretrained models for a few selected languages (see [releases](/releases/latest)), we provide tools to train parsers for new languages from UD. For more details, refer to [Parsing](parsing).
+To work with L'AMBRE, dependency parsers need to be robust towards morpho-syntactic errors in text. We use the [Stanza](https://stanfordnlp.github.io/stanza/training.html) to train new morphological taggers and dependency parsers. In addition to our pretrained models for a few selected languages (see [releases](https://github.com/adithya7/lambre/releases/latest)), we provide tools to train parsers for new languages from UD. For more details, refer to [Parsing](parsing).
 
 ### Customizing rules
 
