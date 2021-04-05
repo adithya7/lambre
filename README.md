@@ -136,6 +136,8 @@ If you find this work helpful in your research, consider citing our paper,
       Neubig, Graham and
       Tsvetkov, Yulia",
     year = "2021",
+    journal = "arXiv preprint arXiv:2103.16590",
+    url = "https://arxiv.org/abs/2103.16590"
 }
 ```
 
