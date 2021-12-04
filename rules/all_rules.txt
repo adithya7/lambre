@@ -1,0 +1,172 @@
+agreement	Person	tr	req-agree	neighborhood_biz	deppos_VERB ### lemma_ben ### headpos_VERB	63
+agreement	Person	tr	req-agree	headrelrel_conj ### deppos_VERB ### depheadpos_NOUN	headpos_VERB	74
+agreement	Person	tr	req-agree	depheadrel_udep ### neighborhood_ben ### depheadpos_NOUN ### headpos_VERB	NA	77
+agreement	Person	tr	req-agree	neighborhood_sen	neighborhood_biz ### deppos_VERB ### lemma_ben ### headpos_VERB	58
+agreement	Person	tr	req-agree	headrelrel_conj ### deppos_VERB	depheadpos_PRON ### depheadpos_NOUN ### deprel_comp:aux@q ### headpos_VERB	73
+agreement	Person	tr	req-agree	deppos_VERB ### deprel_conj	depheadpos_PRON ### headpos_VERB ### headrelrel_conj ### depheadpos_NOUN ### deprel_comp:aux@q	85
+agreement	Person	tr	req-agree	deppos_ADJ ### deprel_mod ### headpos_VERB	headmatch_True ### depheadpos_NOUN ### deppos_PROPN ### deppos_NOUN	66
+agreement	Person	tr	req-agree	deppos_VERB ### deprel_compound@lvc	depheadpos_PRON ### deprel_conj ### headpos_VERB ### headrelrel_conj ### depheadpos_NOUN ### deprel_comp:aux@q	45
+agreement	Person	tr	req-agree	depheadrel_mod ### headpos_VERB	deppos_PROPN ### deppos_ADJ ### deppos_NOUN ### headmatch_True ### depheadpos_NOUN	140
+agreement	Person	tr	req-agree	headrelrel_conj ### depheadpos_VERB ### deppos_NOUN ### headpos_VERB	headmatch_True ### depheadpos_NOUN ### deppos_PROPN ### headrelrel_comp:obj	44
+agreement	Person	tr	req-agree	neighborhood_de ### depheadpos_NOUN ### headpos_VERB	neighborhood_ben ### deppos_PROPN ### deppos_NOUN ### headlemma_al ### neighborhood_sen	70
+agreement	Number	tr	req-agree	headmatch_True ### deppos_PROPN	NA	454
+agreement	Number	tr	req-agree	deppos_PROPN ### headpos_PROPN	headmatch_True	82
+wordorder	subject-verb	tr	before	NA	neighborhood_de	57
+wordorder	subject-verb	tr	before	neighborhood_de	headfeat_Tense_Past	63
+wordorder	subject-verb	tr	before	headfeat_Tense_Past ### neighborhood_de	depheadrel_comp:obj	36
+wordorder	subject-verb	tr	after	headfeat_Tense_Past ### depheadrel_comp:obj ### neighborhood_de	NA	48
+wordorder	object-verb	tr	before	NA	depfeat_PronType_Prs	72
+wordorder	object-verb	tr	before	depfeat_PronType_Prs ### headfeat_Tense_Pres	NA	48
+casemarking	NOUN	tr	Nom	agreerel_mod ### deprel_mod	deprel_udep	217
+casemarking	NOUN	tr	Nom	headfeat_Case_Abl	headrelrel_ADP_comp:obj_udep ### deprel_mod ### deprel_udep	139
+casemarking	NOUN	tr	Loc	headrelrel_ADP_comp:obj_udep ### neighborhood_ki	deprel_mod ### deprel_udep	100
+casemarking	NOUN	tr	Nom	headpos_DET	headrelrel_ADP_comp:obj_udep ### deprel_mod ### headfeat_Case_Abl ### deprel_udep	39
+casemarking	NOUN	tr	Nom	headrelrel_ADP_comp:obj_udep	deprel_mod ### deprel_udep ### neighborhood_ki	78
+casemarking	NOUN	tr	Nom	headfeat_NUM_NumType_Card	headpos_DET ### headrelrel_ADP_comp:obj_udep ### headfeat_Case_Abl ### deprel_mod ### deprel_udep	110
+casemarking	NOUN	tr	Nom	headfeatrel_flat_Case_Nom	headpos_DET ### headrelrel_ADP_comp:obj_udep ### headfeat_Case_Abl ### headfeat_NUM_NumType_Card ### deprel_mod ### deprel_udep	131
+casemarking	NOUN	tr	Nom	agreerel_conj ### depdeprel_cc	headpos_DET ### headfeatrel_flat_Case_Nom ### headrelrel_ADP_comp:obj_udep ### headfeat_Case_Abl ### headfeat_NUM_NumType_Card ### deprel_mod ### deprel_udep	116
+casemarking	NOUN	tr	Nom	NA	headpos_DET ### headfeatrel_flat_Case_Nom ### headrelrel_ADP_comp:obj_udep ### depdeprel_cc ### headfeat_Case_Abl ### headfeat_NUM_NumType_Card ### deprel_mod ### deprel_udep	5072
+casemarking	NOUN	tr	Nom	headfeat_VERB_comp:obj_Polarity_Neg	headfeat_VERB_comp:obj_Polarity_Pos	110
+casemarking	NOUN	tr	Nom	depdeppos_NUM ### headfeat_VERB_comp:obj_Polarity_Pos	depfeat_Number[psor]_Sing	109
+casemarking	NOUN	tr	Acc	depfeat_Number[psor]_Sing ### headfeat_VERB_comp:obj_Polarity_Pos	NA	239
+casemarking	NOUN	tr	Acc	headfeat_VERB_Voice_Cau ### headfeat_VERB_comp:obj_Polarity_Pos	depdeppos_NUM ### depfeat_Number[psor]_Sing	83
+casemarking	NOUN	tr	Gen	headfeat_NOUN_Case_Acc ### deprel_mod@poss	headfeatrel_comp:obj_Case_Nom ### headfeat_VERB_comp:obj_Polarity_Neg ### headfeat_VERB_comp:obj_Polarity_Pos	140
+casemarking	NOUN	tr	Nom	deprel_compound ### agreerel_compound	headfeatrel_comp:obj_Case_Nom ### headfeat_NOUN_Case_Acc ### headfeat_VERB_comp:obj_Polarity_Neg ### headfeat_VERB_comp:obj_Polarity_Pos	177
+casemarking	NOUN	tr	Nom	headfeat_VERB_comp:obj_Polarity_Pos	headfeat_VERB_Voice_Cau ### depdeppos_NUM ### depheadrel_mod ### depfeat_Number[psor]_Sing	199
+casemarking	NOUN	tr	Nom	headrelrel_VERB_subj_mod	deprel_comp:obj ### headfeat_VERB_comp:obj_Polarity_Neg ### headfeat_VERB_comp:obj_Polarity_Pos ### deprel_compound ### headfeatrel_comp:obj_Case_Nom ### headfeat_NOUN_Case_Acc	106
+casemarking	NOUN	tr	Nom	deprel_comp:obj	headfeat_VERB_comp:obj_Polarity_Neg ### headfeat_VERB_comp:obj_Polarity_Pos ### deprel_compound ### headfeatrel_comp:obj_Case_Nom ### headfeat_NOUN_Case_Acc	104
+casemarking	NOUN	tr	Nom	deprel_compound	agreerel_compound ### headfeat_VERB_comp:obj_Polarity_Neg ### headfeat_NOUN_Case_Acc ### headfeat_VERB_comp:obj_Polarity_Pos ### headfeatrel_comp:obj_Case_Nom ### headpos_NOUN	181
+casemarking	NOUN	tr	Nom	headfeat_VERB_subj_Polite_Infm	deprel_comp:obj ### deprel_conj ### headfeat_VERB_comp:obj_Polarity_Neg ### headfeat_VERB_comp:obj_Polarity_Pos ### deprel_compound ### headfeatrel_comp:obj_Case_Nom ### headfeat_NOUN_Case_Acc ### headrelrel_VERB_subj_mod	147
+casemarking	NOUN	tr	Nom	agreepos_NOUN ### deprel_conj	deprel_comp:obj ### headfeat_VERB_comp:obj_Polarity_Neg ### headfeat_NOUN_Case_Acc ### headfeat_VERB_comp:obj_Polarity_Pos ### deprel_compound ### headfeatrel_comp:obj_Case_Nom ### headrelrel_VERB_subj_mod	357
+casemarking	NOUN	tr	Nom	deprel_mod@poss	deprel_comp:obj ### deprel_conj ### headfeat_VERB_comp:obj_Polarity_Neg ### headfeat_NOUN_Case_Acc ### headfeat_VERB_comp:obj_Polarity_Pos ### deprel_compound ### headfeat_VERB_subj_Polite_Infm ### headfeatrel_comp:obj_Case_Nom ### headrelrel_VERB_subj_mod	1392
+casemarking	NOUN	tr	Nom	deprel_conj	deprel_comp:obj ### headfeat_VERB_comp:obj_Polarity_Neg ### headfeat_NOUN_Case_Acc ### headfeat_VERB_comp:obj_Polarity_Pos ### deprel_compound ### agreepos_NOUN ### headfeatrel_comp:obj_Case_Nom ### headpos_NOUN ### headrelrel_VERB_subj_mod	269
+casemarking	NOUN	tr	Nom	headrelrel_udep ### deprel_mod@poss	deprel_udep	300
+casemarking	NOUN	tr	Nom	agreepos_NOUN ### headfeat_NOUN_mod_Case_Nom	headrelrel_udep ### deprel_udep	156
+casemarking	NOUN	tr	Loc	headrelrel_udep ### headlemma_ki	deprel_udep ### deprel_mod@poss	92
+casemarking	NOUN	tr	Nom	depdeprel_compound	headrelrel_udep ### headfeat_NOUN_mod_Case_Nom ### deprel_udep	152
+casemarking	NOUN	tr	Nom	headrelrel_udep ### headlemma_li	headlemma_ki ### deprel_udep ### deprel_mod@poss	80
+casemarking	NOUN	tr	Nom	headfeat_VERB_udep_Aspect_Perf ### depdeppos_NOUN ### deprel_udep	depfeat_Number[psor]_Sing ### headlemma_ol	95
+casemarking	NOUN	tr	Gen	headrelrel_ADJ_mod ### headfeat_ADJ_Number[psor]_Sing	depdeprel_compound ### headfeat_NOUN_Case_Dat ### headrelrel_udep ### headfeat_NOUN_mod_Case_Nom ### deprel_udep	134
+casemarking	NOUN	tr	Nom	agreepos_NOUN ### headfeatrel_compound_Case_Nom	depdeprel_compound ### headfeat_NOUN_Case_Dat ### headrelrel_udep ### headfeat_NOUN_mod_Case_Nom ### headrelrel_ADJ_mod ### deprel_udep	110
+casemarking	NOUN	tr	Nom	headrelrel_udep	headlemma_li ### headlemma_ki ### deprel_mod@poss ### depfeat_Number[psor]_Sing ### deprel_mod ### deprel_udep	72
+casemarking	NOUN	tr	Nom	deprel_subj	depdeprel_compound ### headfeat_NOUN_Case_Dat ### headrelrel_udep ### headfeatrel_compound_Case_Nom ### headfeat_NOUN_mod_Case_Nom ### depheadpos_NUM ### headrelrel_ADJ_mod ### deprel_udep	1123
+casemarking	NOUN	tr	Nom	depheadpos_NUM	depdeprel_compound ### headfeat_NOUN_Case_Dat ### headrelrel_udep ### headfeatrel_compound_Case_Nom ### headfeat_NOUN_mod_Case_Nom ### headrelrel_ADJ_mod ### deprel_udep	98
+casemarking	NOUN	tr	Nom	NA	depdeprel_compound ### headfeat_NOUN_Case_Dat ### headrelrel_udep ### headfeatrel_compound_Case_Nom ### headfeat_NOUN_mod_Case_Nom ### depheadpos_NUM ### deprel_mod@poss ### headrelrel_ADJ_mod ### deprel_subj ### deprel_udep	2756
+casemarking	NOUN	tr	Gen	headfeatrel_mod@poss_Person[psor]_3 ### headfeat_Case_Nom	agreerel_mod@poss	241
+casemarking	NOUN	tr	Nom	agreerel_mod@poss ### headfeatrel_mod@poss_Person[psor]_3	NA	91
+casemarking	NOUN	tr	Nom	agreerel_mod ### deprel_mod	headfeatrel_subj_Person[psor]_3 ### headrelrel_mod@poss ### headfeatrel_mod@poss_Person[psor]_3	197
+casemarking	NOUN	tr	Nom	headrelrel_mod@poss ### headfeat_Case_Nom	headfeatrel_subj_Person[psor]_3 ### headfeatrel_mod@poss_Person[psor]_3	85
+casemarking	NOUN	tr	Gen	headfeatrel_mod@poss_Person[psor]_3	agreerel_mod@poss ### headfeat_NOUN_mod@poss_Number[psor]_Sing ### headfeat_Case_Nom	102
+casemarking	NOUN	tr	Gen	headfeat_NOUN_Case_Acc ### headfeatrel_mod@poss_Person[psor]_3 ### headfeat_NOUN_mod@poss_Number[psor]_Sing	agreerel_mod@poss ### headfeat_Case_Nom	121
+casemarking	NOUN	tr	Nom	headrelrel_NOUN_conj	headfeatrel_subj_Person[psor]_3 ### headfeatrel_mod@poss_Person[psor]_3 ### headrelrel_mod@poss ### headfeat_Person[psor]_3 ### deprel_mod	172
+casemarking	NOUN	tr	Nom	headfeatrel_mod@poss_Person[psor]_3 ### headfeat_NOUN_mod@poss_Number[psor]_Sing	agreerel_mod@poss ### headfeat_NOUN_Case_Acc ### headfeat_Case_Nom	166
+casemarking	NOUN	tr	Nom	headfeat_Person[psor]_3 ### headfeat_Case_Nom	headfeatrel_subj_Person[psor]_3 ### depheadpos_NOUN ### headfeatrel_mod@poss_Person[psor]_3 ### headrelrel_mod@poss ### deprel_mod	96
+casemarking	NOUN	tr	Nom	headrelrel_subj	headfeatrel_subj_Person[psor]_3 ### depheadrel_compound@lvc ### headfeatrel_mod@poss_Person[psor]_3 ### headrelrel_mod@poss ### headrelrel_NOUN_conj ### headfeat_Person[psor]_3 ### deprel_mod	83
+casemarking	NOUN	tr	Nom	headfeat_VERB_subj_Mood_Ind	headrelrel_subj ### headfeatrel_subj_Person[psor]_3 ### depheadrel_compound@lvc ### headfeatrel_mod@poss_Person[psor]_3 ### headrelrel_mod@poss ### headrelrel_NOUN_conj ### depheadpos_PUNCT ### headfeat_Person[psor]_3 ### deprel_mod	111
+casemarking	NOUN	tr	Nom	agreepos_NOUN ### deprel_mod	headfeat_VERB_udep_Mood_Ind	176
+casemarking	NOUN	tr	Nom	headpos_ADJ ### depdeppos_NOUN	headfeat_VERB_udep_Mood_Ind ### depdeplemma_ve ### headfeat_VERB_udep_Aspect_Perf ### headfeat_Case_Ins ### deprel_mod	128
+casemarking	NOUN	tr	Nom	NA	headfeat_VERB_udep_Mood_Ind ### depdeplemma_ve ### headrelrel_udep ### headpos_ADJ ### headfeat_VERB_udep_Aspect_Perf ### depdeprel_conj ### headfeat_Case_Ins ### deprel_mod	4633
+casemarking	NOUN	tr	Nom	depdeprel_conj	headfeat_VERB_udep_Mood_Ind ### depdeplemma_ve ### headpos_ADJ ### headfeat_VERB_udep_Aspect_Perf ### headfeat_Case_Ins ### deprel_mod	347
+casemarking	NOUN	tr	Nom	headpos_ADJ	headfeat_VERB_udep_Mood_Ind ### depdeplemma_ve ### depheadpos_VERB ### headfeat_VERB_udep_Aspect_Perf ### headfeat_Case_Ins ### depdeppos_NOUN ### deprel_mod	442
+casemarking	NOUN	tr	Nom	headrelrel_udep	headfeat_VERB_udep_Mood_Ind ### depdeplemma_ve ### depheadpos_VERB ### headpos_ADJ ### headfeat_VERB_udep_Aspect_Perf ### depdeprel_conj ### headfeat_Case_Nom ### headfeat_Case_Ins ### deprel_mod	706
+casemarking	NOUN	tr	Loc	headpos_ADP ### neighborhood_ki	deprel_udep	122
+casemarking	NOUN	tr	Nom	headfeatrel_comp:pred_Mood_Ind	deprel_mod ### deprel_udep ### neighborhood_ki	110
+casemarking	NOUN	tr	Nom	neighborhood_ki	headpos_ADP ### deprel_udep	169
+casemarking	NOUN	tr	Nom	deprel_flat	neighborhood_ki ### depfeat_Number[psor]_Sing ### deprel_mod ### headfeatrel_comp:pred_Mood_Ind ### deprel_udep	98
+casemarking	NOUN	tr	Nom	agreerel_mod ### deprel_mod	depfeat_Number[psor]_Sing ### depheadpos_VERB ### deprel_udep ### neighborhood_ki	131
+casemarking	NOUN	tr	Nom	deprel_compound ### agreerel_compound	neighborhood_ki ### deprel_flat ### headfeatrel_conj_Number[psor]_Sing ### deprel_mod ### headfeatrel_comp:pred_Mood_Ind ### deprel_udep	175
+casemarking	NOUN	tr	Nom	agreerel_conj ### depdeprel_cc	neighborhood_ki ### deprel_compound ### deprel_flat ### headfeatrel_conj_Number[psor]_Sing ### deprel_mod ### headfeatrel_comp:pred_Mood_Ind ### deprel_udep	87
+casemarking	NOUN	tr	Nom	deprel_compound	agreerel_compound ### neighborhood_ki ### deprel_flat ### depfeat_Person[psor]_3 ### headfeatrel_conj_Number[psor]_Sing ### deprel_mod ### headfeatrel_comp:pred_Mood_Ind ### deprel_udep	187
+casemarking	NOUN	tr	Nom	NA	neighborhood_ki ### deprel_compound ### deprel_flat ### depdeprel_cc ### headfeatrel_conj_Number[psor]_Sing ### deprel_mod ### headfeatrel_comp:pred_Mood_Ind ### deprel_udep	4244
+casemarking	NOUN	tr	Nom	depdeprel_compound ### deprel_udep	NA	100
+casemarking	NOUN	tr	Nom	deprel_subj	headfeat_Person[psor]_3 ### deprel_udep	1124
+casemarking	NOUN	tr	Gen	headfeat_VERB_mod@poss_Aspect_Perf	depfeat_Number[psor]_Sing ### deprel_subj ### deprel_udep	135
+casemarking	NOUN	tr	Nom	headfeatrel_conj_Case_Nom ### depfeat_Number[psor]_Sing	deprel_subj ### deprel_udep	86
+casemarking	NOUN	tr	Nom	deprel_compound ### depfeat_Number[psor]_Sing	headfeatrel_conj_Case_Nom ### deprel_subj ### deprel_udep	193
+casemarking	NOUN	tr	Nom	depfeat_Number[psor]_Sing ### depheadpos_PROPN	deprel_compound ### headfeatrel_conj_Case_Nom ### deprel_subj ### deprel_udep	105
+casemarking	NOUN	tr	Nom	agreerel_mod@poss	depfeat_Number[psor]_Plur ### depdeppos_DET ### depfeat_Number[psor]_Sing ### deprel_subj ### headfeat_VERB_mod@poss_Aspect_Perf ### deprel_udep	314
+casemarking	NOUN	tr	Gen	headfeatrel_mod@poss_Case_Nom	depfeat_Number[psor]_Plur ### depdeppos_DET ### depfeat_Number[psor]_Sing ### deprel_subj ### headfeat_VERB_mod@poss_Aspect_Perf ### agreerel_mod@poss ### deprel_udep	122
+casemarking	NOUN	tr	Nom	agreerel_mod	depfeat_Number[psor]_Plur ### depdeppos_DET ### headfeatrel_mod@poss_Case_Nom ### depfeat_Number[psor]_Sing ### deprel_subj ### headfeat_VERB_mod@poss_Aspect_Perf ### agreerel_mod@poss ### deprel_udep	162
+casemarking	NOUN	tr	Gen	depfeat_Number[psor]_Sing ### deprel_mod@poss	headfeatrel_conj_Case_Nom ### depheadpos_PROPN ### headfeat_NOUN_mod_Case_Nom ### deprel_compound ### deprel_subj ### deprel_udep	121
+casemarking	NOUN	tr	Nom	NA	depfeat_Number[psor]_Plur ### agreerel_mod ### depdeppos_DET ### headfeatrel_mod@poss_Case_Nom ### headfeatrel_mod_Case_Nom ### depfeat_Number[psor]_Sing ### headfeat_VERB_mod@poss_Aspect_Perf ### deprel_subj ### agreerel_mod@poss ### deprel_udep	3225
+casemarking	NOUN	tr	Acc	headfeat_VERB_Polarity_Pos ### depfeat_Number[psor]_Sing	headfeatrel_conj_Case_Nom ### depheadpos_PROPN ### headrelrel_udep ### headfeat_NOUN_mod_Case_Nom ### deprel_mod@poss ### deprel_compound ### deprel_subj ### deprel_udep	399
+casemarking	VERB	tr	Nom	NA	deprel_mod ### deprel_conj ### headpos_ADP	801
+casemarking	VERB	tr	Nom	neighborhood_için ### headpos_ADP	deprel_mod	59
+casemarking	VERB	tr	Dat	depfeat_VerbForm_Vnoun ### deprel_mod ### headfeat_VERB_Mood_Ind	NA	109
+casemarking	VERB	tr	Nom	headfeat_VERB_comp:obj_Mood_Ind	depfeat_VerbForm_Part	118
+casemarking	VERB	tr	Acc	depfeat_VerbForm_Part ### headfeat_VERB_comp:obj_Mood_Ind	NA	146
+casemarking	VERB	tr	Acc	headrelrel_comp:obj	depfeat_Tense_Pres ### headfeat_VERB_comp:obj_Mood_Ind	78
+casemarking	VERB	tr	Nom	depfeat_Tense_Pres	headfeat_VERB_comp:obj_Mood_Ind	146
+casemarking	VERB	tr	Nom	headrelrel_udep	deprel_mod	115
+casemarking	VERB	tr	Dat	headpos_VERB ### depfeat_Tense_Pres ### deprel_mod	NA	120
+casemarking	VERB	tr	Nom	NA	deprel_mod ### headrelrel_mod ### deprel_conj ### headrelrel_udep	552
+casemarking	VERB	tr	Nom	headfeatrel_mod@poss_Person[psor]_3	NA	119
+casemarking	VERB	tr	Nom	agreepos_NOUN ### headfeat_NOUN_Case_Nom	headfeatrel_mod@poss_Person[psor]_3	94
+casemarking	VERB	tr	Nom	NA	deprel_mod ### deprel_compound ### neighborhood_yap	864
+casemarking	VERB	tr	Dat	deprel_mod ### depheadpos_PUNCT	depfeat_Tense_Past	109
+casemarking	VERB	tr	Acc	headfeat_VERB_comp:obj_Mood_Ind	depfeat_VerbForm_Vnoun	146
+casemarking	VERB	tr	Acc	headrelrel_comp:obj	depfeat_VerbForm_Vnoun ### headfeat_VERB_comp:obj_Mood_Ind	82
+casemarking	VERB	tr	Dat	depfeat_VerbForm_Vnoun ### deprel_mod ### headfeat_VERB_Mood_Ind	NA	109
+casemarking	VERB	tr	Nom	depfeat_VerbForm_Vnoun	deprel_mod ### headfeat_VERB_Mood_Ind	92
+casemarking	VERB	tr	Nom	depfeat_VerbForm_Vnoun ### headfeat_VERB_Mood_Ind ### depheadpos_PUNCT	deprel_mod	117
+casemarking	VERB	tr	Nom	NA	headrelrel_comp:obj ### depfeat_VerbForm_Vnoun ### deprel_mod ### headfeat_VERB_comp:obj_Mood_Ind ### deprel_comp:obj	99
+casemarking	ADJ	tr	Nom	depdeppos_VERB	deprel_mod	111
+casemarking	ADJ	tr	Nom	NA	depdeppos_VERB ### deprel_mod ### headfeatrel_mod@poss_Number[psor]_Sing ### headrelrel_mod	499
+casemarking	ADJ	tr	Gen	headfeatrel_mod@poss_Number[psor]_Sing	depdeppos_VERB ### deprel_mod ### headrelrel_mod	91
+casemarking	ADJ	tr	Nom	deprel_mod ### headpos_NOUN	headfeat_VERB_Mood_Ind ### depheadpos_VERB	104
+casemarking	ADJ	tr	Acc	headfeat_VERB_comp:obj_Polarity_Pos	NA	118
+casemarking	ADJ	tr	Nom	depheadpos_VERB ### depheadrel_mod	headfeat_VERB_mod_Mood_Ind ### headrelrel_mod	91
+casemarking	ADJ	tr	Nom	NA	headrelrel_mod ### headfeat_VERB_mod_Mood_Ind ### depdeppos_NOUN ### depheadpos_VERB	91
+casemarking	ADJ	tr	Gen	headfeatrel_mod@poss_Person[psor]_3	NA	138
+casemarking	ADJ	tr	Nom	agreepos_NOUN ### headpos_NOUN	headfeat_VERB_Person[psor]_3 ### headfeatrel_mod@poss_Person[psor]_3	107
+casemarking	ADJ	tr	Nom	NA	deprel_mod	738
+casemarking	ADJ	tr	Loc	deprel_mod ### depfeat_Person[psor]_3 ### depdeprel_mod@poss	NA	171
+casemarking	ADJ	tr	Nom	NA	depfeat_Person[psor]_3 ### headrelrel_mod ### headfeat_VERB_mod_Aspect_Perf	167
+casemarking	ADJ	tr	Nom	headpos_AUX	headfeat_VERB_mod_Polarity_Pos	129
+casemarking	ADJ	tr	Nom	agreepos_NOUN	headpos_AUX ### headfeat_VERB_mod_Polarity_Pos	128
+casemarking	ADJ	tr	Nom	headfeat_VERB_subj_Mood_Ind	headpos_AUX ### agreepos_NOUN ### headfeat_VERB_mod_Polarity_Pos	82
+casemarking	ADJ	tr	Nom	NA	headfeatrel_mod_Case_Nom ### headfeat_Person[psor]_3 ### headpos_AUX ### headrelrel_mod ### headfeat_VERB_subj_Mood_Ind ### headfeat_VERB_mod_Polarity_Pos ### agreepos_NOUN ### depfeat_Person[psor]_3	263
+casemarking	PROPN	tr	Nom	headrelrel_comp:obj ### headpos_NOUN	headrelrel_VERB_mod	66
+casemarking	PROPN	tr	Nom	NA	headpos_VERB ### headrelrel_comp:obj ### headrelrel_VERB_mod	642
+casemarking	PROPN	tr	Nom	headpos_VERB ### deprel_subj	headrelrel_comp:obj ### headrelrel_VERB_mod	222
+casemarking	PROPN	tr	Nom	headpos_VERB	headrelrel_comp:obj ### headrelrel_VERB_mod ### deprel_subj ### headfeat_VERB_udep_Polarity_Pos	63
+casemarking	PROPN	tr	Nom	deprel_subj	deprel_udep	352
+casemarking	PROPN	tr	Nom	headfeat_Person[psor]_3	deprel_subj ### deprel_udep	288
+casemarking	PROPN	tr	Nom	headpos_NOUN	headfeat_Person[psor]_3 ### deprel_subj ### deprel_udep	129
+casemarking	PROPN	tr	Nom	agreepos_PROPN	headfeat_Person[psor]_3 ### headpos_NOUN ### deprel_subj ### deprel_udep	187
+casemarking	PROPN	tr	Nom	deprel_comp:obj	agreepos_PROPN ### deprel_subj ### headfeat_Person[psor]_3 ### headpos_NOUN ### deprel_udep	98
+casemarking	PROPN	tr	Nom	headrelrel_mod@poss	headfeatrel_mod@poss_Person[psor]_3	77
+casemarking	PROPN	tr	Nom	headfeatrel_mod@poss_Person[psor]_3	NA	161
+casemarking	PROPN	tr	Nom	deprel_mod	headrelrel_mod@poss ### headfeatrel_mod@poss_Person[psor]_3	78
+casemarking	PROPN	tr	Nom	headfeat_PROPN_flat_Case_Nom	headfeatrel_mod@poss_Person[psor]_3 ### headrelrel_mod@poss ### deprel_mod	121
+casemarking	PROPN	tr	Nom	NA	headfeatrel_mod@poss_Person[psor]_3 ### headrelrel_mod@poss ### headfeat_PROPN_flat_Case_Nom ### headfeat_VERB_VerbForm_Part ### deprel_mod	651
+casemarking	PROPN	tr	Nom	headrelrel_udep	deprel_udep	117
+casemarking	PROPN	tr	Nom	NA	headrelrel_udep ### deprel_mod ### deprel_udep	982
+casemarking	PROPN	tr	Nom	deprel_subj	deprel_udep	352
+casemarking	PROPN	tr	Nom	agreepos_PROPN	deprel_subj ### deprel_udep	187
+casemarking	PROPN	tr	Nom	agreepos_NOUN	agreepos_PROPN ### deprel_subj ### deprel_udep	164
+casemarking	PROPN	tr	Nom	NA	agreepos_PROPN ### deprel_subj ### headfeat_Case_Nom ### agreepos_NOUN ### deprel_udep	200
+casemarking	PROPN	tr	Gen	headpos_NOUN ### headfeat_Case_Nom	agreepos_NOUN ### agreepos_PROPN ### deprel_subj ### deprel_udep	73
+casemarking	PRON	tr	Nom	headpos_VERB	headrelrel_ADP_udep ### deprel_udep	414
+casemarking	PRON	tr	Dat	deprel_udep ### depfeat_PronType_Prs	NA	90
+casemarking	PRON	tr	Nom	deprel_subj	headpos_VERB ### headrelrel_ADP_udep ### deprel_udep	111
+casemarking	PRON	tr	Acc	headfeat_VERB_comp:obj_Mood_Ind	NA	87
+casemarking	PRON	tr	Dat	headfeat_VERB_udep_Tense_Past ### deprel_udep	NA	115
+casemarking	PRON	tr	Dat	deprel_udep ### depheadpos_PUNCT	headfeat_VERB_udep_Tense_Past	125
+casemarking	PRON	tr	Nom	depheadpos_PUNCT	deprel_mod ### deprel_udep ### headrelrel_udep	436
+casemarking	PRON	tr	Nom	NA	depheadpos_PUNCT ### deprel_mod ### deprel_udep ### headrelrel_udep ### deprel_comp:obj	204
+casemarking	PRON	tr	Acc	deprel_comp:obj	deprel_mod ### deprel_udep ### depheadpos_PUNCT ### headrelrel_udep	111
+casemarking	PRON	tr	Gen	deprel_mod@poss	NA	113
+casemarking	PRON	tr	Nom	NA	deprel_mod@poss ### headpos_ADP ### deprel_mod ### headfeat_Number[psor]_Sing ### headpos_VERB ### neighborhood_sen	167
+casemarking	PRON	tr	Dat	headfeat_VERB_udep_Tense_Pres	headfeatrel_udep_Aspect_Perf	71
+casemarking	PRON	tr	Dat	headfeatrel_udep_Aspect_Perf ### depheadpos_PUNCT	NA	114
+casemarking	PRON	tr	Nom	neighborhood_i	deprel_udep	54
+casemarking	PRON	tr	Dat	deprel_udep ### headfeatrel_udep_Tense_Past	neighborhood_o	97
+casemarking	PRON	tr	Nom	NA	deprel_mod ### deprel_udep ### neighborhood_i ### headpos_ADP	697
+casemarking	PRON	tr	Nom	deprel_subj	NA	315
+casemarking	PRON	tr	Nom	lemma_ne	deprel_subj	64
+casemarking	PRON	tr	Gen	depfeat_PronType_Prs ### headpos_NOUN	deprel_subj ### headpos_VERB ### lemma_ne	113
+casemarking	PRON	tr	Dat	headfeat_VERB_udep_Aspect_Perf ### headpos_VERB	headfeat_VERB_VerbForm_Part ### depheadrel_subj ### lemma_ne ### deprel_subj	106
+casemarking	PRON	tr	Acc	headpos_VERB	depheadrel_subj ### lemma_ne ### headfeat_VERB_VerbForm_Part ### headfeat_VERB_udep_Aspect_Perf ### deprel_subj	84
+casemarking	NUM	tr	Nom	headpos_NUM	NA	32
+casemarking	NUM	tr	Nom	NA	depdeppos_NUM	81
