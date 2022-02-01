@@ -213,7 +213,7 @@ def compute_score(aggr, task, argstruct_aggr):
     # no agreements nor disagreements found for the pre-specified rules
     return 1.0, {}
 
-def checkAgreementScores(lang_rule_all, token, sent, featuresInDatapoint, agreement_aggr):
+def checkAgreementScores(lang_rule_all, token, sent, featuresInDatapoint, agreement_aggr, sent_agreement_aggr):
     task = 'agreement'
     if task in lang_rule_all:
         rulesPerAgreement = lang_rule_all[task]
@@ -230,23 +230,31 @@ def checkAgreementScores(lang_rule_all, token, sent, featuresInDatapoint, agreem
                         agr_type = "%s-%s-%s" % (token.deprel, token.upos, sent[token.head].upos) #rel, dep, head
                         if agr_type not in agreement_aggr:
                             agreement_aggr[agr_type] = {}
+                        if agr_type not in sent_agreement_aggr:
+                            sent_agreement_aggr[agr_type] = {}
+
                         if model not in agreement_aggr[agr_type]:
                             agreement_aggr[agr_type][model] = [0] * 3
+                        if model not in sent_agreement_aggr[agr_type]:
+                            sent_agreement_aggr[agr_type][model] = [0] * 3
 
                         if obsAgreement == label:
                             agreement_aggr[agr_type][model][1] +=1
+                            sent_agreement_aggr[agr_type][model][1] += 1
 
                         else:
                             agreement_aggr[agr_type][model][0] +=1
                             agreement_rules_per_sent[model] = (one_rule_active, one_rule_nonactive, 'req-agree')
+                            sent_agreement_aggr[agr_type][model][0] += 1
                         agreement_aggr[agr_type][model][2] +=1
+                        sent_agreement_aggr[agr_type][model][2] += 1
 
 
 
         return agreement_rules_per_sent
 
 
-def checkWordOrderScores(lang_rule_all, token, sent, featuresInDatapoint, wordorder_aggr):
+def checkWordOrderScores(lang_rule_all, token, sent, featuresInDatapoint, wordorder_aggr, sent_wordorder_aggr):
     task = 'wordorder'
     if task in lang_rule_all:
         rulesPerWordOrder = lang_rule_all[task]
@@ -261,21 +269,26 @@ def checkWordOrderScores(lang_rule_all, token, sent, featuresInDatapoint, wordor
                     if utils.isGrammarRuleApplicable(featuresInDatapoint, one_rule_active, one_rule_nonactive):
                         if model not in wordorder_aggr:
                             wordorder_aggr[model] = [0] * 3
+                        if model not in sent_wordorder_aggr:
+                            sent_wordorder_aggr[model] = [0] * 3
 
                         if obsWordOrder == label:
                             wordorder_aggr[model][1] +=1
+                            sent_wordorder_aggr[model][1] += 1
 
                         else:
                             wordorder_aggr[model][0] +=1
                             wordorder_rules_per_sent[model] = (one_rule_active, one_rule_nonactive, label)
+                            sent_wordorder_aggr[model][0] += 1
                         wordorder_aggr[model][2] +=1
+                        sent_wordorder_aggr[model][2] += 1
 
 
 
         return wordorder_rules_per_sent
 
 
-def checkAssignmentScores(lang_rule_all, token, sent, featuresInDatapoint, assignment_aggr, argstruct_aggr):
+def checkAssignmentScores(lang_rule_all, token, sent, featuresInDatapoint, assignment_aggr, argstruct_aggr, sent_assignment_aggr):
     task = 'casemarking'
     if task in lang_rule_all:
         rulesPerAssignment = lang_rule_all[task]
@@ -299,19 +312,24 @@ def checkAssignmentScores(lang_rule_all, token, sent, featuresInDatapoint, assig
 
                         if model not in assignment_aggr:
                             assignment_aggr[model] = [0] * 3
+                        if model not in sent_assignment_aggr:
+                            sent_assignment_aggr[model] = [0] * 3
 
                         if obsCase == label:
                             assignment_aggr[model][1] +=1
+                            sent_assignment_aggr[model][1] += 1
                             if agr_type:
                                 argstruct_aggr[agr_type]['depd']['counts'][1] += 1
 
                         else:
-                            assignment_aggr[model][0] +=1
+                            assignment_aggr[model][0] += 1
+                            sent_assignment_aggr[model][0] += 1
                             assignment_rules_per_sent[model] = (one_rule_active, one_rule_nonactive, label)
                             if agr_type:
                                 argstruct_aggr[agr_type]['depd']['counts'][0] += 1
 
-                        assignment_aggr[model][2] +=1
+                        assignment_aggr[model][2] += 1
+                        sent_assignment_aggr[model][2] += 1
 
                         if agr_type:
                             argstruct_aggr[agr_type]['depd']['counts'][2] += 1
@@ -396,6 +414,7 @@ def get_doc_score_all(data, lang_rule_all):
     #             "head": {"feat_value": head_feat_value, "counts": [0, 0, 0],},
     #         }
     with open(f'{args.output}/{args.lg}.examples', 'w') as fout:
+        sent_score_examples = []
         for sent in data:
 
             # Add the head-dependents
@@ -406,25 +425,40 @@ def get_doc_score_all(data, lang_rule_all):
                 dep_data_token[token.head].append(token.id)
                 sent_tokens.append(token.form)
 
+            sent_agreement_aggr = {}
+            sent_argstruct_aggr = {}
+            sent_wordorder_aggr = {}
+            sent_assignment_aggr = {}
+            sent_error_examples = []
             for token_num, token in enumerate(sent):
 
                 featuresInDatapoint = utils.extractFeatures(token_num, token, sent, dep_data_token, use_lexical=True)
 
                 #Checking agreement for Gender, Person, Number
-                agreement_rules_not_followed = checkAgreementScores(lang_rule_all, token, sent, featuresInDatapoint, agreement_aggr)
-                utils.printExamples(agreement_rules_not_followed, sent_tokens, token, token_num, sent, id2index, fout, task='agreement')
+                agreement_rules_not_followed = checkAgreementScores(lang_rule_all, token, sent, featuresInDatapoint, agreement_aggr, sent_agreement_aggr)
+                utils.printExamples(agreement_rules_not_followed, sent_tokens, token, token_num, sent, id2index, sent_error_examples, task='agreement')
 
                 #Checking word order for subject-verb, object-verb, adj-noun, noun-adp, numeral-noun
-                wordorder_rules_not_followed = checkWordOrderScores(lang_rule_all, token, sent, featuresInDatapoint, wordorder_aggr)
-                utils.printExamples(wordorder_rules_not_followed, sent_tokens, token, token_num, sent, id2index, fout,
+                wordorder_rules_not_followed = checkWordOrderScores(lang_rule_all, token, sent, featuresInDatapoint, wordorder_aggr, sent_wordorder_aggr)
+                utils.printExamples(wordorder_rules_not_followed, sent_tokens, token, token_num, sent, id2index, sent_error_examples,
                                     task='wordorder')
 
                 # Checking casemarking for nouns, propernouns, pronouns,
                 assignment_rules_not_followed = checkAssignmentScores(lang_rule_all, token, sent, featuresInDatapoint,
-                                                                    assignment_aggr, argstruct_aggr)
-                utils.printExamples(assignment_rules_not_followed, sent_tokens, token, token_num, sent, id2index, fout,
+                                                                    assignment_aggr, argstruct_aggr, sent_assignment_aggr)
+                utils.printExamples(assignment_rules_not_followed, sent_tokens, token, token_num, sent, id2index, sent_error_examples,
                                     task='casemarking')
 
+            sent_score, sent_report = compute_joint_score(sent_agreement_aggr, sent_wordorder_aggr, sent_assignment_aggr, sent_argstruct_aggr)
+            #fout.write(f'sent score: {sent_score} \t sent: {" ".join(sent_tokens)}\n')
+
+            sent_score_examples.append((sent_score, sent_error_examples, " ".join(sent_tokens)))
+
+        #sorted error sents
+        sent_score_examples.sort()
+        for (sent_score, sent_error_examples, sent) in sent_score_examples[:500]:
+            fout.write(f'score: {sent_score} \t sent: {sent}\n')
+            fout.write(f'{"".join(sent_error_examples)}\n\n')
     score, report = compute_joint_score(agreement_aggr, wordorder_aggr, assignment_aggr, argstruct_aggr)
     agr_score, agr_report = compute_score(agreement_aggr, task='agreement', argstruct_aggr=None)
     wo_score, wo_report = compute_score(wordorder_aggr, task='wordorder', argstruct_aggr=None)
@@ -447,9 +481,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="compute morphological well-formedness"
     )
-    parser.add_argument("-input", type=str, help="input CoNLL-U file", default="../data/conllu/tr.conllu")
+    parser.add_argument("-input", type=str, help="input CoNLL-U file", default="../examples/samanantar/hi.zeebiz.txt.stanza.conllu")
     parser.add_argument(
-        "-lg", type=str, help="input language ISO 639-1 code", default="tr"
+        "-lg", type=str, help="input language ISO 639-1 code", default="hi"
     )
     parser.add_argument(
         "-all", type=str, help="all rules file containing rules for agreement, word order, case marking", default="../rules/all_rules.txt"

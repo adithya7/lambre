@@ -385,7 +385,7 @@ def isGrammarRuleApplicable(featuresInDatapoint, one_rule_active, one_rule_nonac
     return valid
 
 
-def printExamples(rules_not_followed, sent_tokens, token, token_num, sent, id2index, fout, task):
+def printExamples(rules_not_followed, sent_tokens, token, token_num, sent, id2index, sent_error_examples, task):
     if len(rules_not_followed) > 0:  # there are rules which were not followed for this datapoint
         if task == 'agreement':
             for model, (one_active, one_nonactive, label) in rules_not_followed.items():
@@ -398,14 +398,14 @@ def printExamples(rules_not_followed, sent_tokens, token, token_num, sent, id2in
                 sent_example_tokens[token_head_num] = "***" + sent_example_tokens[
                     token_head_num] + f"({model}={headtoken_feature_value})***"
 
-                fout.write(f'Example: {" ".join(sent_example_tokens)}\n')
-                fout.write(
+                sent_error_examples.append(f'Example: {" ".join(sent_example_tokens)}\n')
+                sent_error_examples.append(
                     f'{model} agreement not followed by tokens marked *** because following rule was not satisfied:\n')
-                if len(one_active) > 0:
-                    fout.write(f'Required Active features in the rule: {" ### ".join(one_active)}\n')
-                if len(one_nonactive) > 0:
-                    fout.write(f'Required Non-active features in that rule: {" ### ".join(one_nonactive)}\n')
-                fout.write("\n")
+                # if len(one_active) > 0:
+                #     sent_error_examples.append(f'Required Active features in the rule: {" ### ".join(one_active)}\n')
+                # if len(one_nonactive) > 0:
+                #     sent_error_examples.append(f'Required Non-active features in that rule: {" ### ".join(one_nonactive)}\n')
+                sent_error_examples.append("\n")
 
         elif task == 'wordorder':
             for model, (one_active, one_nonactive, label) in rules_not_followed.items():
@@ -423,14 +423,14 @@ def printExamples(rules_not_followed, sent_tokens, token, token_num, sent, id2in
                 token_head_num = id2index[token.head]
                 sent_example_tokens[token_head_num] = "***" + sent_example_tokens[token_head_num] + f"({head})***"
 
-                fout.write(f'Example: {" ".join(sent_example_tokens)}\n')
-                fout.write(
+                sent_error_examples.append(f'Example: {" ".join(sent_example_tokens)}\n')
+                sent_error_examples.append(
                     f'{model} order not followed for tokens marked ***, predicted order is {label} but observed is {not_label}. because following rule was not satisfied:\n')
-                if len(one_active) > 0:
-                    fout.write(f'Required Active features in the rule: {" ### ".join(one_active)}\n')
-                if len(one_nonactive) > 0:
-                    fout.write(f'Required Non-active features in that rule: {" ### ".join(one_nonactive)}\n')
-                fout.write("\n")
+                # if len(one_active) > 0:
+                #     sent_error_examples.append(f'Required Active features in the rule: {" ### ".join(one_active)}\n')
+                # if len(one_nonactive) > 0:
+                #     sent_error_examples.append(f'Required Non-active features in that rule: {" ### ".join(one_nonactive)}\n')
+                sent_error_examples.append("\n")
 
         elif task == 'casemarking':
             for model, (one_active, one_nonactive, label) in rules_not_followed.items():
@@ -438,11 +438,11 @@ def printExamples(rules_not_followed, sent_tokens, token, token_num, sent, id2in
                 value = getFeatureValue('Case', token.feats)
                 sent_example_tokens[token_num] = "***" + sent_example_tokens[token_num] + f"({token.upos}'s Case={value})***"
 
-                fout.write(f'Example: {" ".join(sent_example_tokens)}\n')
-                fout.write(
+                sent_error_examples.append(f'Example: {" ".join(sent_example_tokens)}\n')
+                sent_error_examples.append(
                     f'{model} case marking not followed for tokens marked ***, predicted case is [{label}] but observed is [{value}], because following rule was not satisfied:\n')
-                if len(one_active) > 0:
-                    fout.write(f'Required Active features in the rule: {" ### ".join(one_active)}\n')
-                if len(one_nonactive) > 0:
-                    fout.write(f'Required Non-active features in that rule: {" ### ".join(one_nonactive)}\n')
-                fout.write("\n")
+                # if len(one_active) > 0:
+                #     sent_error_examples.append(f'Required Active features in the rule: {" ### ".join(one_active)}\n')
+                # if len(one_nonactive) > 0:
+                #     sent_error_examples.append(f'Required Non-active features in that rule: {" ### ".join(one_nonactive)}\n')
+                sent_error_examples.append("\n")

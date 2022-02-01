@@ -3,11 +3,12 @@ import argparse, os
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--input", type=str, default='/Users/aditichaudhary/Documents/CMU/argument_structure/syntax_lex')
-parser.add_argument("--lang", type=str, nargs='+',default=['tr_imst'])
-parser.add_argument("--output", type=str, default="../rules/all_rules.txt")
+parser.add_argument("--lang", type=str, nargs='+',default=['hi_hdtb'])
+parser.add_argument("--output", type=str, default="../rules/all_rules_hi.txt")
 
 args = parser.parse_args()
 
+#python prepare_all_rules.py --input syntax_lex --lang el_gdt tr_imst no_nynorsklia fi_tdt no_bokmaal cs_pdt fr_gsd ro_nonstandard gl_ctg pl_pdb sl_ssj nl_alpino en_ewt ca_ancora ur_udtb id_gsd fa_seraji es_gsd da_ddt ar_nyuad de_hdt te_mtg pt_gsd sv_lines ta_ttb lv_lvtb et_edt it_vit ru_syntagrus --output all_rules_wo.txt
 
 
 def validLabel(label):

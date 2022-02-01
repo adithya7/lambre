@@ -170,3 +170,448 @@ casemarking	PRON	tr	Dat	headfeat_VERB_udep_Aspect_Perf ### headpos_VERB	headfeat
 casemarking	PRON	tr	Acc	headpos_VERB	depheadrel_subj ### lemma_ne ### headfeat_VERB_VerbForm_Part ### headfeat_VERB_udep_Aspect_Perf ### deprel_subj	84
 casemarking	NUM	tr	Nom	headpos_NUM	NA	32
 casemarking	NUM	tr	Nom	NA	depdeppos_NUM	81
+agreement	Gender	el	req-agree	deppos_PRON ### deprel_det	deppos_NOUN	319
+agreement	Gender	el	req-agree	deppos_NOUN ### headrelrel_vocative	deprel_conj	17
+agreement	Gender	el	req-agree	NA	deppos_PRON ### deppos_NOUN ### deppos_PROPN	2768
+agreement	Gender	el	req-agree	headpos_PROPN ### deppos_PROPN	deppos_PRON ### deppos_NOUN	146
+agreement	Gender	el	req-agree	lemma_μέλος ### deppos_NOUN	deprel_conj ### headrelrel_vocative	9
+agreement	Gender	el	req-agree	deprel_conj ### deppos_NOUN	headrelrel_comp:obj ### depheadpos_PUNCT	192
+agreement	Person	el	req-agree	deprel_subj	lemma_εγώ	234
+agreement	Person	el	req-agree	deprel_subj@pass	deprel_subj ### lemma_εγώ	87
+agreement	Number	el	req-agree	deppos_NOUN ### headlemma_είμαι	deprel_subj	116
+agreement	Number	el	req-agree	deprel_subj ### deppos_NOUN	NA	709
+agreement	Number	el	req-agree	lemma_μου	deppos_PRON ### deppos_NOUN ### deprel_comp:obj	309
+agreement	Number	el	req-agree	NA	deprel_comp:obl ### lemma_μου ### deppos_NOUN ### deprel_comp:obj ### deppos_VERB	7244
+agreement	Number	el	req-agree	deppos_NOUN ### neighborhood_πρόεδρος	deprel_conj ### deprel_subj ### headlemma_είμαι	64
+wordorder	subject-verb	el	before	depfeat_PronType_Rel	NA	248
+wordorder	subject-verb	el	after	depheadrel_comp:obj ### headrelrel_mod@relcl	depfeat_PronType_Rel	73
+wordorder	subject-verb	el	before	depheadrel_comp:pred ### depheadpos_AUX	depfeat_PronType_Rel ### depheadrel_comp:obj	81
+wordorder	subject-verb	el	before	depheadrel_comp:obj	depfeat_PronType_Rel ### headrelrel_mod@relcl	171
+wordorder	subject-verb	el	after	NA	depheadrel_comp:pred ### depheadpos_ADP ### depheadrel_comp:obj ### deppos_NOUN ### depfeat_PronType_Rel	63
+wordorder	subject-verb	el	after	deppos_NOUN ### headfeat_Voice_Act	depheadrel_comp:pred ### depheadpos_ADP ### depfeat_PronType_Rel ### depheadrel_comp:obj	80
+wordorder	subject-verb	el	before	depheadpos_ADP	depheadrel_comp:pred ### headfeat_Tense_Pres ### depheadrel_comp:obj ### deppos_NOUN ### depfeat_PronType_Rel	43
+wordorder	object-verb	el	after	NA	deppos_PRON	1440
+wordorder	object-verb	el	before	deppos_PRON ### lemma_που	NA	88
+wordorder	object-verb	el	before	deppos_PRON ### lemma_εγώ	lemma_που	83
+wordorder	adjective-noun	el	before	NA	depfeat_Case_Gen	1809
+wordorder	adjective-noun	el	before	depfeat_Case_Gen	headrelrel_comp:obj	543
+wordorder	numeral-noun	el	before	NA	neighborhood_ο	145
+wordorder	numeral-noun	el	before	neighborhood_ο ### depfeat_Case_Acc	NA	78
+wordorder	numeral-noun	el	before	neighborhood_ο	headfeat_Case_Acc ### depfeat_Case_Acc	105
+casemarking	DET	el	Acc	headrelrel_udep	headrelrel_comp:obj	127
+casemarking	DET	el	Acc	headrelrel_comp:obj ### headheadlemma_κατά	NA	63
+casemarking	DET	el	Acc	headrelrel_comp:obj	depfeat_Definite_Def ### headheadlemma_κατά	864
+casemarking	DET	el	Acc	depfeat_Definite_Def ### headrelrel_comp:obj	headheadlemma_κατά	117
+casemarking	DET	el	Gen	agree_det_NOUN_mod ### neighborhood_με	headrelrel_conj ### headrelrel_udep ### headrelrel_comp:obj ### headrelrel_appos	60
+casemarking	DET	el	Nom	agreepos_ADJ ### agreerel_det	headrelrel_udep ### headrelrel_appos ### headrelrel_conj ### headrelrel_comp:obj ### neighborhood_με	76
+casemarking	DET	el	Gen	headfeat_NOUN_det_Abbr_Yes	headrelrel_udep ### agreerel_det ### headrelrel_appos ### headpos_X ### headrelrel_conj ### headrelrel_comp:obj ### neighborhood_με	29
+casemarking	DET	el	Gen	headrelrel_mod	NA	1038
+casemarking	DET	el	Acc	neighborhood_κατά	headrelrel_conj ### headrelrel_mod	78
+casemarking	DET	el	Nom	headrelrel_subj	headrelrel_conj ### headrelrel_mod ### neighborhood_κατά	803
+casemarking	DET	el	Acc	NA	depfeat_PronType_Art ### neighborhood_κατά ### headrelrel_mod ### headrelrel_conj ### headrelrel_subj	721
+casemarking	DET	el	Acc	depfeat_PronType_Art ### neighborhood_από	headrelrel_conj ### headrelrel_subj ### headrelrel_mod ### neighborhood_κατά	294
+casemarking	DET	el	Acc	depfeat_PronType_Art ### neighborhood_για	neighborhood_κατά ### neighborhood_από ### headrelrel_mod ### headrelrel_conj ### headrelrel_subj	346
+casemarking	DET	el	Acc	depfeat_PronType_Art ### neighborhood_με	neighborhood_κατά ### neighborhood_από ### headrelrel_mod ### headrelrel_conj ### neighborhood_για ### headrelrel_subj	292
+casemarking	DET	el	Nom	headrelrel_subj@pass ### depfeat_PronType_Art	neighborhood_κατά ### neighborhood_από ### headrelrel_mod ### headrelrel_conj ### neighborhood_για ### neighborhood_με ### headrelrel_subj	238
+casemarking	DET	el	Acc	depfeat_PronType_Art	neighborhood_κατά ### headrelrel_subj@pass ### neighborhood_από ### headrelrel_mod ### headrelrel_conj ### neighborhood_για ### neighborhood_με ### headrelrel_subj	146
+casemarking	DET	el	Nom	headrelrel_subj@pass	headrelrel_subj	252
+casemarking	DET	el	Nom	headrelrel_subj	NA	715
+casemarking	DET	el	Nom	headrelrel_comp:pred	headrelrel_subj@pass ### headrelrel_subj	86
+casemarking	DET	el	Acc	NA	headrelrel_subj@pass ### agreepos_ADJ ### headrelrel_conj ### depheadpos_PUNCT ### headrelrel_subj ### headrelrel_comp:pred	198
+casemarking	NOUN	el	Acc	deprel_udep	agree_comp:obj ### deprel_comp:obj	126
+casemarking	NOUN	el	Acc	headlemma_κατά ### deprel_comp:obj	headpos_ADV	73
+casemarking	NOUN	el	Acc	headrelrel_udep ### deprel_comp:obj ### headpos_ADV	NA	48
+casemarking	NOUN	el	Acc	agree_comp:obj	headrelrel_NOUN_mod_comp:obj ### deprel_comp:obj	84
+casemarking	NOUN	el	Acc	agree_comp:obj ### headrelrel_NOUN_mod_comp:obj	depheadlemma_ο ### deprel_comp:obj	45
+casemarking	NOUN	el	Gen	depheadlemma_ο ### agree_comp:obj ### headrelrel_NOUN_mod_comp:obj	deprel_comp:obj	41
+casemarking	NOUN	el	Acc	headlemma_σε ### deprel_comp:obj	headlemma_κατά ### headpos_ADV	676
+casemarking	NOUN	el	Acc	deprel_comp:obj	headlemma_σε ### headlemma_κατά ### headpos_ADV ### headpos_ADP	1222
+casemarking	NOUN	el	Nom	deprel_comp:pred	agree_comp:obj ### deprel_comp:obj ### deprel_udep ### headrelrel_NOUN_conj_conj	66
+casemarking	NOUN	el	Acc	headlemma_με ### deprel_comp:obj ### headpos_ADP	headlemma_σε ### headlemma_κατά ### headpos_ADV	347
+casemarking	NOUN	el	Nom	depdeplemma_και	agree_comp:obj ### deprel_comp:obj ### deprel_udep ### headrelrel_NOUN_conj_conj ### agreerel_conj ### deprel_comp:pred	57
+casemarking	NOUN	el	Acc	headlemma_για ### deprel_comp:obj ### headpos_ADP	headlemma_με ### headlemma_κατά ### headlemma_σε ### headpos_ADV	319
+casemarking	NOUN	el	Gen	NA	agree_comp:obj ### depdeppos_PUNCT ### deprel_comp:obj ### headrelrel_conj ### deprel_udep ### headrelrel_NOUN_conj_conj ### depdeplemma_και ### deprel_comp:pred	2998
+casemarking	NOUN	el	Nom	depdeplemma_και ### agreerel_conj	agree_comp:obj ### deprel_comp:obj ### headrelrel_mod ### deprel_udep ### headrelrel_NOUN_conj_conj ### deprel_comp:pred	80
+casemarking	NOUN	el	Gen	depdeplemma_και ### headrelrel_mod ### agreerel_conj	agree_comp:obj ### deprel_comp:obj ### deprel_udep ### headrelrel_NOUN_conj_conj ### deprel_comp:pred	60
+casemarking	NOUN	el	Nom	headrelrel_conj	depheadlemma_ο ### agree_comp:obj ### depdeppos_PUNCT ### deprel_comp:obj ### deprel_udep ### headrelrel_NOUN_conj_conj ### depdeplemma_και ### deprel_comp:pred	120
+casemarking	NOUN	el	Gen	depheadlemma_ο ### headrelrel_conj	agree_comp:obj ### depdeppos_PUNCT ### deprel_comp:obj ### deprel_udep ### headrelrel_NOUN_conj_conj ### depdeplemma_και ### deprel_comp:pred	84
+casemarking	NOUN	el	Acc	neighborhood_προς ### deprel_comp:obj ### headpos_ADP	headlemma_με ### headpos_ADV ### headlemma_από ### headlemma_για ### headlemma_κατά ### headlemma_σε	55
+casemarking	NOUN	el	Acc	headpos_ADP ### deprel_comp:obj ### headlemma_από	headlemma_με ### headpos_ADV ### headlemma_για ### headlemma_κατά ### headlemma_σε	72
+casemarking	NOUN	el	Gen	deprel_comp:obj ### headpos_ADP	neighborhood_προς ### headlemma_με ### headpos_ADV ### headlemma_από ### headlemma_για ### headlemma_σε ### headlemma_κατά ### depdeprel_det	77
+casemarking	NOUN	el	Gen	headrelrel_NOUN_mod	deprel_mod	85
+casemarking	NOUN	el	Acc	agree_comp:obj ### deprel_mod	NA	87
+casemarking	NOUN	el	Gen	deprel_mod	depheadpos_PUNCT ### agree_comp:obj ### agreerel_mod	1441
+casemarking	NOUN	el	Gen	depheadpos_PUNCT ### deprel_mod	agree_comp:obj ### agreepos_NOUN	80
+casemarking	NOUN	el	Voc	depheadpos_PUNCT ### deprel_mod ### agreepos_NOUN	agree_comp:obj	32
+casemarking	NOUN	el	Acc	headlemma_σε	neighborhood_μεταξύ ### headrelrel_NOUN_mod ### deprel_mod ### headfeat_VerbForm_Fin	677
+casemarking	NOUN	el	Acc	headfeat_VerbForm_Fin	headrelrel_NOUN_mod ### neighborhood_μεταξύ ### headfeat_AUX_comp:pred_Voice_Pass ### deprel_mod	2430
+casemarking	NOUN	el	Gen	agreerel_mod ### headrelrel_mod ### deprel_mod	depheadpos_PUNCT ### agree_comp:obj	284
+casemarking	NOUN	el	Acc	headlemma_με	deprel_mod ### headfeat_VerbForm_Fin ### headlemma_σε ### neighborhood_μεταξύ ### headrelrel_NOUN_mod	347
+casemarking	NOUN	el	Nom	headfeat_AUX_comp:pred_Voice_Pass ### headfeat_VerbForm_Fin	neighborhood_μεταξύ ### headrelrel_NOUN_mod ### deprel_mod	46
+casemarking	NOUN	el	Acc	neighborhood_για	headlemma_με ### deprel_mod ### headfeat_VerbForm_Fin ### headlemma_σε ### neighborhood_μεταξύ ### headrelrel_NOUN_mod	389
+casemarking	NOUN	el	Nom	NA	headlemma_με ### headrelrel_udep ### deprel_mod ### headrelrel_mod ### headfeat_VerbForm_Fin ### neighborhood_για ### depdeplemma_και ### headlemma_σε ### neighborhood_μεταξύ ### headrelrel_NOUN_mod	581
+casemarking	NOUN	el	Acc	deprel_comp:obj ### headrelrel_mod	headlemma_με ### headrelrel_udep ### deprel_mod ### headfeat_VerbForm_Fin ### neighborhood_για ### headlemma_σε ### neighborhood_μεταξύ ### headrelrel_NOUN_mod	67
+casemarking	NOUN	el	Acc	headrelrel_udep	headlemma_με ### deprel_mod ### headfeat_VerbForm_Fin ### neighborhood_για ### headlemma_σε ### neighborhood_μεταξύ ### headrelrel_NOUN_mod	296
+casemarking	NOUN	el	Nom	headfeatrel_subj_Mood_Ind	NA	899
+casemarking	NOUN	el	Nom	deprel_subj@pass	headfeatrel_subj_Mood_Ind ### headpos_AUX	165
+casemarking	NOUN	el	Nom	headpos_AUX	headfeatrel_subj_Mood_Ind	125
+casemarking	NOUN	el	Nom	agree_subj	headfeatrel_subj_Mood_Ind ### headpos_AUX ### deprel_subj@pass	84
+casemarking	NOUN	el	Acc	agree_comp:obj ### depdeppos_PUNCT	headfeatrel_subj_Mood_Ind ### deprel_subj@pass ### headpos_AUX ### agree_subj	56
+casemarking	NOUN	el	Acc	neighborhood_ως ### headpos_ADV	depdeppos_PUNCT ### headpos_AUX ### headfeatrel_subj_Mood_Ind ### agree_subj ### deprel_subj@pass	50
+casemarking	NOUN	el	Acc	headfeat_VERB_Voice_Pass	depdeppos_PUNCT ### headpos_AUX ### headfeatrel_subj_Mood_Ind ### headpos_ADV ### deprel_conj ### agree_subj ### deprel_subj@pass	95
+casemarking	NOUN	el	Acc	agree_comp:obj ### deprel_conj	depdeppos_PUNCT ### headpos_AUX ### headfeatrel_subj_Mood_Ind ### headpos_ADV ### agree_subj ### deprel_subj@pass	134
+casemarking	NOUN	el	Gen	headrelrel_subj@pass	headfeat_VERB_Voice_Pass ### depdeppos_PUNCT ### headpos_AUX ### headfeatrel_subj_Mood_Ind ### headpos_ADV ### deprel_conj ### agree_subj ### deprel_subj@pass	101
+casemarking	NOUN	el	Gen	deprel_conj ### headrelrel_mod	agree_comp:obj ### depdeppos_PUNCT ### headpos_AUX ### headfeatrel_subj_Mood_Ind ### headpos_ADV ### agree_subj ### deprel_subj@pass	64
+casemarking	NOUN	el	Acc	NA	headfeat_VERB_Voice_Pass ### depdeppos_PUNCT ### headpos_AUX ### headrelrel_subj@pass ### headfeatrel_subj_Mood_Ind ### headpos_ADV ### deprel_conj ### agree_subj ### deprel_subj@pass	4903
+casemarking	NOUN	el	Voc	neighborhood_κύριος ### neighborhood_πρόεδρος	NA	45
+casemarking	ADJ	el	Acc	deprel_comp:obj	agree_comp:obj	74
+casemarking	ADJ	el	Acc	agree_comp:obj	NA	906
+casemarking	ADJ	el	Nom	headrelrel_subj	agree_comp:obj ### agree_conj ### headrelrel_ADJ_mod ### deprel_comp:obj ### depheadrel_comp:obj	342
+casemarking	ADJ	el	Gen	agree_mod	agree_comp:obj ### agree_conj ### headrelrel_ADJ_mod ### deprel_comp:obj ### depheadrel_comp:obj ### headrelrel_subj	518
+casemarking	ADJ	el	Nom	headfeat_Mood_Ind	agree_comp:obj ### agree_mod ### agree_conj ### headrelrel_ADJ_mod ### deprel_comp:obj ### depheadrel_comp:obj ### headrelrel_subj	221
+casemarking	ADJ	el	Nom	agree_subj@pass	agree_comp:obj ### headfeat_Mood_Ind ### agree_mod ### agree_conj ### headrelrel_ADJ_mod ### deprel_comp:obj ### depheadrel_comp:obj ### headrelrel_subj	100
+casemarking	ADJ	el	Nom	headrelrel_comp:pred	agree_comp:obj ### headfeat_Mood_Ind ### agree_mod ### agree_conj ### headrelrel_ADJ_mod ### agree_subj@pass ### deprel_comp:obj ### depheadrel_comp:obj ### headrelrel_subj	83
+casemarking	ADJ	el	Gen	agree_mod	headrelrel_ADJ_conj_mod	526
+casemarking	ADJ	el	Nom	headfeat_Mood_Ind ### depdeplemma_ο	agree_mod ### agree_conj	58
+casemarking	ADJ	el	Nom	agree_subj	agree_mod ### depdeplemma_ο ### neighborhood_νέος ### agree_conj	322
+casemarking	ADJ	el	Acc	headheadlemma_σε	agree_mod ### agree_conj ### neighborhood_νέος ### agree_subj ### depdeplemma_ο	318
+casemarking	ADJ	el	Nom	headfeat_Mood_Ind	depheadlemma_ο ### agree_mod ### headheadlemma_σε ### agree_conj ### neighborhood_νέος ### agree_subj ### depdeplemma_ο	235
+casemarking	ADJ	el	Acc	depheadlemma_ο	agree_mod ### agree_conj ### headheadlemma_σε ### neighborhood_νέος ### agree_subj ### depdeplemma_ο	64
+casemarking	ADJ	el	Acc	agreepos_NOUN	depheadlemma_ο ### headfeat_Mood_Ind ### agree_mod ### headheadlemma_σε ### agree_conj ### neighborhood_νέος ### agree_subj ### depdeplemma_ο	418
+casemarking	ADJ	el	Nom	headrelrel_subj	NA	342
+casemarking	ADJ	el	Nom	agree_subj@pass	headfeat_Mood_Ind ### headrelrel_subj	100
+casemarking	ADJ	el	Nom	headfeat_Mood_Ind	headrelrel_subj ### headfeat_VERB_Voice_Act	198
+casemarking	ADJ	el	Acc	headfeat_Mood_Ind ### headfeat_VERB_Voice_Act	headrelrel_subj	93
+casemarking	ADJ	el	Nom	agree_mod_NOUN_comp:pred	agree_subj@pass ### headfeat_Mood_Ind ### headrelrel_subj	64
+casemarking	ADJ	el	Acc	deprel_comp:obj	headfeat_Mood_Ind ### agree_subj@pass ### deprel_mod ### depheadpos_PUNCT ### headrelrel_subj ### agree_mod_NOUN_comp:pred	47
+casemarking	ADJ	el	Acc	deprel_mod ### agreepos_NOUN	headfeat_Mood_Ind ### agree_subj@pass ### headrelrel_conj ### depheadpos_PUNCT ### headrelrel_subj ### agree_mod_NOUN_comp:pred	1675
+casemarking	PROPN	el	Acc	deprel_comp:obj	NA	232
+casemarking	PROPN	el	Acc	agree_comp:obj	deprel_comp:obj	72
+casemarking	PROPN	el	Gen	deprel_mod	agree_comp:obj ### headrelrel_conj ### deprel_comp:obj	300
+casemarking	PROPN	el	Nom	deprel_subj	agree_comp:obj ### headrelrel_conj ### deprel_mod ### deprel_comp:obj	145
+casemarking	PROPN	el	Nom	depheadpos_PUNCT	agree_comp:obj ### deprel_subj ### deprel_mod ### deprel_comp:obj ### headrelrel_conj	60
+casemarking	PROPN	el	Nom	agree_subj	agree_comp:obj ### deprel_subj ### deprel_mod ### deprel_comp:obj ### headrelrel_conj ### depheadpos_PUNCT	68
+casemarking	PROPN	el	Gen	deprel_mod	agreepos_NOUN	242
+casemarking	PROPN	el	Gen	agreepos_NOUN ### deprel_mod ### depdeppos_DET	NA	52
+casemarking	PROPN	el	Nom	headrelrel_subj	depdeplemma_και ### deprel_mod ### depdeppos_DET	64
+casemarking	PROPN	el	Acc	depdeppos_DET	depdeplemma_και ### deprel_mod ### depdeprel_conj	379
+casemarking	PROPN	el	Acc	headrelrel_comp:obj	depdeplemma_και ### headrelrel_subj ### deprel_mod ### depdeppos_DET	42
+casemarking	PROPN	el	Nom	agreepos_PROPN	deprel_mod ### depdeppos_DET ### headrelrel_comp:obj ### depdeplemma_και ### headrelrel_subj	61
+casemarking	PROPN	el	Nom	deprel_subj	NA	151
+casemarking	PROPN	el	Nom	agree_subj	deprel_subj	79
+casemarking	PROPN	el	Nom	depheadpos_PUNCT ### agreepos_PROPN	deprel_subj ### agree_subj	62
+casemarking	PROPN	el	Gen	deprel_mod	depheadpos_PUNCT ### deprel_subj ### depdeprel_det ### agree_subj	53
+casemarking	PROPN	el	Acc	depdeprel_det ### headpos_ADP	depheadpos_PUNCT ### deprel_subj ### agree_subj	182
+casemarking	PROPN	el	Gen	deprel_mod ### depdeprel_det	depheadpos_PUNCT ### deprel_subj ### agree_subj ### headpos_ADP	257
+casemarking	PRON	el	Acc	headfeat_VERB_comp:obj_Voice_Act	NA	215
+casemarking	PRON	el	Acc	agree_comp:obj	headfeat_VERB_comp:obj_Voice_Act	179
+casemarking	PRON	el	Acc	headrelrel_udep	agree_comp:obj ### headfeat_VERB_comp:obj_Voice_Act	20
+casemarking	PRON	el	Gen	headpos_NOUN	agree_comp:obj ### headrelrel_udep ### headfeat_VERB_comp:obj_Voice_Act ### headrelrel_conj ### lemma_εγώ	465
+casemarking	PRON	el	Nom	deprel_subj	agree_comp:obj ### headrelrel_udep ### headfeat_VERB_comp:obj_Voice_Act ### headrelrel_conj ### lemma_εγώ ### headpos_NOUN	254
+casemarking	PRON	el	Nom	deprel_subj@pass	agree_comp:obj ### headrelrel_udep ### deprel_subj ### headfeat_VERB_comp:obj_Voice_Act ### headrelrel_conj ### lemma_εγώ ### headpos_NOUN	91
+casemarking	PRON	el	Gen	deprel_mod	NA	355
+casemarking	PRON	el	Gen	agree_det_NOUN_mod	deprel_mod	51
+casemarking	PRON	el	Acc	depfeat_PronType_Prs ### headfeat_VERB_comp:obj_Voice_Act	agree_det_NOUN_mod ### deprel_mod	80
+casemarking	PRON	el	Acc	headrelrel_ADP_udep	agree_det_NOUN_mod ### deprel_mod ### depfeat_PronType_Prs	15
+casemarking	PRON	el	Nom	NA	headrelrel_ADP_udep ### lemma_άλλος ### headrelrel_NOUN_det_comp:obj ### depfeat_PronType_Prs ### deprel_mod ### agree_det_NOUN_mod	626
+casemarking	PRON	el	Acc	headrelrel_NOUN_det_comp:obj	headrelrel_ADP_udep ### lemma_άλλος ### depfeat_PronType_Prs ### deprel_mod ### agree_det_NOUN_mod	144
+casemarking	PRON	el	Nom	deprel_subj	NA	287
+casemarking	PRON	el	Nom	headfeatrel_subj@pass_VerbForm_Fin	deprel_subj	86
+casemarking	PRON	el	Nom	agree_subj	deprel_subj ### headfeatrel_subj@pass_VerbForm_Fin	76
+casemarking	PRON	el	Gen	NA	deprel_subj ### depheadpos_VERB ### headfeatrel_subj@pass_VerbForm_Fin ### agree_subj ### depfeat_PronType_Dem ### depfeat_PronType_Ind	649
+casemarking	PRON	el	Acc	agree_comp:obj ### depfeat_PronType_Dem	deprel_subj ### depheadpos_VERB ### headfeatrel_subj@pass_VerbForm_Fin ### agree_subj	98
+casemarking	PRON	el	Acc	agree_comp:obj ### depfeat_PronType_Ind	deprel_subj ### depheadpos_VERB ### headfeatrel_subj@pass_VerbForm_Fin ### agree_subj ### depfeat_PronType_Dem	58
+casemarking	PRON	el	Acc	depfeat_PronType_Dem ### deprel_comp:obj	agree_comp:obj ### deprel_subj ### depheadpos_VERB ### headfeatrel_subj@pass_VerbForm_Fin ### agree_subj	36
+casemarking	NUM	el	Acc	headrelrel_comp:obj	NA	122
+casemarking	NUM	el	Gen	agree_mod	NA	40
+casemarking	NUM	el	Acc	headrelrel_NOUN_mod_comp:obj	agree_mod	107
+casemarking	NUM	el	Acc	agree_comp:obj	NA	111
+casemarking	NUM	el	Gen	headrelrel_mod	agree_comp:obj	47
+casemarking	NUM	el	Nom	depheadrel_det	agree_comp:obj ### headrelrel_mod	51
+agreement	Gender	hi	req-agree	lemma_जिला ### deppos_NOUN ### headlemma_का	headrelrel_subj ### neighborhood_संख्या	5
+agreement	Gender	hi	req-agree	deprel_conj ### headmatch_True	headpos_VERB ### headpos_NOUN ### headlemma_का ### deprel_compound	823
+agreement	Gender	hi	req-agree	headpos_ADP ### deppos_ADP ### lemma_का	deprel_conj ### headlemma_का ### headpos_NOUN ### deprel_compound	39
+agreement	Gender	hi	req-agree	deppos_NOUN ### headlemma_का ### lemma_सवाल	lemma_जिला ### headrelrel_subj ### lemma_राज्य ### neighborhood_संख्या	26
+agreement	Gender	hi	req-agree	headpos_AUX	deprel_mod ### deprel_udep ### lemma_का ### headlemma_का ### deprel_conj ### deprel_compound	49
+agreement	Gender	hi	req-agree	deprel_udep ### depheadpos_SCONJ	headlemma_का ### lemma_का ### deprel_conj ### deppos_NOUN ### neighborhood_ओर ### deprel_compound	63
+agreement	Gender	hi	req-agree	deppos_PRON ### lemma_का	deppos_ADP ### deprel_udep ### headlemma_का ### deprel_conj ### headlemma_सरकार ### deprel_compound	198
+agreement	Gender	hi	req-agree	deppos_ADP ### lemma_का ### headmatch_True	headpos_NOUN ### headpos_ADP ### headlemma_का ### deprel_conj ### deprel_compound	230
+agreement	Gender	hi	req-agree	deppos_ADP ### headpos_NOUN ### lemma_का	deprel_conj ### depheadrel_udep ### headlemma_का ### deprel_compound	47
+agreement	Gender	hi	req-agree	depheadrel_udep ### headpos_NOUN ### deppos_ADP ### lemma_का ### neighborhood_है	deprel_conj ### headlemma_का ### deprel_compound	119
+agreement	Gender	hi	req-agree	deprel_conj ### deppos_ADP ### headpos_NOUN ### headmatch_True	headrelrel_conj ### headpos_VERB ### headlemma_का ### deprel_compound	65
+agreement	Gender	hi	req-agree	depheadrel_compound ### neighborhood_सिंह ### deprel_compound	headpos_NOUN ### lemma_रक्षा ### headlemma_का ### headlemma_सरकार ### depheadpos_NOUN	109
+agreement	Gender	hi	req-agree	depheadrel_compound ### depheadpos_NOUN ### deprel_compound	headpos_NOUN ### headrelrel_subj ### lemma_रक्षा ### headlemma_का ### headlemma_सरकार	735
+agreement	Gender	hi	req-agree	neighborhood_कश्मीर ### headlemma_का	lemma_भाजपा ### lemma_दिल्ली ### headrelrel_subj ### headrelrel_comp:obj ### deppos_NOUN ### lemma_कांग्रेस	17
+agreement	Gender	hi	req-agree	deprel_udep ### lemma_वाला	depheadpos_SCONJ ### headlemma_का ### lemma_का ### deprel_conj ### deppos_NOUN ### neighborhood_ओर ### deprel_compound	137
+agreement	Gender	hi	req-agree	neighborhood_जा ### deppos_NOUN ### deprel_udep	lemma_बार ### neighborhood_तरह ### lemma_का ### headlemma_का ### deprel_conj ### deprel_compound	61
+agreement	Gender	hi	req-agree	depheadrel_udep ### headpos_NOUN ### lemma_का ### deppos_ADP	headlemma_का ### deprel_conj ### neighborhood_है ### depheadpos_NOUN ### deprel_compound	296
+agreement	Gender	hi	req-agree	depheadrel_compound ### neighborhood_राष्ट्रपति ### deprel_compound	headpos_NOUN ### lemma_रक्षा ### headlemma_का ### neighborhood_सिंह ### headlemma_सरकार ### depheadpos_NOUN	47
+agreement	Gender	hi	req-agree	lemma_राष्ट्रपति ### headlemma_का	lemma_भाजपा ### lemma_दिल्ली ### neighborhood_कश्मीर ### headrelrel_subj ### headrelrel_comp:obj ### deppos_NOUN ### lemma_कांग्रेस	19
+agreement	Gender	hi	req-agree	NA	lemma_भाजपा ### deprel_udep ### lemma_का ### headlemma_का ### deprel_conj ### headpos_AUX ### headlemma_सरकार ### deprel_compound	10572
+agreement	Gender	hi	req-agree	lemma_का	deppos_ADP ### deprel_mod ### deprel_udep ### deppos_PRON ### headlemma_का ### deprel_conj ### headlemma_सरकार ### deprel_compound	209
+agreement	Gender	hi	req-agree	deprel_mod ### lemma_का ### deppos_ADJ	deppos_ADP ### deprel_udep ### deppos_PRON ### headlemma_का ### deprel_conj ### headlemma_सरकार ### deprel_compound	199
+agreement	Gender	hi	req-agree	deppos_ADP ### deprel_udep ### lemma_का	headpos_NOUN ### headpos_ADP ### headlemma_का ### deprel_conj ### deprel_compound ### headmatch_True ### depheadpos_NOUN	364
+agreement	Gender	hi	req-agree	neighborhood_बीच ### deprel_conj	headpos_VERB ### headpos_NOUN ### headrelrel_conj ### headlemma_का ### lemma_का ### deppos_NOUN ### headmatch_True ### deprel_compound	33
+agreement	Gender	hi	req-agree	deprel_compound	headpos_NOUN ### lemma_रह ### lemma_शुरू ### lemma_रक्षा ### headlemma_का ### depheadrel_compound ### headlemma_सरकार ### lemma_सक ### lemma_हो	4148
+agreement	Gender	hi	req-agree	neighborhood_संसाधन ### depheadrel_compound ### deprel_compound	headpos_NOUN ### lemma_रक्षा ### headlemma_का ### neighborhood_सिंह ### neighborhood_राष्ट्रपति ### headlemma_सरकार ### depheadpos_NOUN	28
+agreement	Number	hi	req-agree	deppos_VERB ### headlemma_का	NA	282
+agreement	Number	hi	req-agree	headrelrel_subj ### headlemma_का ### deppos_PROPN	deppos_VERB ### headmatch_True	122
+agreement	Number	hi	req-agree	headpos_NOUN ### deprel_det	headpos_VERB ### headlemma_का ### depheadpos_DET ### lemma_का ### deprel_compound	1428
+agreement	Number	hi	req-agree	headpos_VERB ### depheadpos_SCONJ	lemma_रह ### headlemma_का ### lemma_वाला ### headmatch_True ### depheadpos_NOUN	222
+agreement	Number	hi	req-agree	NA	depheadrel_comp:aux ### headpos_VERB ### headpos_NOUN ### depheadrel_comp:aux@pass ### headlemma_का ### headlemma_जैसा ### deprel_conj ### headrelrel_udep	15336
+agreement	Number	hi	req-agree	depheadrel_comp:aux ### headlemma_रह ### depheadpos_ADP ### depheadpos_NOUN	headpos_VERB ### headpos_NOUN ### deprel_subj ### headlemma_का	83
+agreement	Number	hi	req-agree	depheadrel_comp:aux ### deprel_subj ### neighborhood_और ### deppos_PROPN	lemma_हम ### headpos_VERB ### headpos_NOUN ### headlemma_का	52
+agreement	Number	hi	req-agree	deppos_ADJ ### headpos_NOUN ### headmatch_True	headpos_VERB ### deprel_det ### headlemma_का ### lemma_का ### deprel_compound	666
+agreement	Number	hi	req-agree	headpos_NOUN ### lemma_का ### headmatch_True	headpos_VERB ### deppos_PRON ### headlemma_का ### deprel_conj ### deprel_compound	3609
+agreement	Number	hi	req-agree	headpos_NOUN ### deppos_PRON ### lemma_का ### neighborhood_कोई	deprel_conj ### headpos_VERB ### headlemma_का ### deprel_compound	64
+agreement	Number	hi	req-agree	neighborhood_सक ### headpos_VERB ### headlemma_कर ### headmatch_True	lemma_रह ### headlemma_का ### lemma_वाला ### depheadpos_NOUN	53
+agreement	Number	hi	req-agree	neighborhood_प्रधानमंत्री ### deppos_PROPN ### headlemma_का ### headmatch_True ### headrelrel_udep	deppos_VERB ### neighborhood_नेता ### neighborhood_और	36
+wordorder	subject-verb	hi	before	NA	neighborhood_हो	2369
+wordorder	subject-verb	hi	before	neighborhood_हो	depheadpos_ADJ	276
+wordorder	subject-verb	hi	before	depheadpos_ADJ ### neighborhood_हो ### headrelrel_comp:obj	NA	80
+wordorder	object-verb	hi	after	deppos_SCONJ	NA	80
+wordorder	object-verb	hi	after	depfeat_VerbForm_Fin	deppos_SCONJ	26
+wordorder	object-verb	hi	before	NA	deppos_SCONJ ### depfeat_VerbForm_Fin	4986
+casemarking	DET	hi	Nom	headrelrel_subj	NA	418
+casemarking	DET	hi	Nom	agree_comp:pred	headrelrel_subj ### headheadlemma_कर	101
+casemarking	DET	hi	Nom	headrelrel_comp:obj ### headheadlemma_कर	headrelrel_subj	82
+casemarking	DET	hi	Nom	agree_udep	headrelrel_subj ### headheadlemma_कर ### agree_comp:pred	42
+casemarking	DET	hi	Nom	agreepos_NOUN	neighborhood_दे ### headheadlemma_कर ### agree_comp:obj ### headrelrel_subj ### agree_udep ### agree_comp:pred	69
+casemarking	DET	hi	Acc	headheadlemma_का ### agree_comp:obj	neighborhood_दे ### headheadlemma_कर ### headrelrel_subj ### agree_udep ### agree_comp:pred	420
+casemarking	DET	hi	Acc	headrelrel_udep	neighborhood_दे ### headheadlemma_कर ### agree_comp:obj ### headrelrel_subj ### agree_udep ### agreepos_NOUN ### agree_comp:pred	55
+casemarking	DET	hi	Acc	headheadlemma_में ### agree_comp:obj	neighborhood_दे ### headheadlemma_कर ### headheadlemma_का ### headrelrel_subj ### agree_udep ### agree_comp:pred	288
+casemarking	DET	hi	Acc	agree_comp:obj ### headheadlemma_को	headheadlemma_में ### neighborhood_दे ### headheadlemma_कर ### headheadlemma_का ### headrelrel_subj ### agree_udep ### agree_comp:pred	299
+casemarking	DET	hi	Acc	headheadlemma_पर ### agree_comp:obj	headheadlemma_में ### neighborhood_दे ### headheadlemma_कर ### headheadlemma_को ### headheadlemma_का ### headrelrel_subj ### agree_udep ### agree_comp:pred	142
+casemarking	DET	hi	Nom	agree_subj	NA	413
+casemarking	DET	hi	Nom	agree_comp:pred	agree_subj	101
+casemarking	DET	hi	Nom	headheadlemma_दे	agree_comp:pred ### agree_subj ### headheadlemma_कर	59
+casemarking	DET	hi	Nom	headrelrel_comp:obj ### headheadlemma_कर	agree_subj ### agree_comp:pred	82
+casemarking	DET	hi	Nom	agree_det_NOUN_udep	agree_comp:pred ### headheadlemma_दे ### agree_subj ### headheadlemma_कर	34
+casemarking	DET	hi	Acc	agree_det_NOUN_comp:obj ### headheadlemma_का	headheadlemma_कर ### headheadlemma_दे ### agree_subj ### agree_det_NOUN_udep ### agree_comp:pred	418
+casemarking	DET	hi	Acc	headrelrel_udep	agree_det_NOUN_comp:obj ### headheadlemma_कर ### headheadlemma_दे ### agree_subj ### agree_det_NOUN_udep ### agree_comp:pred ### agreerel_det	54
+casemarking	DET	hi	Acc	agree_det_NOUN_comp:obj ### headheadlemma_में	headheadlemma_कर ### headheadlemma_दे ### headheadlemma_का ### agree_subj ### agree_det_NOUN_udep ### agree_comp:pred	288
+casemarking	DET	hi	Acc	agree_det_NOUN_comp:obj ### headheadlemma_को	headheadlemma_में ### headheadlemma_कर ### headheadlemma_दे ### headheadlemma_का ### agree_subj ### agree_det_NOUN_udep ### agree_comp:pred	298
+casemarking	DET	hi	Acc	headheadlemma_पर ### agree_det_NOUN_comp:obj	headheadlemma_में ### headheadlemma_कर ### headheadlemma_को ### headheadlemma_दे ### headheadlemma_का ### agree_subj ### agree_det_NOUN_udep ### agree_comp:pred	142
+casemarking	NOUN	hi	Nom	headpos_ADP ### headlemma_पहले	NA	22
+casemarking	NOUN	hi	Nom	headlemma_बाद ### headpos_ADP	headlemma_पहले	27
+casemarking	NOUN	hi	Nom	depdeprel_conj ### headfeat_AUX_Voice_Act	headpos_ADP ### agree_comp:obj	164
+casemarking	NOUN	hi	Acc	headheadlemma_का ### agree_comp:obj	headpos_ADP ### headpos_PROPN	319
+casemarking	NOUN	hi	Acc	headpos_PROPN ### agree_comp:obj	headpos_ADP	1031
+casemarking	NOUN	hi	Acc	headrelrel_comp:obj ### deprel_conj	headpos_ADP ### depdeprel_conj ### agree_comp:obj	98
+casemarking	NOUN	hi	Nom	neighborhood_पिछला	depdeprel_conj ### agree_comp:obj ### depdeppos_ADJ ### deprel_conj ### headpos_ADP	41
+casemarking	NOUN	hi	Nom	headrelrel_subj ### deprel_conj	headrelrel_comp:obj ### headpos_ADP ### depdeprel_conj ### agree_comp:obj	119
+casemarking	NOUN	hi	Nom	depdeppos_NOUN ### depdeprel_conj ### deprel_subj	headpos_ADP ### agree_comp:obj ### headfeat_AUX_Voice_Act	102
+casemarking	NOUN	hi	Acc	headheadlemma_में ### agree_comp:obj	headpos_ADP ### headpos_PROPN ### headheadlemma_का ### deprel_conj	57
+casemarking	NOUN	hi	Acc	headpos_ADP	neighborhood_दूर ### headlemma_बाद ### headlemma_पहले	486
+casemarking	NOUN	hi	Acc	neighborhood_पिछला ### depdeppos_ADJ	headpos_ADP ### depdeprel_conj ### agree_comp:obj ### deprel_conj	39
+casemarking	NOUN	hi	Acc	depdeprel_conj	headrelrel_comp:obj ### headfeat_AUX_Voice_Act ### depdeppos_NOUN ### agree_comp:obj ### headpos_ADP	69
+casemarking	NOUN	hi	Acc	depdeprel_conj ### agree_comp:obj	headheadlemma_में ### headheadlemma_का ### headpos_PROPN ### deprel_conj ### headpos_ADP	71
+casemarking	NOUN	hi	Acc	agree_comp:obj ### deprel_conj ### headheadlemma_को	headpos_ADP ### headpos_PROPN ### headheadlemma_का ### depheadpos_NUM	67
+casemarking	NOUN	hi	Nom	deprel_comp:obj ### depdeppos_NOUN ### depdeprel_conj	headfeat_AUX_Voice_Act ### neighborhood_और ### agree_comp:obj ### deprel_subj ### headpos_ADP	54
+casemarking	NOUN	hi	Nom	deprel_comp:obj ### agree_comp:obj	depdeprel_conj ### headheadlemma_में ### headheadlemma_का ### headpos_PROPN ### deprel_conj ### headpos_ADP	134
+casemarking	NOUN	hi	Acc	neighborhood_के ### agree_comp:obj ### deprel_conj	headheadlemma_को ### headheadlemma_का ### depheadpos_NUM ### headpos_PROPN ### headpos_ADP	68
+casemarking	NOUN	hi	Nom	depheadrel_mod ### agree_mod	depheadrel_udep ### depdeprel_conj ### agree_comp:obj ### neighborhood_पिछला ### agreepos_PROPN ### deprel_conj ### headpos_ADP	70
+casemarking	NOUN	hi	Nom	agreepos_PROPN	depheadrel_conj ### depdeprel_conj ### agree_comp:obj ### neighborhood_पिछला ### deprel_conj ### headpos_ADP ### agree_mod_PROPN_conj	207
+casemarking	NOUN	hi	Nom	deprel_conj	headrelrel_comp:obj ### depdeprel_conj ### headrelrel_mod ### agree_comp:obj ### depdeppos_ADJ ### agree_conj ### headrelrel_subj ### headpos_ADP	53
+casemarking	NOUN	hi	Nom	depdeppos_NOUN ### neighborhood_और ### depdeprel_conj	headfeat_AUX_Voice_Act ### depdeppos_ADP ### agree_comp:obj ### deprel_subj ### headpos_ADP	108
+casemarking	NOUN	hi	Acc	headheadlemma_से ### agree_comp:obj ### deprel_conj	headheadlemma_को ### neighborhood_के ### headheadlemma_का ### depheadpos_NUM ### headpos_PROPN ### headpos_ADP	46
+casemarking	NOUN	hi	Nom	NA	depdeprel_conj ### agree_comp:obj ### lemma_दिन ### neighborhood_पिछला ### agreepos_PROPN ### depfeat_Echo_Rdp ### deprel_conj ### headpos_ADP ### agree_mod	14796
+casemarking	NOUN	hi	Nom	lemma_दिन	depdeprel_conj ### depdeprel_mod ### agree_comp:obj ### neighborhood_पिछला ### agreepos_PROPN ### depfeat_Echo_Rdp ### deprel_conj ### headpos_ADP ### agree_mod	22
+casemarking	NOUN	hi	Nom	agree_mod	depheadrel_udep ### depdeprel_conj ### depheadpos_NOUN ### agree_comp:obj ### depheadrel_mod ### neighborhood_पिछला ### agreepos_PROPN ### deprel_conj ### headpos_ADP	166
+casemarking	NOUN	hi	Nom	agree_comp:obj	neighborhood_को ### headheadlemma_में ### depdeprel_conj ### deprel_comp:obj ### neighborhood_के ### headheadlemma_का ### headpos_PROPN ### deprel_conj ### headpos_ADP	532
+casemarking	NOUN	hi	Acc	headheadlemma_में ### agree_comp:obj ### deprel_conj	headheadlemma_को ### neighborhood_के ### headheadlemma_का ### depheadpos_NUM ### headheadlemma_से ### headpos_PROPN ### headpos_ADP	43
+casemarking	NOUN	hi	Nom	headpos_ADP ### headlemma_पहले	NA	22
+casemarking	NOUN	hi	Acc	depdeplemma_पिछला	headpos_ADP ### depdeprel_conj ### agree_comp:obj	61
+casemarking	NOUN	hi	Nom	depdeprel_conj ### headfeat_AUX_Voice_Act	headpos_ADP ### agree_comp:obj	164
+casemarking	NOUN	hi	Acc	headrelrel_PROPN_comp:obj ### agree_comp:obj	headpos_ADP	1031
+casemarking	NOUN	hi	Acc	headheadlemma_का ### agree_comp:obj	headpos_ADP ### headrelrel_PROPN_comp:obj	61
+casemarking	NOUN	hi	Acc	headpos_ADP ### depdeprel_conj	neighborhood_दूर ### headlemma_पहले	423
+casemarking	NOUN	hi	Acc	depdeprel_conj ### agree_comp:obj	headpos_ADP ### headrelrel_PROPN_comp:obj ### headheadlemma_का ### deprel_conj	83
+casemarking	NOUN	hi	Acc	agree_comp:obj ### deprel_conj ### headheadlemma_को	headpos_ADP ### headrelrel_PROPN_comp:obj ### headheadlemma_का	70
+casemarking	NOUN	hi	Acc	headpos_ADP ### neighborhood_बाद	agree_comp:obj_ADP_udep ### depdeprel_conj ### headlemma_पहले ### neighborhood_दूर	489
+casemarking	NOUN	hi	Acc	agreepos_PROPN ### depheadpos_ADP	depdeprel_conj ### agree_comp:obj ### depdeplemma_पिछला ### deprel_conj ### headpos_ADP	73
+casemarking	NOUN	hi	Nom	headrelrel_subj ### deprel_conj	headrelrel_comp:obj ### depdeprel_conj ### agree_comp:obj ### depdeplemma_पिछला ### headpos_ADP	119
+casemarking	NOUN	hi	Acc	headrelrel_comp:obj ### deprel_conj	headpos_ADP ### depdeprel_conj ### agree_comp:obj ### depdeplemma_पिछला	48
+casemarking	NOUN	hi	Nom	neighborhood_और ### depdeprel_conj	headpos_ADP ### depdeppos_ADP ### agree_comp:obj ### headfeat_AUX_Voice_Act	159
+casemarking	NOUN	hi	Acc	depdeppos_ADP ### depdeprel_conj	headpos_ADP ### depdeprel_udep ### agree_comp:obj ### headfeat_AUX_Voice_Act	155
+casemarking	NOUN	hi	Acc	headheadlemma_में ### agree_comp:obj	depdeprel_conj ### headheadlemma_का ### headrelrel_PROPN_comp:obj ### deprel_conj ### headpos_ADP	45
+casemarking	NOUN	hi	Acc	agree_comp:obj ### headheadlemma_के ### deprel_conj	headpos_ADP ### headrelrel_PROPN_comp:obj ### headheadlemma_का ### headheadlemma_को	72
+casemarking	NOUN	hi	Acc	headpos_ADP	neighborhood_दूर ### depdeprel_conj ### headlemma_पहले ### neighborhood_बाद	102
+casemarking	NOUN	hi	Nom	agree_comp:obj_ADP_udep ### headpos_ADP ### neighborhood_बाद	neighborhood_दूर ### depdeprel_conj ### headlemma_पहले ### headlemma_का	23
+casemarking	NOUN	hi	Acc	agree_comp:obj_ADP_udep ### headpos_ADP ### neighborhood_बाद ### headlemma_का	neighborhood_दूर ### depdeprel_conj ### headlemma_पहले	49
+casemarking	NOUN	hi	Nom	depdeprel_conj ### neighborhood_व	agree_conj_NOUN_conj ### headfeat_AUX_Voice_Act ### neighborhood_और ### depdeppos_ADP ### agree_comp:obj ### headpos_ADP	55
+casemarking	NOUN	hi	Nom	agree_comp:obj ### headheadlemma_कर	depdeprel_conj ### headheadlemma_में ### headheadlemma_का ### headrelrel_PROPN_comp:obj ### deprel_conj ### headpos_ADP	197
+casemarking	NOUN	hi	Acc	headheadlemma_से ### agree_comp:obj ### deprel_conj	headheadlemma_को ### headheadlemma_का ### headrelrel_PROPN_comp:obj ### headheadlemma_के ### headpos_ADP	48
+casemarking	NOUN	hi	Nom	agree_mod	depdeprel_conj ### depheadlemma_का ### agree_comp:obj ### depdeplemma_पिछला ### agreepos_PROPN ### deprel_conj ### headpos_ADP	66
+casemarking	NOUN	hi	Nom	agreepos_PROPN ### agree_subj	depdeprel_conj ### agree_comp:obj ### depheadpos_ADP ### depdeplemma_पिछला ### deprel_conj ### headpos_ADP	168
+casemarking	NOUN	hi	Nom	deprel_conj	headrelrel_comp:obj ### depdeprel_conj ### agree_comp:obj ### depdeplemma_पिछला ### agree_conj ### headrelrel_subj ### headpos_ADP ### agree_conj_NOUN_mod	88
+casemarking	NOUN	hi	Nom	deprel_comp:obj ### agree_comp:obj	depdeprel_conj ### headheadlemma_में ### headheadlemma_कर ### headheadlemma_का ### headrelrel_PROPN_comp:obj ### deprel_conj ### headpos_ADP	98
+casemarking	NOUN	hi	Acc	agree_comp:obj ### neighborhood_पर ### deprel_conj	headheadlemma_को ### headheadlemma_का ### headrelrel_PROPN_comp:obj ### headheadlemma_से ### headheadlemma_के ### headpos_ADP	41
+casemarking	NOUN	hi	Nom	NA	depdeprel_conj ### agree_comp:obj ### depdeplemma_पिछला ### agreepos_PROPN ### deprel_conj ### depfeat_Echo_Rdp ### neighborhood_अगला ### headpos_ADP ### agree_mod	14846
+casemarking	NOUN	hi	Nom	agreepos_PROPN	depheadrel_conj ### depdeprel_conj ### agree_comp:obj ### depheadpos_ADP ### agree_subj ### depdeplemma_पिछला ### deprel_conj ### headpos_ADP ### agree_mod_PROPN_conj	66
+casemarking	NOUN	hi	Nom	agree_comp:obj	depdeprel_conj ### headheadlemma_में ### headheadlemma_कर ### deprel_comp:obj ### headheadlemma_का ### neighborhood_ने ### headrelrel_PROPN_comp:obj ### deprel_conj ### headpos_ADP	498
+casemarking	VERB	hi	Acc	headpos_ADP	headfeat_Voice_Act	1023
+casemarking	VERB	hi	Acc	agree_comp:obj	headpos_ADP ### headfeat_Voice_Act	80
+casemarking	VERB	hi	Acc	depdeprel_conj	headfeat_Voice_Act ### headpos_ADP ### agree_comp:obj	66
+casemarking	VERB	hi	Nom	headfeat_Voice_Act	depheadrel_subj	34
+casemarking	VERB	hi	Acc	headpos_ADP	headfeat_Voice_Act	1023
+casemarking	VERB	hi	Acc	agree_comp:obj	headpos_ADP ### headfeat_Voice_Act	80
+casemarking	VERB	hi	Nom	headfeat_Voice_Act ### neighborhood_कि	depheadrel_subj	19
+casemarking	VERB	hi	Nom	headfeat_VERB_Aspect_Imp ### headfeat_Voice_Act	depheadrel_subj ### neighborhood_कि	64
+casemarking	VERB	hi	Acc	deprel_mod	headfeat_Voice_Act ### headpos_ADP ### agree_comp:obj	50
+casemarking	VERB	hi	Nom	headfeat_Voice_Act ### headfeat_VerbForm_Fin	headfeat_VERB_Aspect_Imp ### depheadrel_subj ### neighborhood_कि	88
+casemarking	ADJ	hi	Nom	headheadlemma_दे ### agree_comp:obj	NA	106
+casemarking	ADJ	hi	Nom	agree_comp:obj ### headheadlemma_बना	headheadlemma_दे	48
+casemarking	ADJ	hi	Acc	lemma_पिछला	agree_conj ### headrelrel_mod ### agree_comp:obj	18
+casemarking	ADJ	hi	Nom	agree_comp:obj ### neighborhood_नहीं	headheadlemma_दे ### headheadlemma_बना	46
+casemarking	ADJ	hi	Acc	headpos_PROPN ### headrelrel_mod	neighborhood_यह ### agree_comp:obj ### agree_mod	96
+casemarking	ADJ	hi	Acc	headheadlemma_का ### agree_comp:obj	headheadlemma_बना ### headheadlemma_दे ### neighborhood_नहीं	1545
+casemarking	ADJ	hi	Acc	deprel_comp:obj ### headrelrel_mod	headpos_PROPN ### neighborhood_यह ### agree_comp:obj ### agree_mod	88
+casemarking	ADJ	hi	Acc	agree_comp:obj ### headheadlemma_के	headheadlemma_बना ### headheadlemma_का ### neighborhood_नहीं ### headheadlemma_दे	705
+casemarking	ADJ	hi	Nom	agreepos_NOUN	headrelrel_mod ### agree_comp:obj ### agree_conj ### lemma_पिछला ### headrelrel_NOUN_udep	1502
+casemarking	ADJ	hi	Nom	neighborhood_तरह ### headrelrel_NOUN_udep	headrelrel_mod ### agree_comp:obj ### depheadpos_ADP ### agree_conj ### lemma_पिछला	10
+casemarking	ADJ	hi	Acc	headrelrel_mod ### neighborhood_से ### agree_mod	headpos_PROPN ### neighborhood_यह ### depheadlemma_का ### agree_comp:obj	69
+casemarking	ADJ	hi	Acc	headheadlemma_से ### agree_comp:obj	neighborhood_नहीं ### headheadlemma_का ### headheadlemma_दे ### headheadlemma_के ### headheadlemma_बना	571
+casemarking	ADJ	hi	Nom	NA	headrelrel_mod ### agree_comp:obj ### depheadpos_ADP ### headrelrel_NOUN_udep ### agree_conj ### lemma_पिछला ### agreepos_NOUN	16
+casemarking	ADJ	hi	Nom	headlemma_बार ### headrelrel_NOUN_udep	headrelrel_mod ### agree_comp:obj ### depheadpos_ADP ### agree_conj ### neighborhood_तरह ### lemma_पिछला	7
+casemarking	ADJ	hi	Acc	neighborhood_के ### headrelrel_mod ### agree_mod	depheadlemma_का ### agree_comp:obj ### neighborhood_से ### headpos_PROPN ### neighborhood_यह	64
+casemarking	ADJ	hi	Acc	headheadlemma_पर ### agree_comp:obj	neighborhood_नहीं ### headheadlemma_का ### headheadlemma_दे ### headheadlemma_से ### headheadlemma_के ### headheadlemma_बना	427
+casemarking	ADJ	hi	Acc	neighborhood_को ### agree_comp:obj	headheadlemma_का ### headheadlemma_दे ### headheadlemma_से ### headheadlemma_के ### headheadlemma_बना ### headheadlemma_पर ### neighborhood_नहीं	693
+casemarking	ADJ	hi	Acc	headheadlemma_ने ### agree_comp:obj	neighborhood_को ### headheadlemma_का ### headheadlemma_दे ### headheadlemma_से ### headheadlemma_के ### headheadlemma_बना ### headheadlemma_पर ### neighborhood_नहीं	290
+casemarking	ADJ	hi	Nom	headheadlemma_दे ### agree_comp:obj	NA	106
+casemarking	ADJ	hi	Nom	agree_comp:obj ### headheadlemma_बना	headheadlemma_दे	48
+casemarking	ADJ	hi	Acc	neighborhood_पिछला	agree_conj ### headrelrel_mod ### agree_comp:obj	23
+casemarking	ADJ	hi	Acc	headpos_PROPN ### headrelrel_mod	agreepos_PROPN ### agree_comp:obj	98
+casemarking	ADJ	hi	Nom	agree_comp:obj ### neighborhood_नहीं	headheadlemma_दे ### headheadlemma_बना	46
+casemarking	ADJ	hi	Acc	agree_conj ### neighborhood_का	headrelrel_mod ### agree_comp:obj ### depheadrel_mod	86
+casemarking	ADJ	hi	Acc	headheadlemma_का ### agree_comp:obj	headheadlemma_बना ### headheadlemma_दे ### neighborhood_नहीं	1545
+casemarking	ADJ	hi	Nom	depheadrel_conj ### agree_mod_NOUN_comp:pred	neighborhood_पिछला ### headrelrel_mod ### agree_comp:obj ### agree_conj	43
+casemarking	ADJ	hi	Acc	neighborhood_के ### headrelrel_mod	headpos_PROPN ### agreepos_PROPN ### agree_comp:obj ### neighborhood_का	74
+casemarking	ADJ	hi	Acc	headheadlemma_में ### agree_comp:obj	headheadlemma_बना ### headheadlemma_का ### neighborhood_नहीं ### headheadlemma_दे	961
+casemarking	ADJ	hi	Acc	deprel_comp:obj ### headrelrel_mod ### headpos_ADJ ### neighborhood_का	headpos_PROPN ### agreepos_PROPN ### agree_comp:obj	54
+casemarking	ADJ	hi	Acc	agree_comp:obj ### headheadlemma_के	neighborhood_नहीं ### headheadlemma_में ### headheadlemma_का ### headheadlemma_दे ### headheadlemma_बना	705
+casemarking	ADJ	hi	Nom	agreepos_NOUN	neighborhood_दिन ### depheadrel_conj ### headrelrel_mod ### agree_comp:obj ### agree_conj ### neighborhood_पिछला ### agree_mod_NOUN_udep	1487
+casemarking	ADJ	hi	Acc	headpos_ADJ ### headrelrel_mod ### agree_mod_ADJ_mod ### neighborhood_का	deprel_comp:obj ### headpos_PROPN ### agreepos_PROPN ### agree_comp:obj	97
+casemarking	ADJ	hi	Acc	agree_comp:obj ### headheadlemma_को	neighborhood_नहीं ### headheadlemma_में ### headheadlemma_का ### headheadlemma_दे ### headheadlemma_के ### headheadlemma_बना	707
+casemarking	ADJ	hi	Nom	NA	neighborhood_दिन ### depheadrel_conj ### headrelrel_mod ### agree_comp:obj ### neighborhood_पिछला ### agree_conj ### depdeprel_udep ### agreepos_NOUN	91
+casemarking	ADJ	hi	Nom	agree_mod_NOUN_udep ### neighborhood_तरह ### agreepos_NOUN	neighborhood_दिन ### depheadrel_conj ### headrelrel_mod ### agree_comp:obj ### agree_conj ### neighborhood_पिछला	9
+casemarking	ADJ	hi	Acc	headheadlemma_से ### agree_comp:obj	headheadlemma_में ### headheadlemma_को ### headheadlemma_का ### headheadlemma_दे ### headheadlemma_के ### headheadlemma_बना ### neighborhood_नहीं	571
+casemarking	ADJ	hi	Nom	depfeat_NumType_Ord ### agree_mod_NOUN_udep ### agreepos_NOUN	neighborhood_दिन ### depheadrel_conj ### headrelrel_mod ### agree_comp:obj ### agree_conj ### neighborhood_पिछला ### neighborhood_तरह	14
+casemarking	ADJ	hi	Acc	headheadlemma_पर ### agree_comp:obj	headheadlemma_में ### headheadlemma_को ### headheadlemma_का ### headheadlemma_दे ### headheadlemma_से ### headheadlemma_के ### headheadlemma_बना ### neighborhood_नहीं	427
+casemarking	PROPN	hi	Nom	agree_comp:obj ### headheadlemma_कर	headpos_ADP	109
+casemarking	PROPN	hi	Acc	headpos_ADP	headheadlemma_बीच	6661
+casemarking	PROPN	hi	Acc	depdeprel_dislocated	headpos_ADP ### depheadrel_dislocated ### agree_comp:obj ### depdeprel_conj	122
+casemarking	PROPN	hi	Nom	depheadrel_dislocated ### headrelrel_PROPN_compound_mod	headpos_ADP ### depdeprel_conj ### agreepos_PROPN ### agree_comp:obj	146
+casemarking	PROPN	hi	Acc	depheadrel_dislocated ### agreepos_PROPN	headpos_ADP ### depdeprel_conj ### agree_comp:obj	155
+casemarking	PROPN	hi	Nom	depdeprel_conj ### deprel_subj	neighborhood_और ### depdeppos_ADP ### headpos_ADP ### agree_comp:obj	88
+casemarking	PROPN	hi	Nom	neighborhood_और ### depdeprel_conj	agree_conj_PROPN_conj ### depdeppos_ADP ### headpos_ADP ### agree_comp:obj	160
+casemarking	PROPN	hi	Acc	headheadlemma_का ### agree_comp:obj	depheadrel_conj ### neighborhood_लिए ### headpos_ADP ### headheadlemma_कर	395
+casemarking	PROPN	hi	Acc	headrelrel_comp:obj ### depdeprel_cc	depdeprel_conj ### agree_comp:obj ### depdeprel_dislocated ### headpos_ADP ### depheadrel_dislocated	59
+casemarking	PROPN	hi	Nom	depheadrel_dislocated ### headrelrel_PROPN_udep	depdeprel_conj ### agree_comp:obj ### agreepos_PROPN ### headpos_ADP ### headrelrel_PROPN_compound_mod	48
+casemarking	PROPN	hi	Nom	depdeprel_conj ### agree_subj	neighborhood_और ### depdeppos_ADP ### agree_comp:obj ### deprel_subj ### headpos_ADP	46
+casemarking	PROPN	hi	Nom	NA	depdeprel_conj ### depdeprel_cc ### agree_comp:obj ### depdeprel_dislocated ### headpos_ADP ### depheadrel_dislocated ### lemma_केंद्रीय	82
+casemarking	PROPN	hi	Nom	depheadrel_dislocated ### headrelrel_PROPN_subj	depdeprel_conj ### agree_comp:obj ### headrelrel_PROPN_udep ### agreepos_PROPN ### headpos_ADP ### headrelrel_PROPN_compound_mod	57
+casemarking	PROPN	hi	Acc	depdeppos_ADP ### depdeprel_conj	headpos_AUX ### deprel_mod ### agree_comp:obj ### depheadpos_ADP ### headpos_ADP	45
+casemarking	PROPN	hi	Acc	agree_comp:obj	depheadrel_conj ### headheadlemma_कर ### deprel_compound ### headheadlemma_का ### neighborhood_लिए ### headpos_ADP ### agree_mod_NOUN_comp:obj	410
+casemarking	PROPN	hi	Acc	deprel_compound ### headheadlemma_में ### agree_comp:obj	depheadrel_conj ### headheadlemma_कर ### headheadlemma_का ### neighborhood_लिए ### headpos_ADP	70
+casemarking	PROPN	hi	Nom	depdeprel_cc	headrelrel_comp:obj ### depdeprel_conj ### agree_comp:obj ### depdeprel_dislocated ### depheadpos_PUNCT ### headpos_ADP ### depheadrel_dislocated	76
+casemarking	PROPN	hi	Acc	depdeppos_ADP ### agree_mod_NOUN_comp:obj ### agree_comp:obj	depheadrel_conj ### headheadlemma_कर ### deprel_compound ### headheadlemma_का ### neighborhood_लिए ### headpos_ADP	79
+casemarking	PROPN	hi	Acc	deprel_compound ### agree_comp:obj ### neighborhood_ने	depheadrel_conj ### headheadlemma_में ### headheadlemma_कर ### headheadlemma_का ### neighborhood_लिए ### headpos_ADP	42
+casemarking	PROPN	hi	Acc	depdeprel_conj ### deprel_conj	neighborhood_और ### depdeppos_ADP ### deprel_mod ### agree_comp:obj ### agree_subj ### agree_conj ### deprel_subj ### headpos_ADP	109
+casemarking	PROPN	hi	Acc	deprel_compound ### depheadpos_PROPN ### agree_comp:obj	depheadrel_conj ### headheadlemma_में ### headheadlemma_कर ### headheadlemma_का ### neighborhood_ने ### neighborhood_लिए ### headpos_ADP	141
+casemarking	PROPN	hi	Nom	agree_comp:obj ### headheadlemma_कर	headpos_ADP	109
+casemarking	PROPN	hi	Acc	headpos_ADP	headheadlemma_बीच	6661
+casemarking	PROPN	hi	Acc	headheadlemma_बीच ### headpos_ADP	depdeprel_conj	48
+casemarking	PROPN	hi	Nom	headheadlemma_बीच ### depdeprel_conj ### headpos_ADP	NA	30
+casemarking	PROPN	hi	Acc	depdeprel_dislocated	headpos_ADP ### depheadrel_dislocated ### agree_comp:obj ### depdeprel_conj	122
+casemarking	PROPN	hi	Acc	headheadlemma_का ### agree_comp:obj	depheadrel_conj ### headpos_ADP ### headheadlemma_कर	399
+casemarking	PROPN	hi	Acc	headrelrel_PROPN_conj_comp:obj	depdeprel_conj ### agree_comp:obj ### depdeprel_dislocated ### headpos_ADP ### depheadrel_dislocated	51
+casemarking	PROPN	hi	Nom	depheadrel_dislocated ### headrelrel_PROPN_mod	headpos_ADP ### depdeprel_conj ### agreepos_PROPN ### agree_comp:obj	148
+casemarking	PROPN	hi	Acc	depheadrel_dislocated ### agreepos_PROPN	headpos_ADP ### depdeprel_conj ### agree_comp:obj	192
+casemarking	PROPN	hi	Nom	headrelrel_comp:obj ### depdeprel_conj	headpos_ADP ### depdeppos_ADP ### agree_comp:obj ### deprel_subj	89
+casemarking	PROPN	hi	Nom	depdeprel_conj ### deprel_subj	headpos_ADP ### depdeppos_ADP ### agree_comp:obj	100
+casemarking	PROPN	hi	Nom	depheadrel_dislocated ### headrelrel_PROPN_subj	depdeprel_conj ### agree_comp:obj ### agreepos_PROPN ### headpos_ADP ### headrelrel_PROPN_mod	57
+casemarking	PROPN	hi	Nom	depdeprel_conj ### headrelrel_PROPN_subj	headrelrel_comp:obj ### depdeppos_ADP ### agree_comp:obj ### deprel_subj ### headpos_ADP	60
+casemarking	PROPN	hi	Acc	depdeppos_ADP ### depdeprel_conj	agree_comp:obj ### depdeprel_udep ### deprel_udep ### headpos_ADP ### headpos_NOUN	237
+casemarking	PROPN	hi	Acc	agree_comp:obj	depheadrel_conj ### headheadlemma_कर ### headheadlemma_का ### headrelrel_PROPN_compound_comp:obj ### headpos_ADP ### agree_mod_NOUN_comp:obj	415
+casemarking	PROPN	hi	Acc	headrelrel_PROPN_compound_comp:obj ### headheadlemma_में ### agree_comp:obj	depheadrel_conj ### headpos_ADP ### headheadlemma_का ### headheadlemma_कर	73
+casemarking	PROPN	hi	Nom	depheadrel_dislocated ### headrelrel_PROPN_udep	depdeprel_conj ### agree_comp:obj ### agreepos_PROPN ### headrelrel_PROPN_subj ### headpos_ADP ### headrelrel_PROPN_mod	48
+casemarking	PROPN	hi	Acc	depdeppos_ADP ### agree_mod_NOUN_comp:obj ### agree_comp:obj	depheadrel_conj ### headheadlemma_कर ### headheadlemma_का ### headrelrel_PROPN_compound_comp:obj ### headpos_ADP	81
+casemarking	PROPN	hi	Acc	headheadlemma_ने ### headrelrel_PROPN_compound_comp:obj ### agree_comp:obj	depheadrel_conj ### headheadlemma_में ### headheadlemma_कर ### headheadlemma_का ### headpos_ADP	50
+casemarking	PROPN	hi	Acc	depdeprel_conj ### depheadpos_NOUN	headrelrel_comp:obj ### depdeppos_ADP ### agree_comp:obj ### depheadrel_mod ### deprel_subj ### headrelrel_PROPN_subj ### headpos_ADP	51
+casemarking	PROPN	hi	Nom	NA	depdeprel_conj ### headrelrel_PROPN_conj_conj ### agree_comp:obj ### depdeprel_dislocated ### headpos_ADP ### depdeppos_CCONJ ### depheadrel_dislocated ### headrelrel_PROPN_conj_comp:obj ### lemma_केंद्रीय	10594
+casemarking	PROPN	hi	Nom	depdeppos_CCONJ ### agreepos_PROPN	depdeprel_conj ### headrelrel_PROPN_conj_conj ### agree_comp:obj ### depdeprel_dislocated ### headpos_ADP ### depheadrel_dislocated ### headrelrel_PROPN_conj_comp:obj ### lemma_केंद्रीय	158
+casemarking	PRON	hi	Acc	agree_comp:obj	NA	170
+casemarking	PRON	hi	Acc/Gen	headfeat_AdpType_Post ### depfeat_Poss_Yes	agree_comp:obj	137
+casemarking	PRON	hi	Acc/Gen	headrelrel_NOUN_mod_mod	depdeppos_ADP ### agree_comp:obj ### headfeat_AdpType_Post	98
+casemarking	PRON	hi	Nom	depdeppos_ADP	lemma_कोई ### agree_comp:obj ### headfeat_AdpType_Post	90
+casemarking	PRON	hi	Acc	depdeppos_ADP ### lemma_कोई	agree_comp:obj ### headfeat_AdpType_Post	86
+casemarking	PRON	hi	Acc	headfeat_AdpType_Post	depfeat_Poss_Yes ### agree_comp:obj ### lemma_यह	204
+casemarking	PRON	hi	Acc	headfeat_AdpType_Post ### lemma_यह ### headlemma_पर	agree_comp:obj ### depfeat_Poss_Yes	2
+casemarking	PRON	hi	Nom	neighborhood_अपना	depdeppos_ADP ### headrelrel_NOUN_mod_mod ### agree_comp:obj ### headfeat_AdpType_Post	157
+casemarking	PRON	hi	Acc/Ins	headfeat_AdpType_Post ### lemma_यह	headrelrel_comp:obj ### depfeat_Poss_Yes ### agree_comp:obj ### headlemma_पर	20
+casemarking	PRON	hi	Acc	headrelrel_comp:obj ### headfeat_AdpType_Post ### lemma_यह	depfeat_Poss_Yes ### agree_comp:obj ### headlemma_पर	10
+casemarking	PRON	hi	Nom	lemma_कोई	neighborhood_अपना ### depdeppos_ADP ### agree_comp:obj ### headrelrel_NOUN_mod_mod ### headfeat_AdpType_Post	96
+casemarking	PRON	hi	Acc/Dat	deprel_comp:obl	NA	116
+casemarking	PRON	hi	Acc/Dat	depheadrel_udep ### headrelrel_VERB_comp:obj_comp:aux@pass	deprel_comp:obl	87
+casemarking	PRON	hi	Acc/Dat	headrelrel_VERB_comp:obj_comp:aux	deprel_comp:obl ### headrelrel_VERB_comp:obj_comp:aux@pass ### headheadlemma_है	75
+casemarking	PRON	hi	Nom	headrelrel_VERB_comp:obj_comp:aux ### headheadlemma_है	deprel_comp:obl ### headrelrel_VERB_comp:obj_comp:aux@pass	75
+casemarking	PRON	hi	Nom	headrelrel_VERB_comp:obj_comp:aux@pass ### neighborhood_यह	deprel_comp:obl ### depheadrel_udep	46
+casemarking	PRON	hi	Nom	headfeat_VERB_comp:obj_Voice_Act	deprel_comp:obl ### headrelrel_VERB_comp:obj_comp:aux ### headfeat_VERB_comp:obj_VerbForm_Inf ### headrelrel_VERB_comp:obj_comp:aux@pass	103
+casemarking	PRON	hi	Nom	headrelrel_VERB_mod	headfeatrel_subj_Mood_Ind ### headfeat_VERB_comp:obj_Voice_Act ### headfeat_VERB_comp:obj_VerbForm_Inf ### headrelrel_VERB_comp:obj_comp:aux@pass ### deprel_comp:obl ### headrelrel_VERB_comp:obj_comp:aux	103
+casemarking	PRON	hi	Nom	headfeatrel_subj_Mood_Ind	depheadpos_NOUN ### headfeat_VERB_comp:obj_Voice_Act ### headfeat_VERB_comp:obj_VerbForm_Inf ### headrelrel_VERB_comp:obj_comp:aux@pass ### deprel_comp:obl ### headrelrel_VERB_comp:obj_comp:aux	97
+casemarking	PRON	hi	Nom	depheadpos_NOUN ### headfeatrel_subj_Polite_Form ### headfeatrel_subj_Mood_Ind	headfeat_VERB_comp:obj_Voice_Act ### headfeat_VERB_comp:obj_VerbForm_Inf ### headrelrel_VERB_comp:obj_comp:aux@pass ### deprel_comp:obl ### headrelrel_VERB_comp:obj_comp:aux	33
+casemarking	PRON	hi	Nom	depheadrel_comp:aux@pass	headrelrel_VERB_mod ### headfeatrel_subj_Mood_Ind ### headfeat_VERB_comp:obj_Voice_Act ### headfeat_VERB_comp:obj_VerbForm_Inf ### headrelrel_VERB_comp:obj_comp:aux@pass ### deprel_comp:obl ### headrelrel_VERB_comp:obj_comp:aux ### deprel_subj	67
+casemarking	PRON	hi	Nom	deprel_subj	headrelrel_VERB_mod ### headfeatrel_subj_Mood_Ind ### headfeat_VERB_comp:obj_Voice_Act ### depheadrel_comp:obj ### headfeat_VERB_comp:obj_VerbForm_Inf ### headrelrel_VERB_comp:obj_comp:aux@pass ### deprel_comp:obl ### headrelrel_VERB_comp:obj_comp:aux	160
+casemarking	PRON	hi	Acc/Erg	depheadrel_comp:obj ### deprel_subj	headrelrel_VERB_mod ### headfeatrel_subj_Mood_Ind ### headfeat_VERB_comp:obj_Voice_Act ### headfeat_VERB_comp:obj_VerbForm_Inf ### headrelrel_VERB_comp:obj_comp:aux@pass ### deprel_comp:obl ### headrelrel_VERB_comp:obj_comp:aux	83
+casemarking	PRON	hi	Nom	headfeatrel_subj_Mood_Ind ### depheadpos_NOUN	headfeat_VERB_comp:obj_Voice_Act ### headfeat_VERB_comp:obj_VerbForm_Inf ### headrelrel_VERB_comp:obj_comp:aux@pass ### deprel_comp:obl ### headrelrel_VERB_comp:obj_comp:aux ### headfeatrel_subj_Polite_Form ### lemma_वह	51
+casemarking	PRON	hi	Acc/Erg	depheadrel_comp:obj ### headfeat_VERB_subj_Aspect_Perf	NA	78
+casemarking	PRON	hi	Nom	headfeat_AUX_subj_Aspect_Perf	depheadpos_VERB ### headfeat_VERB_subj_Aspect_Perf	52
+casemarking	PRON	hi	Nom	depheadpos_VERB	depfeat_Polite_Form ### headfeat_VERB_subj_Aspect_Perf	307
+casemarking	PRON	hi	Acc/Erg	depheadpos_VERB ### depfeat_Polite_Form ### headfeat_AUX_subj_Tense_Pres	headfeat_VERB_subj_Aspect_Perf	11
+casemarking	PRON	hi	Acc/Gen	depfeat_Poss_Yes	NA	1217
+casemarking	PRON	hi	Acc/Ine	headrelrel_ADJ_mod_comp:pred	NA	59
+casemarking	PRON	hi	Acc	headlemma_से	headrelrel_ADJ_mod_comp:pred ### deprel_udep	42
+casemarking	PRON	hi	Acc/Ine	lemma_जो ### deprel_udep	headrelrel_ADJ_mod_comp:pred	46
+casemarking	PRON	hi	Nom	deprel_udep	lemma_जो ### neighborhood_वह ### headrelrel_ADJ_mod_comp:pred ### lemma_यह	382
+casemarking	PRON	hi	Acc/Ine	deprel_udep ### lemma_यह	lemma_जो ### depheadrel_comp:aux ### headrelrel_ADJ_mod_comp:pred	62
+casemarking	PRON	hi	Acc/Ins	depheadrel_comp:aux ### deprel_udep ### lemma_यह	lemma_जो ### headrelrel_ADJ_mod_comp:pred	38
+casemarking	PRON	hi	Nom	neighborhood_वह ### depheadpos_PRON ### deprel_udep	lemma_जो ### headrelrel_ADJ_mod_comp:pred ### lemma_यह	79
+casemarking	PRON	hi	Acc/Ins	headlemma_पहले	NA	7
+casemarking	PRON	hi	Acc/Dat	headfeat_VERB_comp:obl_Aspect_Perf	headlemma_पहले ### deprel_udep	62
+casemarking	PRON	hi	Nom	deprel_udep	neighborhood_यह ### headlemma_पहले	87
+casemarking	PRON	hi	Acc/Gen	neighborhood_वह ### headrelrel_comp:pred	headlemma_पहले ### deprel_udep ### headfeat_VERB_comp:obl_Aspect_Perf	90
+casemarking	PRON	hi	Nom	headfeat_VERB_comp:obj_Voice_Act	headfeat_VERB_comp:obl_Aspect_Perf ### depheadpos_NOUN ### headlemma_पहले ### headrelrel_comp:pred ### deprel_udep	195
+casemarking	PRON	hi	Nom	headrelrel_comp:pred	neighborhood_वह ### headfeat_VERB_comp:obl_Aspect_Perf ### headlemma_पहले ### deprel_udep ### neighborhood_यह	142
+casemarking	PRON	hi	Acc/Ine	headrelrel_comp:pred ### neighborhood_यह	headlemma_पहले ### neighborhood_वह ### deprel_udep ### headfeat_VERB_comp:obl_Aspect_Perf	94
+casemarking	PRON	hi	Acc/Dat	headfeat_VERB_comp:obj_Aspect_Perf	headlemma_पहले ### headfeat_VERB_comp:obj_Voice_Act ### headrelrel_comp:pred ### headfeat_VERB_VerbForm_Inf ### headfeat_VERB_comp:obl_Aspect_Perf ### deprel_udep	98
+casemarking	PRON	hi	Nom	headfeat_VERB_VerbForm_Inf	neighborhood_वह ### headlemma_पहले ### headfeat_VERB_comp:obj_Voice_Act ### headrelrel_comp:pred ### headfeat_VERB_comp:obl_Aspect_Perf ### deprel_udep	115
+casemarking	PRON	hi	Acc	headheadlemma_का	neighborhood_वह ### headlemma_पहले ### headfeat_VERB_comp:obj_Voice_Act ### headrelrel_comp:pred ### headfeat_VERB_VerbForm_Inf ### headfeat_VERB_comp:obl_Aspect_Perf ### deprel_udep ### headfeat_VERB_comp:obj_Aspect_Perf	195
+casemarking	PRON	hi	Acc/Gen	neighborhood_वह ### headheadlemma_का	headlemma_पहले ### headfeat_VERB_comp:obj_Voice_Act ### headrelrel_comp:pred ### headfeat_VERB_VerbForm_Inf ### headfeat_VERB_comp:obl_Aspect_Perf ### deprel_udep ### headfeat_VERB_comp:obj_Aspect_Perf	122
+casemarking	PRON	hi	Nom	depdeppos_SCONJ	headpos_AUX ### headfeat_VerbForm_Fin	59
+casemarking	PRON	hi	Nom	deprel_subj ### headfeat_VerbForm_Fin	headpos_AUX	173
+casemarking	PRON	hi	Nom	headpos_AUX ### depfeat_Polite_Form ### headfeat_AUX_subj_Polite_Form	NA	33
+casemarking	PRON	hi	Nom	headfeat_VerbForm_Fin	depheadrel_compound ### headpos_AUX ### deprel_subj	124
+casemarking	PRON	hi	Nom	headpos_AUX ### headfeat_Voice_Act	lemma_जो ### depfeat_Polite_Form	47
+casemarking	PRON	hi	Nom	lemma_जो ### headpos_AUX	depfeat_Polite_Form ### deprel_udep	33
+casemarking	PRON	hi	Acc/Ine	lemma_जो ### headpos_AUX ### deprel_udep	depfeat_Polite_Form	27
+casemarking	PRON	hi	Acc/Erg	headpos_AUX ### depfeat_Polite_Form	headfeat_AUX_subj_Polite_Form	37
+casemarking	PRON	hi	Nom	depdeppos_NOUN	headpos_AUX ### headfeat_VerbForm_Fin ### depdeppos_SCONJ ### deprel_udep	81
+casemarking	PRON	hi	Nom	neighborhood_यहाँ ### deprel_udep	headpos_AUX ### depdeppos_SCONJ ### headfeat_VerbForm_Fin	48
+casemarking	PRON	hi	Nom	lemma_अब ### headpos_AUX	lemma_जो ### depfeat_Polite_Form ### headfeat_Voice_Act	26
+casemarking	PRON	hi	Nom	depheadrel_subj ### deprel_udep	headpos_AUX ### neighborhood_यहाँ ### depdeppos_SCONJ ### headfeat_VerbForm_Fin	121
+casemarking	PRON	hi	Nom	headfeat_AUX_Polite_Form ### headpos_AUX	lemma_जो ### lemma_अब ### depfeat_Polite_Form ### headfeat_Voice_Act	55
+casemarking	PRON	hi	Nom	neighborhood_कुछ	depdeppos_NOUN ### headpos_AUX ### depdeppos_SCONJ ### deprel_udep ### agreepos_NOUN ### headfeat_VerbForm_Fin	82
+casemarking	PRON	hi	Nom	headpos_AUX ### neighborhood_जब	lemma_जो ### headfeat_AUX_Polite_Form ### depfeat_Polite_Form ### headfeat_Voice_Act ### lemma_अब	38
+casemarking	PRON	hi	Acc/Gen	depfeat_Poss_Yes	neighborhood_कुछ ### depdeppos_NOUN ### headpos_AUX ### depdeppos_SCONJ ### deprel_udep ### agreepos_NOUN ### headfeat_VerbForm_Fin	1179
+casemarking	PRON	hi	Nom	agreepos_NOUN	depdeppos_NOUN ### headpos_AUX ### depdeppos_SCONJ ### deprel_udep ### headrelrel_NOUN_mod_comp:obj ### headfeat_VerbForm_Fin	174
+casemarking	PRON	hi	Acc	headrelrel_NOUN_mod_comp:obj ### agreepos_NOUN	depdeppos_NOUN ### headpos_AUX ### depdeppos_SCONJ ### deprel_udep ### headfeat_VerbForm_Fin	151
+casemarking	PRON	hi	Nom	headpos_AUX ### lemma_यहाँ	lemma_जो ### neighborhood_जब ### headfeat_AUX_Polite_Form ### depfeat_Polite_Form ### headfeat_Voice_Act ### lemma_अब	20
+casemarking	PRON	hi	Nom	headpos_AUX ### headlemma_रह	lemma_जो ### neighborhood_जब ### lemma_यहाँ ### headfeat_AUX_Polite_Form ### depfeat_Polite_Form ### headfeat_Voice_Act ### lemma_अब	32
+casemarking	PRON	hi	Acc	headfeatrel_comp:obj_AdpType_Post	neighborhood_कुछ ### depdeppos_NOUN ### headpos_AUX ### depfeat_Polite_Form ### depdeppos_SCONJ ### depfeat_Poss_Yes ### deprel_udep ### agreepos_NOUN ### headfeat_VerbForm_Fin	192
+casemarking	PRON	hi	Acc/Erg	depfeat_Polite_Form	neighborhood_कुछ ### depdeppos_NOUN ### headpos_AUX ### depfeat_Poss_Yes ### depdeppos_SCONJ ### deprel_udep ### agreepos_NOUN ### headfeat_VerbForm_Fin	150
+casemarking	PRON	hi	Nom	headpos_AUX	lemma_जो ### neighborhood_जब ### lemma_यहाँ ### headlemma_रह ### headfeat_AUX_Polite_Form ### depfeat_Polite_Form ### headfeat_Voice_Act ### deprel_udep ### lemma_अब	184
+casemarking	ADV	hi	Nom	NA	headfeat_ADP_comp:obj_AdpType_Post	410
+casemarking	ADV	hi	Acc	headfeat_ADP_comp:obj_AdpType_Post	NA	64
+casemarking	ADV	hi	Nom	NA	headfeat_ADP_comp:obj_AdpType_Post	410
+casemarking	ADV	hi	Acc	headfeat_ADP_comp:obj_AdpType_Post	NA	64
