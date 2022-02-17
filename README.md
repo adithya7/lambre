@@ -97,13 +97,13 @@ The released rule sets and robust parsers are obtained from UD v2.5. However for
 TREEBANK_PATH=parsing/data
 mkdir -p $TREEBANK_PATH
 
-# download version v2.7 of UD
-wget https://lindat.mff.cuni.cz/repository/xmlui/bitstream/handle/11234/1-3424/ud-treebanks-v2.7.tgz -P $TREEBANK_PATH
-tar -zxvf ${TREEBANK_PATH}/ud-treebanks-v2.7.tgz -C $TREEBANK_PATH
+# download version v2.8 of UD
+wget https://lindat.mff.cuni.cz/repository/xmlui/bitstream/handle/11234/1-3687/ud-treebanks-v2.8.tgz -P $TREEBANK_PATH
+tar -zxvf ${TREEBANK_PATH}/ud-treebanks-v2.8.tgz -C $TREEBANK_PATH
 
-# download version v2.7 of SUD
-wget https://www.grew.fr/download/sud-treebanks-v2.7.tgz -P $TREEBANK_PATH --no-check-certificate
-tar -zxvf ${TREEBANK_PATH}/sud-treebanks-v2.7.tgz -C $TREEBANK_PATH
+# download version v2.8 of SUD
+wget https://grew.fr/download/sud-treebanks-v2.8.tgz -P $TREEBANK_PATH --no-check-certificate
+tar -zxvf ${TREEBANK_PATH}/sud-treebanks-v2.8.tgz -C $TREEBANK_PATH
 
 ```
 

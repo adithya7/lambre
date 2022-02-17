@@ -1,4 +1,6 @@
-import os, sys, re
+from collections import defaultdict
+from pathlib import Path
+import sys
 
 """ entropy threshold to identify morphosyntactic rules """
 # TODO: any principled way to choose this threshold?
@@ -12,11 +14,13 @@ MIN_VALUE_PROB = 0.1
 
 valid_feats = ["Case", "VerbForm"]
 
-INP_FILE = sys.argv[1]
-OUT_FILE = sys.argv[2]
+INP_FILE = Path(sys.argv[1])
+OUT_DIR = Path(sys.argv[2])
+OUT_DIR.mkdir(exist_ok=True)
 
+lg2rules = defaultdict(list)
 lang, depd_type = "", ""
-with open(INP_FILE, "r") as rf, open(OUT_FILE, "w") as wf:
+with open(INP_FILE, "r") as rf:
     rules = []
     for line_raw in rf:
         line = line_raw.strip()
@@ -24,10 +28,6 @@ with open(INP_FILE, "r") as rf, open(OUT_FILE, "w") as wf:
             lang = line.lstrip("# ")
         elif line.startswith("## "):
             for rule in rules:
-                """ should we restrict to only a specific set of features? """
-                # if rule["feat"] != "Case" and rule["feat"] != "PronType" and rule["feat"] != "Person":
-                #     continue
-
                 depd_val_str, head_val_str = "", ""
 
                 """ extracting possible values of the `feat` for dependent """
@@ -55,10 +55,7 @@ with open(INP_FILE, "r") as rf, open(OUT_FILE, "w") as wf:
                         depd_val_str = "-"
                     if head_val_str == "":
                         head_val_str = "-"
-                    wf.write(
-                        "%s\t%s\t%s\t%s\t%s\n"
-                        % (lang, depd_type, rule["feat"], depd_val_str, head_val_str)
-                    )
+                    lg2rules[lang] += [(depd_type, rule["feat"], depd_val_str, head_val_str)]
             lang, depd_type = line.lstrip("## ").split(" ")
             rules = []
         else:
@@ -108,3 +105,11 @@ with open(INP_FILE, "r") as rf, open(OUT_FILE, "w") as wf:
                         "head_probs": head_prob_dist,
                     }
                 )
+
+
+for lg in lg2rules:
+    with open(OUT_DIR / f"{lg}.txt", "w") as wf:
+        for depd_type, feat, depd_val_str, head_val_str in lg2rules[lg]:
+            wf.write(
+                f"{lg}\tpratapa-etal-2021\targstruct\t{depd_type}\t{feat}\t{depd_val_str}\t{head_val_str}\n"
+            )

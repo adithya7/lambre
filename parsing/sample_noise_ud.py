@@ -89,9 +89,7 @@ def sample_noise(data, um, um2ud, k=1):
                         options.remove(form)
                         # TODO: Allow for multi-word insertions
                         options = [o for o in options if " " not in o]
-                        option_feats = [
-                            convert_um2ud(um[lemma][o], um2ud)[1] for o in options
-                        ]
+                        option_feats = [convert_um2ud(um[lemma][o], um2ud)[1] for o in options]
                         counts = count_changes(feats, option_feats)
                         options = [o for i, o in enumerate(options) if counts[i] == k]
                         counts = [c for i, c in enumerate(counts) if c == k]
@@ -109,9 +107,7 @@ def sample_noise(data, um, um2ud, k=1):
                                     if feats[option_feat] != option_feats[option_feat]:
                                         old_feats = feats[option_feat]
                                         old_feat = option_feat
-                                        new_feats[option_feat] = option_feats[
-                                            option_feat
-                                        ]
+                                        new_feats[option_feat] = option_feats[option_feat]
 
                             new_token_string = new_sent[token_id].conll()
                             new_token_string = new_token_string.split("\t")
@@ -119,14 +115,10 @@ def sample_noise(data, um, um2ud, k=1):
                                 new_token_string[:1]
                                 + [choice]
                                 + new_token_string[2:-1]
-                                + [
-                                    f"{new_token_string[-1]}|modified:{old_feat}={','.join(list(old_feats))}"
-                                ]
+                                + [f"{new_token_string[-1]}|modified:{old_feat}={','.join(list(old_feats))}"]
                             )
                             new_token_string = "\t".join(new_token_string)
-                            modified_token = pyconll.unit.token.Token(
-                                new_token_string
-                            ).conll()
+                            modified_token = pyconll.unit.token.Token(new_token_string).conll()
 
                             new_str = []
                             for token in new_sent:
@@ -173,12 +165,10 @@ if __name__ == "__main__":
     parser.add_argument("-unimorph", type=str, help="unimorph file for lg")
     parser.add_argument("-orig", type=str, help="original conllu")
     parser.add_argument("-alt", type=str, help="altered conllu")
-    parser.add_argument("-alt-txt", type=str, default="", help="altered txt")
     args = parser.parse_args()
 
     treebank = args.orig
     new_treebank = args.alt
-    new_treebank_txt = args.alt_txt
 
     data = pyconll.load_from_file(treebank)
 
@@ -187,12 +177,12 @@ if __name__ == "__main__":
 
     random.seed(23)
     new_sents, alt_feat_dict = sample_noise(data, um, um2ud)
-    with open(new_treebank, "w") as op, open(new_treebank_txt, "w") as op_txt:
+    with open(new_treebank, "w") as op:
         for new_sent in new_sents:
-            op.write("\n".join(new_sent) + "\n\n")
             sent_ = pyconll.load_from_string("\n".join(new_sent))
             assert len(sent_) == 1, "more than one sentence"
-            op_txt.write(" ".join([t_.form for t_ in sent_[0] if t_.form]) + "\n")
+            # op.write("# text = " + " ".join([t_.form for t_ in sent_[0] if t_.form]) + "\n")
+            op.write("\n".join(new_sent) + "\n\n")
     alt_feat_dict = sorted(alt_feat_dict.items(), key=lambda x: x[0])
     print(args.unimorph.split("/")[-1])
     for (pos, feat), count in alt_feat_dict:
