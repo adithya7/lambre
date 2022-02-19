@@ -1,5 +1,6 @@
 from collections import defaultdict
 from copy import deepcopy
+from tkinter import E
 import numpy as np
 
 
@@ -121,6 +122,7 @@ def check_argstruct_rule(token, head_token_idx, argstruct_dict, sent):
         sent[head_token_idx].upos,
     )
     errors_in_features = []
+    errors = []
     if depd_type in argstruct_dict:
         for feat in argstruct_dict[depd_type]:
             token_feat_value = token.feats[feat] if feat in token.feats else None
@@ -143,6 +145,7 @@ def check_argstruct_rule(token, head_token_idx, argstruct_dict, sent):
                 argstruct_dict[depd_type][feat]["depd"]["counts"][1] += 1
             else:
                 argstruct_dict[depd_type][feat]["depd"]["counts"][0] += 1
+                errors += [(sent, feat, token.id, token_feat_value, head_token_idx, "")]
             if argstruct_dict[depd_type][feat]["depd"]["feat_value"] != "-":
                 # only if there is a rule on feat values
                 argstruct_dict[depd_type][feat]["depd"]["counts"][2] += 1
@@ -152,16 +155,18 @@ def check_argstruct_rule(token, head_token_idx, argstruct_dict, sent):
                 argstruct_dict[depd_type][feat]["head"]["counts"][1] += 1
             else:
                 argstruct_dict[depd_type][feat]["head"]["counts"][0] += 1
+                errors += [(sent, feat, token.id, "", head_token_idx, head_feat_value)]
                 errors_in_features.append(feat)
 
             if argstruct_dict[depd_type][feat]["head"]["feat_value"] != "-":
                 # only if there is a rule on feat values
                 argstruct_dict[depd_type][feat]["head"]["counts"][2] += 1
 
-    return errors_in_features
+    return errors_in_features, errors
 
 
 def check_agreement(token, head_token_idx, agreement_dict, sent):
+    errors = []
     agr_type = "%s-%s-%s" % (
         token.deprel,
         token.upos,
@@ -176,6 +181,7 @@ def check_agreement(token, head_token_idx, agreement_dict, sent):
             if token_feat_value != None and head_feat_value != None:
                 if len(token_feat_value & head_feat_value) == 0:
                     isDisagreement = True
+                    errors += [(sent, feat, token.id, token_feat_value, head_token_idx, head_feat_value)]
 
             if not isDisagreement:
                 agreement_dict[agr_type][feat][1] += 1
@@ -185,7 +191,7 @@ def check_agreement(token, head_token_idx, agreement_dict, sent):
 
             agreement_dict[agr_type][feat][2] += 1
 
-    return errors_in_features
+    return errors_in_features, errors
 
 
 def get_sent_score(data, lang_agr, lang_argstruct):
@@ -228,13 +234,13 @@ def get_sent_score(data, lang_agr, lang_argstruct):
             if token.head != "0" and token.head is not None:
                 anns = [token.upos, token.deprel, sent[token.head].upos]
                 if not None in anns:
-                    errors_in_features = check_agreement(
+                    errors_in_features, _ = check_agreement(
                         token,
                         token.head,
                         agreement_aggr,
                         sent,
                     )
-                    arg_errors_in_features = check_argstruct_rule(
+                    arg_errors_in_features, _ = check_argstruct_rule(
                         token,
                         token.head,
                         argstruct_aggr,
@@ -327,18 +333,21 @@ def get_doc_score(data, lang_agr, lang_argstruct):
                 },
             }
 
+    error_tuples = []
     for sent in data:
         for token in sent:
             if token.head != "0" and token.head is not None:
                 anns = [token.upos, token.deprel, sent[token.head].upos]
                 if not None in anns:
-                    check_agreement(token, token.head, agreement_aggr, sent)
-                    check_argstruct_rule(
+                    token_error_feats, token_error_tuples = check_agreement(token, token.head, agreement_aggr, sent)
+                    error_tuples.extend(token_error_tuples)
+                    token_error_feats, token_error_tuples = check_argstruct_rule(
                         token,
                         token.head,
                         argstruct_aggr,
                         sent,
                     )
+                    error_tuples.extend(token_error_tuples) 
 
     score, report = compute_joint_score(agreement_aggr, argstruct_aggr)
     agr_score, agr_report = compute_agreement_score(agreement_aggr)
@@ -352,4 +361,4 @@ def get_doc_score(data, lang_agr, lang_argstruct):
         "joint_score": score,
         "joint_report": report,
     }
-    return score_dict
+    return score_dict, error_tuples

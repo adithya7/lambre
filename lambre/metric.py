@@ -7,6 +7,7 @@ import pyconll
 from lambre.parse_utils import get_depd_tree
 from lambre import rule_utils
 from lambre import score_utils_pratapa, score_utils_chaudhury
+from lambre import visualize
 
 
 def parse_args():
@@ -20,7 +21,8 @@ def parse_args():
         help="rule set name (chaudhury-etal-2021 or pratapa-etal-2021)",
     )
     parser.add_argument("--conllu", action="store_true", help="expect CoNLL-U input, instead of text")
-    parser.add_argument("--report", action="store_true")
+    parser.add_argument("--report", action="store_true", help="report scores per rule")
+    parser.add_argument("--visualize", type=Path, default=None, help="visualize the errors")
     parser.add_argument("--rules-path", type=Path, default=Path.home() / "lambre_files" / "rules", help="path to rule sets")
     parser.add_argument(
         "--stanza-path", type=Path, default=Path.home() / "lambre_files" / "lambre_stanza_resources", help="path to stanza resources"
@@ -73,9 +75,12 @@ def main():
         logging.warning(f"{args.lg} is not supported for rule set {args.rule_set}")
         exit(1)
 
+    # error tuples for visualization
+    error_tuples = []
+
     if args.rule_set == "pratapa-etal-2021":
         lang_agr, lang_argstruct = rule_utils.load_pratapa_etal_2021_rules(rules_file_path)
-        doc_score = score_utils_pratapa.get_doc_score(sentences, lang_agr, lang_argstruct)
+        doc_score, error_tuples = score_utils_pratapa.get_doc_score(sentences, lang_agr, lang_argstruct)
 
     elif args.rule_set == "chaudhury-etal-2021":
         lang_rules = rule_utils.load_chaudhury_etal_2021_rules(rules_file_path)
@@ -87,6 +92,9 @@ def main():
         for rule, score in doc_report.items():
             logging.info(f"{rule}\t{score:.4f}")
 
+    if args.visualize:
+        out_spans, out_depds = visualize.visualize_errors(error_tuples)
+        visualize.write_visualizations(args.visualize, out_spans, out_depds)
 
 if __name__ == "__main__":
     main()

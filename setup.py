@@ -16,7 +16,7 @@ setup(
     license="MIT",
     keywords="multilingual text-generation evaluation",
     packages=find_packages(),
-    install_requires=["stanza==1.3.0", "scipy", "pyconll"],
+    install_requires=["stanza==1.3.0", "pyconll", "ipymarkup", "scipy"],
     python_requires=">=3.8",
     entry_points={"console_scripts": ["lambre=lambre.metric:main", "lambre-download=lambre.download:main"]},
 )
