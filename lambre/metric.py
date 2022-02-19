@@ -1,6 +1,7 @@
 import argparse
 import logging
 from pathlib import Path
+import subprocess
 import pyconll
 
 from lambre.parse_utils import get_depd_tree
@@ -20,9 +21,9 @@ def parse_args():
     )
     parser.add_argument("--conllu", action="store_true", help="expect CoNLL-U input, instead of text")
     parser.add_argument("--report", action="store_true")
-    parser.add_argument("--rules-path", type=Path, default="~/lambre_files/rules", help="path to rule sets")
+    parser.add_argument("--rules-path", type=Path, default=Path.home() / "lambre_files" / "rules", help="path to rule sets")
     parser.add_argument(
-        "--stanza-path", type=Path, default="~/lambre_files/lambre_stanza_resources", help="path to stanza resources"
+        "--stanza-path", type=Path, default=Path.home() / "lambre_files" / "lambre_stanza_resources", help="path to stanza resources"
     )
 
     return parser.parse_args()
@@ -37,6 +38,18 @@ def main():
     )
 
     args = parse_args()
+
+    """
+    Check language support
+    """
+    lang_parser_path = args.stanza_path / args.lg
+    if not lang_parser_path.is_dir():
+        # try download
+        try:
+            subprocess.run(["lambre-download", args.lg], check=True)
+        except subprocess.CalledProcessError:
+            logging.warning(f"skipping scorer")
+            exit(1)
 
     """
     Scorer expects CoNLL-U file with morphological feature values and (SUD) dependency parse 

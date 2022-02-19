@@ -1,7 +1,7 @@
 from collections import defaultdict
 import numpy as np
 
-import lambre.score_utils_chaudhury as utils
+import lambre.rule_utils as utils
 
 
 def compute_joint_score(agreement_aggr, wordorder_aggr, assignment_aggr, argstruct_aggr):
@@ -392,31 +392,31 @@ def get_doc_score(data, lang_rule_all):
             agreement_rules_not_followed = checkAgreementScores(
                 lang_rule_all, token, sent, featuresInDatapoint, agreement_aggr, sent_agreement_aggr
             )
-            utils.printExamples(
-                agreement_rules_not_followed,
-                sent_tokens,
-                token,
-                token_num,
-                sent,
-                id2index,
-                sent_error_examples,
-                task="agreement",
-            )
+            # utils.printExamples(
+            #     agreement_rules_not_followed,
+            #     sent_tokens,
+            #     token,
+            #     token_num,
+            #     sent,
+            #     id2index,
+            #     sent_error_examples,
+            #     task="agreement",
+            # )
 
             # Checking word order for subject-verb, object-verb, adj-noun, noun-adp, numeral-noun
             wordorder_rules_not_followed = checkWordOrderScores(
                 lang_rule_all, token, sent, featuresInDatapoint, wordorder_aggr, sent_wordorder_aggr
             )
-            utils.printExamples(
-                wordorder_rules_not_followed,
-                sent_tokens,
-                token,
-                token_num,
-                sent,
-                id2index,
-                sent_error_examples,
-                task="wordorder",
-            )
+            # utils.printExamples(
+            #     wordorder_rules_not_followed,
+            #     sent_tokens,
+            #     token,
+            #     token_num,
+            #     sent,
+            #     id2index,
+            #     sent_error_examples,
+            #     task="wordorder",
+            # )
 
             # Checking casemarking for nouns, propernouns, pronouns,
             assignment_rules_not_followed = checkAssignmentScores(
@@ -428,16 +428,16 @@ def get_doc_score(data, lang_rule_all):
                 argstruct_aggr,
                 sent_assignment_aggr,
             )
-            utils.printExamples(
-                assignment_rules_not_followed,
-                sent_tokens,
-                token,
-                token_num,
-                sent,
-                id2index,
-                sent_error_examples,
-                task="casemarking",
-            )
+            # utils.printExamples(
+            #     assignment_rules_not_followed,
+            #     sent_tokens,
+            #     token,
+            #     token_num,
+            #     sent,
+            #     id2index,
+            #     sent_error_examples,
+            #     task="casemarking",
+            # )
 
         sent_score, sent_report = compute_joint_score(
             sent_agreement_aggr, sent_wordorder_aggr, sent_assignment_aggr, sent_argstruct_aggr

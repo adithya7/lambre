@@ -35,18 +35,10 @@ def load_chaudhury_etal_2021_rules(file_path: Path):
 
     rules = {}
     with open(file_path, "r") as rf:
-        # Agreement	Number	tr_imst	req-agree	headmatch_True ### deppos_PROPN	NA	454
+        # tr      chaudhary-etal-2021     agreement       Person  req-agree       depheadpos_NOUN ### deppos_VERB depheadpos_PUNCT ### headpos_VERB       71
         for line in rf:
             line_txt = line.strip().split("\t")
-            task, model, lang, label, active, non_active, total_samples = (
-                line_txt[0],
-                line_txt[1],
-                line_txt[2],
-                line_txt[3],
-                line_txt[4],
-                line_txt[5],
-                line_txt[6],
-            )
+            lang, _, task, model, label, active, non_active, total_samples = line_txt
             if task not in rules:
                 rules[task] = defaultdict(list)
 

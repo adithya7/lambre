@@ -3,7 +3,6 @@ generate depd relations
 tools: stanza
 """
 from pathlib import Path
-from tabnanny import verbose
 import stanza
 from stanza.utils.conll import CoNLL
 

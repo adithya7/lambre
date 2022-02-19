@@ -19,11 +19,13 @@ def load_resource_paths(dir_path: Path):
 def parse_args():
     parser = argparse.ArgumentParser(description="download parsers and rules for the input language")
     parser.add_argument("lg", type=str, help="language ISO 639-1 code")
-    parser.add_argument("--dir", type=Path, default="~/lambre_files", help="path to store lambre related files")
+    parser.add_argument("--dir", type=Path, default=Path.home() / "lambre_files", help="path to store lambre related files")
 
     return parser.parse_args()
 
 def download_lambre_files(lg: str, resource_mapping: Dict, parser_dir: Path, rules_dir: Path):
+    
+    logging.info(f"downloading parser and rules for language: {lg}")
     
     """
     download rules
@@ -66,8 +68,8 @@ def main():
     resources_mapping = load_resource_paths(args.dir)
     
     if args.lg not in resources_mapping:
-        logging.warning(f"{args.lg} is not supported!")
-        logging.warning("supported languages: " + ", ".join([f'{v["name"]} ({k})' for k,v in resources_mapping.items() if "name" in v]))
+        logging.warning(f"Language {args.lg} is not supported!")
+        logging.warning("Current supported languages: " + ", ".join([f'{v["name"]} ({k})' for k,v in resources_mapping.items() if "name" in v]))
         exit(1)
 
     download_lambre_files(args.lg, resources_mapping, args.dir / "lambre_stanza_resources", args.dir / "rules")
