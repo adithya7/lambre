@@ -1,14 +1,15 @@
-import argparse
 from collections import defaultdict
-import logging
-import numpy as np
-from pathlib import Path
-import pyconll
-
-from utils import load_pratapa_etal_2021_rules
-from utils import getFeatureValue
-from parsing_utils import get_depd_tree
 from copy import deepcopy
+import numpy as np
+
+
+def getFeatureValue(feat, feats):
+    if feat not in feats:
+        return None
+    values = list(feats[feat])
+    values.sort()
+    value = "/".join(values)
+    return value
 
 
 def get_feat_str(feat_dict):
@@ -352,63 +353,3 @@ def get_doc_score(data, lang_agr, lang_argstruct):
         "joint_report": report,
     }
     return score_dict
-
-
-if __name__ == "__main__":
-
-    logging.basicConfig(
-        format="%(message)s",
-        level=logging.INFO,
-        handlers=[logging.StreamHandler()],
-    )
-
-    parser = argparse.ArgumentParser(description="compute morphological well-formedness")
-    parser.add_argument("lg", type=str, help="input language ISO 639-1 code")
-    parser.add_argument("input", type=Path, help="input file (.txt or .conllu)")
-    parser.add_argument(
-        "--rule-set",
-        type=str,
-        default="chaudhury-etal-2021",
-        help="rule set name (chaudhury-etal-2021 or pratapa-etal-2021)",
-    )
-    parser.add_argument("--parse", action="store_true", help="parse the input text file")
-    parser.add_argument("--report", action="store_true")
-    parser.add_argument("--rules-path", type=Path, default="rules", help="path to rule sets")
-    parser.add_argument(
-        "--stanza-path", type=Path, default="stanza_resources", help="path to stanza resources"
-    )
-
-    args = parser.parse_args()
-
-    """ obtain CoNLL-U files """
-    if args.parse:
-        # text file as input
-        depd_tree = get_depd_tree(txt_path=args.input, lg=args.lg, stanza_model_path=args.stanza_path)
-        sentences = pyconll.load_from_string(depd_tree)
-    else:
-        if args.input.suffix != ".conllu":
-            logging.warning("input file is not CoNLL-U, use --parse option to parse text files")
-            exit(1)
-        # CoNLL-U file as input
-        sentences = pyconll.load_from_file(args.input)
-
-    """ load rule sets """
-    if args.rule_set == "pratapa-etal-2021":
-        lang_agr, lang_argstruct = load_pratapa_etal_2021_rules(
-            args.rules_path / args.rule_set / f"{args.lg}.txt"
-        )
-        doc_score = get_doc_score(sentences, lang_agr, lang_argstruct)
-    elif args.rule_set == "chaudhury-etal-2021":
-        #! TODO
-        pass
-    else:
-        logging.warning(
-            f"{args.rule_set} is not supported! Only chaudhury-etal-2021 and pratapa-etal-2021 are supported."
-        )
-        exit(1)
-
-    print(f"score: {doc_score['joint_score']:.4f}")
-    if args.report:
-        doc_report = doc_score["joint_report"]
-        for rule, score in doc_report.items():
-            print(f"{rule}\t{score:.4f}")

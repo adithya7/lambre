@@ -1,13 +1,13 @@
-"""
-utils for metric
-"""
 from collections import defaultdict
 from copy import deepcopy
 from pathlib import Path
 
 
 def load_pratapa_etal_2021_rules(file_path: Path):
-    # load rules from Pratapa et al., 2021 for a given language
+    """
+    load rules from Pratapa et al., 2021 for a specific language
+    """
+
     agr_rules = defaultdict(list)
     argstruct_rules = {}
     with open(file_path, "r") as rf:
@@ -28,54 +28,14 @@ def load_pratapa_etal_2021_rules(file_path: Path):
     return agr_rules, argstruct_rules
 
 
-def load_agr_file(LG, AGR_FILE):
+def load_chaudhury_etal_2021_rules(file_path: Path):
+    """
+    load rules from Chaudhury et al., 2021 for a specific language
+    """
 
-    lang2agr = defaultdict(list)
-    with open(AGR_FILE, "r") as rf:
-        lang = ""
-        for line in rf:
-            line_txt = line.strip()
-            if line_txt.startswith("# lang:"):
-                if lang != "":
-                    break
-                elif LG == line_txt.split(":")[-1]:
-                    lang = LG
-            elif lang != "":
-                for dim in line_txt.split("\t")[1:]:
-                    try:
-                        dim_type, prob, count = dim.split("|")
-                        lang2agr[line_txt.split("\t")[0]].append((dim_type, prob, count))
-                    except:
-                        lang2agr[line_txt.split("\t")[0]].append((dim, None, None))
-
-    return lang2agr
-
-
-def load_argstruct_file(LG, INP_FILE):
-
-    argstruct_dict = {}
-    with open(INP_FILE, "r") as rf:
-        for line_str in rf:
-            line = line_str.strip()
-            line_lg, depd_type, feat, depd_vals, head_vals = line.split("\t")
-            if line_lg != LG:
-                continue
-            if depd_type not in argstruct_dict:
-                argstruct_dict[depd_type] = {}
-            argstruct_dict[depd_type][feat] = (
-                depd_vals.replace(";", ","),
-                head_vals.replace(";", ","),
-            )
-
-    return argstruct_dict
-
-
-def load_rule_file(INP_FILE):
-
-    lang2rule = {}
-    with open(INP_FILE, "r") as rf:
+    rules = {}
+    with open(file_path, "r") as rf:
         # Agreement	Number	tr_imst	req-agree	headmatch_True ### deppos_PROPN	NA	454
-        lang = ""
         for line in rf:
             line_txt = line.strip().split("\t")
             task, model, lang, label, active, non_active, total_samples = (
@@ -87,14 +47,12 @@ def load_rule_file(INP_FILE):
                 line_txt[5],
                 line_txt[6],
             )
-            if lang not in lang2rule:
-                lang2rule[lang] = {}
-            if task not in lang2rule[lang]:
-                lang2rule[lang][task] = defaultdict(list)
+            if task not in rules:
+                rules[task] = defaultdict(list)
 
-            lang2rule[lang][task][model].append((label, active, non_active, total_samples))
+            rules[task][model].append((label, active, non_active, total_samples))
 
-    return lang2rule
+    return rules
 
 
 def isPropertyPresent(prop, token, isHead=False):
