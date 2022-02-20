@@ -17,7 +17,7 @@ def parse_args():
     parser.add_argument(
         "--rule-set",
         type=str,
-        default="pratapa-etal-2021",
+        default="chaudhury-etal-2021",
         help="rule set name (chaudhury-etal-2021 or pratapa-etal-2021)",
     )
     parser.add_argument("--conllu", action="store_true", help="expect CoNLL-U input, instead of text")

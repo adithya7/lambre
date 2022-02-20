@@ -68,7 +68,7 @@ We also encourage you to cite the original works for the `chaudhury-etal-2021` r
 
 ## License
 
-MIT License
+L'AMBRE is available under MIT License. The code for training parsers is adapted from [stanza](https://github.com/stanfordnlp/stanza), which is available under Apache License, Version 2.0.
 
 ## Issues
 
