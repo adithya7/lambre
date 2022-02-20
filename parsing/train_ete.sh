@@ -4,16 +4,16 @@ LG=$1
 UD_TREEBANK=$2
 UD_TREEBANK_SHORT=$3
 
-STANZA_ROOT=$PWD/stanza
+STANZA_ROOT=$PWD/stanza-1.3.0
 ALT_ROOT=$PWD/data/alt-ud-data
-ORIG_UD_ROOT=$PWD/data/ud-treebanks-v2.7
+ORIG_UD_ROOT=$PWD/data/ud-treebanks-v2.8
 
 DATA=$STANZA_ROOT/raw_data/alt-ud-train-data/
 mkdir -p $DATA/$UD_TREEBANK
 
 # using altered train corpus concatenated with original train corpus
 cat $ORIG_UD_ROOT/$UD_TREEBANK/${UD_TREEBANK_SHORT}-ud-train.conllu $ALT_ROOT/$UD_TREEBANK/${UD_TREEBANK_SHORT}-ud-train.conllu > $DATA/$UD_TREEBANK/${UD_TREEBANK_SHORT}-ud-train.conllu
-cat $ORIG_UD_ROOT/$UD_TREEBANK/${UD_TREEBANK_SHORT}-ud-train.txt $ALT_ROOT/$UD_TREEBANK/${UD_TREEBANK_SHORT}-ud-train.txt > $DATA/$UD_TREEBANK/${UD_TREEBANK_SHORT}-ud-train.txt
+# cat $ORIG_UD_ROOT/$UD_TREEBANK/${UD_TREEBANK_SHORT}-ud-train.txt $ALT_ROOT/$UD_TREEBANK/${UD_TREEBANK_SHORT}-ud-train.txt > $DATA/$UD_TREEBANK/${UD_TREEBANK_SHORT}-ud-train.txt
 # using original dev corpus
 cp $ORIG_UD_ROOT/$UD_TREEBANK/${UD_TREEBANK_SHORT}-ud-dev.* $DATA/$UD_TREEBANK/
 cp $ORIG_UD_ROOT/$UD_TREEBANK/${UD_TREEBANK_SHORT}-ud-test.* $DATA/$UD_TREEBANK/

@@ -5,7 +5,7 @@ TREEBANKS=$2
 
 UNIMORPH="data/unimorph"
 # path to generate noisy (or alternate) treebanks
-ALT_DATA='data/alt-ud-data'
+ALT_DATA='data/alt-sud-data'
 
 mkdir -p $UNIMORPH
 mkdir -p $ALT_DATA
@@ -31,17 +31,17 @@ while read line || [[ -n $line ]]; do
     # train
     python sample_noise_ud.py \
         -unimorph $UNIMORPH/$lg3 \
-        -orig $TREEBANK_ROOT/$treebank/${short}-ud-train.conllu \
-        -alt $ALT_DATA/$treebank/${short}-ud-train.conllu
+        -orig $TREEBANK_ROOT/$treebank/${short}-sud-train.conllu \
+        -alt $ALT_DATA/$treebank/${short}-sud-train.conllu
     # dev
     python sample_noise_ud.py \
         -unimorph $UNIMORPH/$lg3 \
-        -orig $TREEBANK_ROOT/$treebank/${short}-ud-dev.conllu \
-        -alt $ALT_DATA/$treebank/${short}-ud-dev.conllu
+        -orig $TREEBANK_ROOT/$treebank/${short}-sud-dev.conllu \
+        -alt $ALT_DATA/$treebank/${short}-sud-dev.conllu
     # test
     python sample_noise_ud.py \
         -unimorph $UNIMORPH/$lg3 \
-        -orig $TREEBANK_ROOT/$treebank/${short}-ud-test.conllu \
-        -alt $ALT_DATA/$treebank/${short}-ud-test.conllu
+        -orig $TREEBANK_ROOT/$treebank/${short}-sud-test.conllu \
+        -alt $ALT_DATA/$treebank/${short}-sud-test.conllu
         
 done < $TREEBANKS

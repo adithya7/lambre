@@ -6,10 +6,11 @@ corpus=$3
 export SAVE_DIR=$4/$corpus/
 mkdir -p $SAVE_DIR
 
-# setting up environment variables
-source config.sh
+cd stanza-1.3.0
 
-cd stanza
+# setting up environment variables
+source ../config.sh
+
 # # tokenize
 # python stanza/stanza/utils/datasets/prepare_tokenize_treebank.py $corpus
 # python stanza/stanza/utils/training/run_tokenize.py $corpus --model_dir $SAVE_DIR
@@ -24,7 +25,7 @@ python -m stanza.utils.training.run_pos $corpus --save_dir $SAVE_DIR
 
 # lemma
 python -m stanza.utils.datasets.prepare_lemma_treebank $corpus
-python -m stanza.utils.training.run_lemma $corpus --model_dir $SAVE_DIR
+python -m stanza.utils.training.run_lemma $corpus --save_dir $SAVE_DIR
 
 # depparse
 python -m stanza.utils.datasets.prepare_depparse_treebank $corpus --gold
