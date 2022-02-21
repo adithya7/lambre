@@ -20,12 +20,20 @@ def parse_args():
         default="chaudhury-etal-2021",
         help="rule set name (chaudhury-etal-2021 or pratapa-etal-2021)",
     )
+    parser.add_argument(
+        "--ssplit", action="store_true", help="perform sentence segmentation in addition to tokenization"
+    )
     parser.add_argument("--conllu", action="store_true", help="expect CoNLL-U input, instead of text")
     parser.add_argument("--report", action="store_true", help="report scores per rule")
     parser.add_argument("--visualize", type=Path, default=None, help="visualize the errors")
-    parser.add_argument("--rules-path", type=Path, default=Path.home() / "lambre_files" / "rules", help="path to rule sets")
     parser.add_argument(
-        "--stanza-path", type=Path, default=Path.home() / "lambre_files" / "lambre_stanza_resources", help="path to stanza resources"
+        "--rules-path", type=Path, default=Path.home() / "lambre_files" / "rules", help="path to rule sets"
+    )
+    parser.add_argument(
+        "--stanza-path",
+        type=Path,
+        default=Path.home() / "lambre_files" / "lambre_stanza_resources",
+        help="path to stanza resources",
     )
 
     return parser.parse_args()
@@ -62,7 +70,9 @@ def main():
         sentences = pyconll.load_from_file(args.input)
     else:
         # input txt file, parse
-        depd_tree = get_depd_tree(txt_path=args.input, lg=args.lg, stanza_model_path=args.stanza_path)
+        depd_tree = get_depd_tree(
+            txt_path=args.input, lg=args.lg, stanza_model_path=args.stanza_path, ssplit=args.ssplit
+        )
         sentences = pyconll.load_from_string(depd_tree)
 
     """
@@ -95,6 +105,7 @@ def main():
     if args.visualize:
         out_spans, out_depds = visualize.visualize_errors(error_tuples)
         visualize.write_visualizations(args.visualize, out_spans, out_depds)
+
 
 if __name__ == "__main__":
     main()

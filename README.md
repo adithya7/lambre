@@ -12,7 +12,10 @@ python setup.py install
 
 ### Try L'AMBRE
 
+For a given input text file, `lambre` computes a morpho-syntactic well-formedness score [0-1]. The following command first downloads the parsers and rule sets for the specified language before computing the document-level score.
+
 ```bash
+# lambre <lg> <txt file>
 lambre ru data/txt/ru.txt # Russian
 lambre de data/txt/de.txt # German
 ```
@@ -21,15 +24,15 @@ Run `lambre --help` for more options.
 
 ## Morpho-syntactic Rules
 
-`lambre` provides two rule sets, `chaudhury-etal-2021` (see [Chaudhury et al., 2020](https://aclanthology.org/2020.emnlp-main.422/), [2021](https://aclanthology.org/2021.emnlp-main.553/)) and `pratapa-etal-2021` (see [Pratapa et al., 2021](https://aclanthology.org/2021.emnlp-main.570)). The former is the default, but the rule set can be specified using `--rule-set` option.
+`lambre` currently supports two rule sets, `chaudhury-etal-2021` (see [Chaudhury et al., 2020](https://aclanthology.org/2020.emnlp-main.422/), [2021](https://aclanthology.org/2021.emnlp-main.553/)) and `pratapa-etal-2021` (see [Pratapa et al., 2021](https://aclanthology.org/2021.emnlp-main.570)). The former is the default, but the rule set can be specified using `--rule-set` option.
 
 ## Parser
 
-We provide SUD parsers trained using [Stanza](https://stanfordnlp.github.io/stanza/) toolkit. See section 4 in [our paper](https://aclanthology.org/2021.emnlp-main.570) for details on the parsers.
+We provide SUD parsers trained using [Stanza](https://stanfordnlp.github.io/stanza/) toolkit. See section 4 in [our paper](https://aclanthology.org/2021.emnlp-main.570) for more details.
 
 ## Supported Languages
 
-We currently support the following languages.
+We currently support the following languages. `lambre` command automatically downloads the necessary language-specific resources (when available). Alternatively, `lambre-download` command can be used to download the same.
 
 | Language     | Code | Language     | Code | Language     | Code | Language     | Code |
 | --------     | ---- | --------     | ---- | --------     | ---- | --------     | ---- |
