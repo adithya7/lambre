@@ -7,7 +7,7 @@ long_description = (here / "README.md").read_text(encoding="utf-8")
 
 setup(
     name="lambre",
-    version="2.0.0.dev1",
+    version="2.0.0.dev2",
     description="a tool to measure the grammatical well-formedness of multilingual texts",
     long_description=long_description,
     long_description_content_type="text/markdown",

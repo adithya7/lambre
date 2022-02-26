@@ -25,7 +25,7 @@ def parse_args():
     )
     parser.add_argument("--conllu", action="store_true", help="expect CoNLL-U input, instead of text")
     parser.add_argument("--report", action="store_true", help="report scores per rule")
-    parser.add_argument("--visualize", type=Path, default=None, help="visualize the errors")
+    parser.add_argument("--visualize", type=Path, default=None, help="directory path to write errors")
     parser.add_argument(
         "--rules-path", type=Path, default=Path.home() / "lambre_files" / "rules", help="path to rule sets"
     )
@@ -35,6 +35,7 @@ def parse_args():
         default=Path.home() / "lambre_files" / "lambre_stanza_resources",
         help="path to stanza resources",
     )
+    parser.add_argument("--verbose", action="store_true", help="verbose output")
 
     return parser.parse_args()
 
@@ -71,7 +72,11 @@ def main():
     else:
         # input txt file, parse
         depd_tree = get_depd_tree(
-            txt_path=args.input, lg=args.lg, stanza_model_path=args.stanza_path, ssplit=args.ssplit
+            txt_path=args.input,
+            lg=args.lg,
+            stanza_model_path=args.stanza_path,
+            ssplit=args.ssplit,
+            verbose=args.verbose,
         )
         sentences = pyconll.load_from_string(depd_tree)
 
@@ -90,21 +95,26 @@ def main():
 
     if args.rule_set == "pratapa-etal-2021":
         lang_agr, lang_argstruct = rule_utils.load_pratapa_etal_2021_rules(rules_file_path)
-        doc_score, error_tuples = score_utils_pratapa.get_doc_score(sentences, lang_agr, lang_argstruct)
+        doc_score, error_tuples = score_utils_pratapa.get_doc_score(
+            sentences, lang_agr, lang_argstruct, verbose=args.verbose
+        )
 
     elif args.rule_set == "chaudhury-etal-2021":
         lang_rules = rule_utils.load_chaudhury_etal_2021_rules(rules_file_path)
-        doc_score = score_utils_chaudhury.get_doc_score(sentences, lang_rules)
+        doc_score = score_utils_chaudhury.get_doc_score(sentences, lang_rules, verbose=args.verbose)
 
-    logging.info(f"score: {doc_score['joint_score']:.4f}")
+    logging.info(f"lambre score: {doc_score['joint_score']:.4f}")
     if args.report:
         doc_report = doc_score["joint_report"]
         for rule, score in doc_report.items():
             logging.info(f"{rule}\t{score:.4f}")
 
     if args.visualize:
+        args.visualize.mkdir(exist_ok=True, parents=True)
         out_spans, out_depds = visualize.visualize_errors(error_tuples)
-        visualize.write_visualizations(args.visualize, out_spans, out_depds)
+        visualize.write_visualizations(args.visualize / "errors.txt", out_spans, out_depds)
+        out_conll_str = visualize.visualize_conll_errors(error_tuples)
+        visualize.write_html_visualizations(args.visualize / "errors.html", out_conll_str)
 
 
 if __name__ == "__main__":

@@ -32,7 +32,7 @@ We provide SUD parsers trained using [Stanza](https://stanfordnlp.github.io/stan
 
 ## Supported Languages
 
-We currently support the following languages. `lambre` command automatically downloads the necessary language-specific resources (when available). Alternatively, `lambre-download` command can be used to download the same.
+We currently support the following languages. `lambre` command automatically downloads the necessary language-specific resources (when available). Alternatively, `lambre-download <lg>` command can be used to download the same.
 
 | Language     | Code | Language     | Code | Language     | Code | Language     | Code |
 | --------     | ---- | --------     | ---- | --------     | ---- | --------     | ---- |

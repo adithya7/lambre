@@ -1,5 +1,7 @@
 from collections import defaultdict
+import logging
 import numpy as np
+from tqdm import tqdm
 
 import lambre.rule_utils as utils
 
@@ -289,13 +291,15 @@ def checkAssignmentScores(
         return assignment_rules_per_sent
 
 
-def get_sent_score(data, lang_rule_all):
+def get_sent_score(data, lang_rule_all, verbose: bool = False):
     """
     computes the grammar error metric at sentence level
     """
 
+    logging.info(f"computing sentence-level lambre score")
+
     scores = []
-    for sent in data:
+    for sent in tqdm(data, disable=not verbose):
         agreement_aggr = {}
         wordorder_aggr = {}
         assignment_aggr = {}
@@ -348,10 +352,12 @@ def get_sent_score(data, lang_rule_all):
     return scores
 
 
-def get_doc_score(data, lang_rule_all):
+def get_doc_score(data, lang_rule_all, verbose: bool = False):
     """
     computes grammar error metric at document level
     """
+
+    logging.info(f"computing document-level lambre score")
 
     agreement_aggr = {}
     argstruct_aggr = {}
@@ -367,7 +373,7 @@ def get_doc_score(data, lang_rule_all):
     #         }
     # with open(f"{args.output}/{args.lg}.examples", "w") as fout:
     sent_score_examples = []
-    for sent in data:
+    for sent in tqdm(data, disable=not verbose):
 
         # Add the head-dependents
         dep_data_token = defaultdict(list)

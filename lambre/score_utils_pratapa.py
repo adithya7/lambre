@@ -1,7 +1,8 @@
 from collections import defaultdict
 from copy import deepcopy
-from tkinter import E
+import logging
 import numpy as np
+from tqdm import tqdm
 
 
 def getFeatureValue(feat, feats):
@@ -194,15 +195,17 @@ def check_agreement(token, head_token_idx, agreement_dict, sent):
     return errors_in_features, errors
 
 
-def get_sent_score(data, lang_agr, lang_argstruct):
+def get_sent_score(data, lang_agr, lang_argstruct, verbose: bool = False):
     """
     computes the grammar error metric at sentence level
     """
 
+    logging.info(f"computing sentence-level lambre score")
+
     scores = []
     sent_examples = []
 
-    for sent in data:
+    for sent in tqdm(data, disable=not verbose):
         id2index = sent._ids_to_indexes
         agreement_aggr = {}
         for agr_type in lang_agr:
@@ -305,10 +308,12 @@ def get_sent_score(data, lang_agr, lang_argstruct):
     return scores
 
 
-def get_doc_score(data, lang_agr, lang_argstruct):
+def get_doc_score(data, lang_agr, lang_argstruct, verbose: bool = False):
     """
     computes grammar error metric at document level
     """
+
+    logging.info(f"computing document-level lambre score")
 
     """ agreement counts are accumulated for the entire document """
     agreement_aggr = {}
@@ -334,12 +339,14 @@ def get_doc_score(data, lang_agr, lang_argstruct):
             }
 
     error_tuples = []
-    for sent in data:
+    for sent in tqdm(data, disable=not verbose):
         for token in sent:
             if token.head != "0" and token.head is not None:
                 anns = [token.upos, token.deprel, sent[token.head].upos]
                 if not None in anns:
-                    token_error_feats, token_error_tuples = check_agreement(token, token.head, agreement_aggr, sent)
+                    token_error_feats, token_error_tuples = check_agreement(
+                        token, token.head, agreement_aggr, sent
+                    )
                     error_tuples.extend(token_error_tuples)
                     token_error_feats, token_error_tuples = check_argstruct_rule(
                         token,
@@ -347,7 +354,7 @@ def get_doc_score(data, lang_agr, lang_argstruct):
                         argstruct_aggr,
                         sent,
                     )
-                    error_tuples.extend(token_error_tuples) 
+                    error_tuples.extend(token_error_tuples)
 
     score, report = compute_joint_score(agreement_aggr, argstruct_aggr)
     agr_score, agr_report = compute_agreement_score(agreement_aggr)
