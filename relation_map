@@ -1,0 +1,144 @@
+obl:prep;prepositional pronouns;https://universaldependencies.org/ga/dep/obl-prep.html
+nmod:obl;nmod:obl;https://universaldependencies.org/docsv1/hu/dep/nmod-obl.html
+advmod:neg;negation particle;https://universaldependencies.org/pl/dep/advmod-neg.html
+nmod:pmod;nmod:pmod;https://universaldependencies.org/docsv1/ro/dep/nmod-pmod.html
+acl:focus;acl:focus;https://universaldependencies.org/treebanks/br_keb/br_keb-dep-acl-focus.html
+amod:att;amod:att;https://universaldependencies.org/docsv1/hu/dep/amod-att.html
+discourse:filler;discourse:filler;https://universaldependencies.org/docs/en/dep/discourse.html
+expl:pv;reflexive clitic with an inherently reflexive verb;https://universaldependencies.org/cs/dep/expl-pv.html
+mark:prt;particle;http://universaldependencies.org/docsv1/ga/dep/mark-prt.html
+nmod:gen;nmod:gen;https://universaldependencies.org/treebanks/br_keb/br_keb-dep-nmod-gen.html
+aux:aglt;aux:aglt;https://universaldependencies.org/treebanks/pl_lfg/pl_lfg-dep-aux-aglt.html
+aux:caus;causative auxiliary;https://universaldependencies.org/fr/dep/aux-caus.html
+compound:affix;compound:affix;https://universaldependencies.org/u/dep/compound.html
+compound:plur;compound:plur;https://universaldependencies.org/u/dep/compound.html
+fixed:name;fixed:name;https://universaldependencies.org/u/dep/fixed.html
+obl:mod;obl:mod;https://universaldependencies.org/treebanks/fr_spoken/fr_spoken-dep-obl-mod.html
+advmod:emph;emphasizing word, intensifier;https://universaldependencies.org/cs/dep/advmod-emph.html
+aux:neg;aux:neg;https://universaldependencies.org/treebanks/myv_jr/myv_jr-dep-aux-neg.html
+obl:x;obl:x;https://universaldependencies.org/treebanks/br_keb/br_keb-dep-obl-x.html
+aux:part;aux:part;https://universaldependencies.org/docs/en/dep/aux_.html
+case:det;case:det;https://universaldependencies.org/u/dep/case.html
+cc:nc;coordinated conjunct : non coordonant;https://universaldependencies.org/fro/dep/cc-nc.html
+nsubj:cop;nominal copular subject;https://universaldependencies.org/fi/dep/nsubj-cop.html
+obl:advmod;obl:advmod;https://universaldependencies.org/docsv1/hu/dep/advmod-obl.html
+det:def;det:def;https://universaldependencies.org/u/dep/all.html
+compound:smixut;compound:smixut;https://universaldependencies.org/treebanks/he_htb/he_htb-dep-compound-smixut.html
+nsubj:appos;nsubj:appos;https://universaldependencies.org/treebanks/br_keb/br_keb-dep-nsubj-appos.html
+xcomp:pred;predicate;https://universaldependencies.org/docsv1/ga/dep/xcomp-pred.html
+nmod:att;nmod:att;https://universaldependencies.org/docsv1/hu/dep/nmod-att.html
+nmod:own;haver;https://universaldependencies.org/fi/dep/nmod-own.html
+iobj;indirect object;https://universaldependencies.org/u/dep/iobj.html
+nsubj;nominal subject;https://universaldependencies.org/u/dep/nsubj.html
+obj;object;https://universaldependencies.org/u/dep/obj.html
+obl;oblique nominal;https://universaldependencies.org/u/dep/obl.html
+vocative;vocative;https://universaldependencies.org/u/dep/vocative.html
+expl;expletive;https://universaldependencies.org/u/dep/expl.html
+dislocated;dislocated elements;https://universaldependencies.org/u/dep/dislocated.html
+nmod;nominal modifier;https://universaldependencies.org/u/dep/nmod.html
+appos;appositional modifier;https://universaldependencies.org/u/dep/appos.html
+nummod;numeric modifier;https://universaldependencies.org/u/dep/nummod.html
+acl;adjectival clause;https://universaldependencies.org/u/dep/acl.html
+advcl;adverbial clause modifier;https://universaldependencies.org/u/dep/advcl.html
+xcomp;open clausal complement;https://universaldependencies.org/u/dep/xcomp.html
+ccomp;clausal complement;https://universaldependencies.org/u/dep/ccomp.html
+csubj;clausal subject;https://universaldependencies.org/u/dep/csubj.html
+advmod;adverbial modifier;https://universaldependencies.org/u/dep/advmod.html
+discourse;discourse element;https://universaldependencies.org/u/dep/discourse.html
+amod;adjectival modifier;https://universaldependencies.org/u/dep/amod.html
+aux;auxiliary;https://universaldependencies.org/u/dep/aux.html
+cop;copula;https://universaldependencies.org/u/dep/cop.html
+mark;marker;https://universaldependencies.org/u/dep/mark.html
+det;determiner;https://universaldependencies.org/u/dep/det.html
+clf;classifier;https://universaldependencies.org/u/dep/clf.html
+case;case marking;https://universaldependencies.org/u/dep/case.html
+conj;conjunct;https://universaldependencies.org/u/dep/conj.html
+compound;compound;https://universaldependencies.org/u/dep/compound.html
+cc;coordinating conjunction;https://universaldependencies.org/u/dep/cc.html
+dep;unspecified dependency;https://universaldependencies.org/u/dep/dep.html
+fixed;fixed multiword expression;https://universaldependencies.org/u/dep/fixed.html
+flat;flat multiword expression;https://universaldependencies.org/u/dep/flat.html
+goeswith;goes with;https://universaldependencies.org/u/dep/goeswith.html
+list;list;https://universaldependencies.org/u/dep/list.html
+orphan; orphan;https://universaldependencies.org/u/dep/orphan.html
+parataxis;parataxis;https://universaldependencies.org/u/dep/parataxis.html
+punct;punctuation;https://universaldependencies.org/u/dep/punct.html
+reparandum;overridden disfluency;https://universaldependencies.org/u/dep/reparandum.html
+root;root;https://universaldependencies.org/u/dep/root.html
+acl:relcl;relative clause modifier;https://universaldependencies.org/en/dep/acl-relcl.html
+csubj:pass;clausal passive subject;https://universaldependencies.org/sv/dep/csubj-pass.html
+nsubj:pass;passive nominal subject;https://universaldependencies.org/sv/dep/nsubj-pass.html
+obl:agent;agent modifier;https://universaldependencies.org/sv/dep/obl-agent.html
+compound:lvc;light verb construction;https://universaldependencies.org/tr/dep/compound-lvc.html
+obl:arg;oblique argument;https://universaldependencies.org/cs/dep/obl-arg.html
+compound:svc;serial verb construction;https://universaldependencies.org/swl/dep/compound-svc.html
+nsubj:own;nominal subject;https://universaldependencies.org/treebanks/mr_ufal/mr_ufal-dep-nsubj-own.html
+compound:redup;reduplicated compounds;https://universaldependencies.org/hy/dep/compound-redup.html
+aux:pass;passive auxiliary;https://universaldependencies.org/sv/dep/aux-pass.html
+nummod:entity;numeric modifer;https://universaldependencies.org/treebanks/ru_syntagrus/ru_syntagrus-dep-nummod-entity.html
+nummod:gov;numeric modifer governing case of noun;https://universaldependencies.org/cs/dep/nummod-gov.html
+flat:foreign;foreign words;https://universaldependencies.org/cs/dep/flat-foreign.html
+flat:name;flat-name;https://universaldependencies.org/sv/dep/flat-name.html
+det:poss;determiner;https://universaldependencies.org/treebanks/it_postwita/it_postwita-dep-det-poss.html
+parataxis:insert;parenthetical clause or comment;https://universaldependencies.org/pl/dep/parataxis-insert.html
+expl:pass;reflexive pronoun used in passive;https://universaldependencies.org/cs/dep/expl-pass.html
+parataxis:obj;direct speech;https://universaldependencies.org/pl/dep/parataxis-obj.html
+parataxis:appos;parataxis;https://universaldependencies.org/treebanks/it_postwita/it_postwita-dep-parataxis-appos.html
+det:predet;predeterminer;https://universaldependencies.org/en/dep/det-predet.html
+vocative:mention;Twitter mentions;https://universaldependencies.org/it/dep/vocative-mention.html
+parataxis:discourse;paratactic discourse;https://universaldependencies.org/it/dep/parataxis-discourse.html
+expl:impers;impersonal expletive;https://universaldependencies.org/it/dep/expl-impers.html
+parataxis:nsubj;paratactic nominal subject;https://universaldependencies.org/it/dep/parataxis-nsubj.html
+discourse:emo;emojis;https://universaldependencies.org/it/dep/discourse-emo.html
+parataxis:hashtag;paratactic hashtag;https://universaldependencies.org/it/dep/parataxis-hashtag.html
+nmod:npmod;noun phrase as adverbial modifier;https://universaldependencies.org/en/dep/nmod-npmod.html
+obl:tmod;obl temporal modifier;https://universaldependencies.org/en/dep/obl-tmod.html
+nmod:tmod;temporal modifier;https://universaldependencies.org/docs/en/dep/nmod-tmod.html
+nmod:poss;possessive nominal modifier;https://universaldependencies.org/en/dep/nmod-poss.html
+cc:preconj;preconjunct;https://universaldependencies.org/en/dep/cc-preconj.html
+compound:prt;phrasal verb particle;https://universaldependencies.org/docs/en/dep/compound-prt.html
+obl:npmod;oblique;https://universaldependencies.org/treebanks/en_ewt/en_ewt-dep-obl-npmod.html
+case:acc;accusative case marker;https://universaldependencies.org/he/
+pd;PD;https://universaldependencies.org/
+subj;subject;https://surfacesyntacticud.github.io/
+comp;complement;https://surfacesyntacticud.github.io/
+mod;modifer;https://surfacesyntacticud.github.io/
+comp:obj;direct object complements;https://surfacesyntacticud.github.io/  
+comp:obl;oblique complements;https://surfacesyntacticud.github.io/  
+comp:pred;predicative complements;https://surfacesyntacticud.github.io/  
+comp:aux;auxiliary;https://surfacesyntacticud.github.io/
+comp:cleft;cleft clauses;https://surfacesyntacticud.github.io/
+udep;underspecified dependency;https://surfacesyntacticud.github.io/
+mod@relcl;modifer of relative clause;https://surfacesyntacticud.github.io/
+mod@poss;possessive modifer;https://surfacesyntacticud.github.io/
+mod@x;modifer;https://surfacesyntacticud.github.io/
+comp:obl@x;oblique complements;https://surfacesyntacticud.github.io/
+comp:obl@agent;oblique complements;https://surfacesyntacticud.github.io/
+comp:obl@lvc;oblique complements;https://surfacesyntacticud.github.io/
+comp:aux@tense;auxiliary;https://surfacesyntacticud.github.io/
+comp:aux@pass;auxiliary;https://surfacesyntacticud.github.io/
+comp:aux@caus;auxiliary;https://surfacesyntacticud.github.io
+subj@pass;passive nominal subject;https://universaldependencies.org/sv/dep/nsubj-pass.html
+subj@x;subject;
+comp:obj@x;object;
+comp:obl@x;oblique;
+udep@x;underspecified dependency;
+unk@expl;expletive;
+noun;noun;https://universaldependencies.org/u/pos/NOUN.html
+adj;adjective;https://universaldependencies.org/u/pos/ADJ.html
+adv;adverb;https://universaldependencies.org/u/pos/ADV.html
+INTJ;interjection;https://universaldependencies.org/u/pos/INTJ.html
+PROPN;proper noun;https://universaldependencies.org/u/pos/PROPN.html
+verb;verb;https://universaldependencies.org/u/pos/VERB.html
+adp;adposition;https://universaldependencies.org/u/pos/ADP.html
+aux:auxiliary;https://universaldependencies.org/u/pos/AUX.html
+CCONJ;conjunction;https://universaldependencies.org/u/pos/CCONJ.html
+det;determiner;https://universaldependencies.org/u/pos/DET.html
+num;numeral;https://universaldependencies.org/u/pos/NUM.html
+part;particle;https://universaldependencies.org/u/pos/PART.html
+pron;pronoun;https://universaldependencies.org/u/pos/PRON.html
+SCONJ;conjunction;https://universaldependencies.org/u/pos/SCONJ.html
+punct;punctuation;https://universaldependencies.org/u/pos/PUNCT.html
+sym;symbol;https://universaldependencies.org/u/pos/SYM.html
+x; (X) foreign word;https://universaldependencies.org/u/pos/X.html
+nst;(NST) spatial/temporal expressions;
