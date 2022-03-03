@@ -436,3 +436,239 @@ def printExamples(
                 # if len(one_nonactive) > 0:
                 #     sent_error_examples.append(f'Required Non-active features in that rule: {" ### ".join(one_nonactive)}\n')
                 sent_error_examples.append("\n")
+
+def transformRulesIntoReadable(feature, task, rel, relation_map):
+    task = task.lower()
+    if task == 'wordorder':
+        dependent = rel.split("-")[0]
+        head = rel.split("-")[1]
+        if rel in ['adjective-noun', 'numeral-noun']:
+            head = 'nominal'
+        if rel in ['noun-adposition']:
+            dependent = 'nominal'
+    elif task == 'agreement':
+        dependent = 'dependent'
+        head = 'head'
+    elif task == "assignment":
+        dependent = rel
+        head = 'head'
+    else:
+        dependent = 'current word'
+        head = 'head'
+
+    new_features = feature
+    info = feature.split("_")
+
+    def get_relation(info):
+        lang_link = f'https://universaldependencies.org/'
+        if info in relation_map or info.lower() in relation_map:
+            (value, _) = relation_map.get(info.lower(), info.lower())
+
+        elif info.split("@")[0] in relation_map or info.split("@")[0].lower() in relation_map:
+            (value, _) = relation_map.get(info.split("@")[0].lower(), info.lower())
+
+        else:
+            value = info
+        return value, lang_link
+
+    if feature.startswith("spinehead"):
+        return f'{head} is a word like= {info[1]}'
+
+    elif feature.startswith('spine'):
+        return f'{dependent} is a word like= {info[1]}'
+
+    if len(info) == 2: #f'dep_{relation}_'
+        if feature.startswith('wiki'):
+            new_features = f'{dependent}\'s semantic class is= {info[1]}'
+        elif feature == 'headmatch_True':
+            new_features = f'the head agrees with its head on= {rel}'
+        elif feature.startswith('lemma'):
+            new_features = f'{dependent} has lemma= {info[1]}'
+        elif feature.startswith('headlemma'):
+            new_features = f'{dependent} is governed by= {info[1]}'
+        elif feature.startswith('depdeplemma'):
+            new_features = f'{dependent} is governing= {info[1]}'
+        elif feature.startswith('headheadlemma'):
+            new_features = f'{head} is governed by= {info[1]}'
+        elif feature.startswith('depheadlemma'):
+            new_features = f'{head} is also governing= {info[1]}'
+        elif feature.startswith('neighborhood'):
+            new_features = f'{dependent} is nearby= {info[1]}'
+        elif feature.startswith('left'):
+            new_features = f'before the {dependent} is= {info[1]}'
+        elif feature.startswith('right'):
+            new_features = f'after the {dependent} is= {info[1]}'
+        elif feature.startswith('lang'):
+            new_features = f'lang is= {info[1]}'
+        elif feature.startswith('srclem'):
+            new_features = f'in English is= {info[1]}'
+        elif feature.startswith('srcpos'):
+            info_, _ = get_relation(info[1])
+
+            new_features = f'in English is= {info[1]}'
+        else: #f'deppos_{pos}'
+
+            info_, link = get_relation(info[1])
+
+            if feature.startswith('deppos'):
+                new_features = f'{dependent} is a= {info[1]}'
+
+            elif feature.startswith('headpos'):
+                new_features = f'{dependent} is governed by a= {info[1]}'
+
+            elif feature.startswith('deprel'):
+                info[1] = f'<a href="{link}" title=""> {info_} </a>'
+                new_features = f'{dependent} is the= {info[1]}'
+
+            elif feature.startswith('headrelrel'):
+                info[1] = f'<a href="{link}" title=""> {info_} </a>'
+                new_features= f'{dependent} is governed by= {info[1]}'
+
+            elif feature.startswith('depdeppos'):
+                new_features = f'{dependent} is governing= {info[1]}'
+
+            elif feature.startswith('depdeprel'):
+                info[1] = f'<a href="{link}" title=""> {info_} </a>'
+                new_features = f'{dependent} is governing= {info[1]}'
+
+            elif feature.startswith('depheadrel') or feature.startswith('depheadpos'):
+                head_phrase = head
+                if head_phrase == 'head':
+                    new_features = f'***-marked token is nearby= {info[1]}'
+                else:
+                    new_features = f'***-marked token is nearby= {info[1]}'
+
+            elif feature.startswith('svo'):
+                new_features = f'anaphora= True'
+
+            elif feature.startswith('agreepos'):
+                new_features = f'{dependent} agrees with its head= {info[1]}'
+
+            elif feature.startswith('agreerel'):
+                info[1] = f'<a href="{link}" title=""> {info_} </a>'
+                new_features = f'{dependent} agrees with its head when {dependent} is a= {info[1]}'
+
+            elif feature.startswith('agree'):
+                new_features = f'{dependent} agrees with its head when the head is a= {info[1]}'
+
+    if len(info) == 3: #f'depposrel_{pos}_{relation}'
+        info_, link = get_relation(info[-1])
+        if feature.startswith("depposrel"):
+            info_pos, pos_link = get_relation(info[1])
+            info[1] = info_pos
+            info[2] = info_
+            new_features = f'{info[1]} is the dependent and is the= {info[2]}'
+
+        elif feature.startswith('headrelrel'): #f'headrelrel_{head_pos}_{headrelation.lower()}'
+            new_features = f'{dependent} has head-{info[1]} is a= {info_}'
+
+        elif feature.startswith('headfeat'):
+            new_features = f'{dependent} is governed by a word with {info[1]}= {info[2]}'
+
+        elif feature.startswith('depfeat'):
+            new_features = f'{dependent} with {info[1]}= {info[2]}'
+
+        elif feature.startswith('wiki'):
+            new_features = f'the head of the {dependent} has semantic class= {info[-1]}'
+
+        elif feature.startswith("head") :#f'head_{head_pos}_{relation}'
+            info_pos, pos_link = get_relation(info[1])
+            info[-1] = info_
+            new_features = f'{info[-1]} of head= {info[1]}'
+
+        elif feature.startswith('agree'):  # f'agree_{head_pos}_{headrelation.lower()}'
+            info[-1] = info_
+            new_features = f'{dependent} agrees with its {info[1]}-head which is a= {info[-1]}'
+
+
+    if len(info) == 4:
+        if feature.startswith('wiki'):
+            new_features = f'the head has semantic class= {info[-1]}'
+
+        elif feature.startswith('depfeat'):
+            info[1] =info_pos
+            new_features = f'{info[1]} is the dependent with {info[2]}= {info[3]}' #f'depfeat_{pos}_{feat}_{value}'
+
+        elif feature.startswith('headfeatrel'):#f'headfeatrel_{rel}_{feat}_{value}'
+            info_rel, rel_link = get_relation(info[1])
+            info[1] = info_rel
+            info[2] = info
+            new_features = f'{dependent} has head is a {info[1]} with {info[2]}= {info[3]}'
+
+        elif feature.startswith('headfeat'): #f'headfeat_{head_pos}_{feat}_'
+            info_pos, pos_link = get_relation(info[1])
+            info[1] = info_pos
+            new_features = f'{dependent} is governed by {info[1]} with {info[2]}= {info[3]}'
+
+        elif feature.startswith('headrelrel'):#f'headrelrel_{head_pos}_{relation}_{headrelation.lower()}'
+            info_rel, rel_link = get_relation(info[-1])
+            info[-1] = info_rel
+
+            info_pos, pos_link = get_relation(info[1])
+            info[1] = info_pos
+
+            info_rel, rel_link = get_relation(info[2])
+            info[2] = info_rel
+            new_features = f'{dependent} is a {info[2]} of {info[1]} where the head-{info[1]} is a= {info[-1]}'
+
+        elif feature.startswith('head'): #f'head_{pos}_{relation}_{head}'
+            info_rel, rel_link = get_relation(info[-1])
+            info[-1] = info_rel
+
+            info_pos, pos_link = get_relation(info[1])
+            info[1] = info_pos
+
+            info_pos, pos_link = get_relation(info[2])
+            info[2] = info_pos
+            new_features = f'{dependent} is a {info[1]} is a {info[2]} of head= {info[-1]}'
+
+        elif feature.startswith('agree'):  # f'agree_{relation}_{head_pos}_{headrelation.lower()}'
+            info_rel, rel_link = get_relation(info[-1])
+            info[-1] = info_rel
+
+            info_pos, pos_link = get_relation(info[1])
+            info[1] = info_pos
+
+            info_rel, rel_link = get_relation(info[2])
+            info[2] = info_rel
+
+            new_features = f'{dependent} is a {info[1]} and agrees with {info[2]}-head which is a= {info[-1]}'
+
+    if len(info) == 5:
+        if feature.startswith('headrelrel'):#f'headrelrel_{pos}_{relation}_{head}_{headrelation.lower()}'
+            info_rel, rel_link = get_relation(info[-1])
+            info[-1] = f'<a href="{rel_link}" title=""> {info_rel} </a>'
+
+            info_pos, pos_link = get_relation(info[1])
+            info[1] = info_pos
+
+            info_pos, pos_link = get_relation(info[2])
+            info[1] = info_pos
+
+            info_rel, rel_link = get_relation(info[3])
+            info[3] = info_rel
+
+            new_features =  f'{info[1]} is a {info[2]} of head {info[3]} where that {info[3]} is the= {info[-1]}'
+
+        elif feature.startswith('headfeat'): #f'headfeat_{head_pos}_{relation}_{feat}_{value}'
+            info_rel, rel_link = get_relation(info[2])
+            info[2] = info_rel
+
+            info_pos, pos_link = get_relation(info[1])
+            info[1] = info_pos
+
+            new_features = f'{dependent}  is a {info[2]}  of {info[1]} with {info[3]}= {info[4]}'
+
+        elif feature.startswith('depfeat'):  # f'dpefeat_{pos}_{relation}_{feat}_{value}'
+            info_rel, rel_link = get_relation(info[2])
+            info[2] = info_rel
+
+            info_pos, pos_link = get_relation(info[1])
+            info[1] = info_pos
+
+            new_features = f'{info[1]} is a {info[2]} with {info[3]}= {info[4]}'
+
+
+    return new_features
+
+
