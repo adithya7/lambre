@@ -8,6 +8,7 @@ from lambre.parse_utils import get_depd_tree
 from lambre import rule_utils
 from lambre import score_utils_pratapa, score_utils_chaudhary
 from lambre import visualize
+from lambre import RELATION_MAP
 
 
 def parse_args():
@@ -36,7 +37,6 @@ def parse_args():
         help="path to stanza resources",
     )
     parser.add_argument("--verbose", action="store_true", help="verbose output")
-    parser.add_argument("--relation_map", type=str, default="./relation_map")
 
     return parser.parse_args()
 
@@ -102,7 +102,9 @@ def main():
 
     elif args.rule_set == "chaudhary-etal-2021":
         lang_rules = rule_utils.load_chaudhury_etal_2021_rules(rules_file_path)
-        doc_score, error_tuples = score_utils_chaudhary.get_doc_score(sentences, lang_rules, verbose=args.verbose)
+        doc_score, error_tuples = score_utils_chaudhary.get_doc_score(
+            sentences, lang_rules, verbose=args.verbose
+        )
 
     logging.info(f"lambre score: {doc_score['joint_score']:.4f}")
     if args.report:
@@ -119,21 +121,19 @@ def main():
             visualize.write_html_visualizations(args.visualize / "errors.html", out_conll_str)
         elif args.rule_set == "chaudhary-etal-2021":
             relation_map = {}
-            with open(args.relation_map, "r") as inp:
+            with open(RELATION_MAP, "r") as inp:
                 for line in inp.readlines():
                     info = line.strip().split(";")
                     key = info[0].lower()
                     value = info[1]
                     relation_map[key] = (value, info[-1])
-                    if '@x' in key:
+                    if "@x" in key:
                         relation_map[key.split("@x")[0]] = (value, info[-1])
 
             out_spans, out_depds = visualize.visualize_errors_chau(error_tuples, relation_map)
-            #visualize.write_visualizations("/Users/aditichaudhary/Documents/CMU/lambre/errors/errors_chau.txt", out_spans, out_depds)
-            visualize.write_visualizations(args.visualize / "errors_newrules.txt", out_spans, out_depds)
+            visualize.write_visualizations(args.visualize / "errors.txt", out_spans, out_depds)
             out_conll_str = visualize.visualize_conll_errors_chau(error_tuples, relation_map)
-            #visualize.write_html_visualizations("/Users/aditichaudhary/Documents/CMU/lambre/errors/errors_newrules.html", out_conll_str)
-            visualize.write_html_visualizations(args.visualize / "errors_newrules.html", out_conll_str)
+            visualize.write_html_visualizations(args.visualize / "errors.html", out_conll_str)
 
 
 if __name__ == "__main__":
