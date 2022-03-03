@@ -49,15 +49,15 @@ def download_lambre_files(lg: str, resource_mapping: Dict, parser_dir: Path, rul
             local_path / f"{lg}.txt",
         ]
     )
-    # download rules for chaudhury-etal-2021
-    local_path = rules_dir / "chaudhury-etal-2021"
+    # download rules for chaudhary-etal-2021
+    local_path = rules_dir / "chaudhary-etal-2021"
     local_path.mkdir(exist_ok=True, parents=True)
     subprocess.run(
         [
             "wget",
             "-q",
             "--show-progress",
-            resource_mapping[lg]["rules_chaudhury_etal_2021"],
+            resource_mapping[lg]["rules_chaudhary_etal_2021"],
             "-O",
             local_path / f"{lg}.txt",
         ]
