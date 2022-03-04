@@ -185,6 +185,9 @@ def visualize_conll_errors(error_tuples: List):
 def visualize_conll_errors_chau(error_tuples, relation_map):
     conll_str = []
     idx = 0
+    conll_str += [
+        f"<h1> The tokens of interest (i.e. have errors according to our rules) are marked in ***, hover over the ***-marked tokens for more grammar information </h1>"
+    ]
     for (
         sent,
         token,
@@ -199,52 +202,52 @@ def visualize_conll_errors_chau(error_tuples, relation_map):
         # Add the head-dependents
         dep_data_token = defaultdict(list)
         sent_tokens = []
+        try:
 
-        for token_num, token_ in enumerate(sent):
-            dep_data_token[token_.head].append(token_.id)
-            sent_tokens.append(token_.form)
+            for token_num, token_ in enumerate(sent):
+                dep_data_token[token_.head].append(token_.id)
+                sent_tokens.append(token_.form)
 
-        conll_str += [
-            f"<h1> The tokens of interest (i.e. have errors according to our rules) are marked in ***, hover over the ***-marked tokens for more grammar information </h1>"
-        ]
 
-        if isAgreeError:
-            agreement_examples_per_rules = findWordsWhereAgreementNotFollowed(
-                agreement_rules_not_followed, sent, sent_tokens, token, relation_map
-            )
-            erro_feats = list(agreement_examples_per_rules.keys())
-            conll_str += [
-                f'<h3> Error in morphological agreement for <b> {", ".join(erro_feats)} </b> i.e. the ***-marked tokens should have matching gender values </h3>'
-            ]
-            conll_str += [f"<div class='bibtex' id='{idx}'>"]
-            conll_str += [get_conll_str(sent, token.id)]
-            conll_str += ["</div>"]
 
-        if isWordOrderError:
-            wordorder_examples_per_rules = findWordsWhereWordOrderNotFollowed(
-                wordorder_rules_not_followed, sent, sent_tokens, token, relation_map
-            )
-            erro_feats = list(wordorder_examples_per_rules.keys())
-            conll_str += [
-                f'<h3> Error in word order for <b> {", ".join(erro_feats)} </b> i.e. the token and its syntactic head are not in the correct order </h3>'
-            ]
-            conll_str += [f"<div class='bibtex' id='{idx}'>"]
-            conll_str += [get_conll_str(sent, token.id)]
-            conll_str += ["</div>"]
+            if isAgreeError:
+                agreement_examples_per_rules = findWordsWhereAgreementNotFollowed(
+                    agreement_rules_not_followed, sent, sent_tokens, token, relation_map
+                )
+                erro_feats = list(agreement_examples_per_rules.keys())
+                conll_str += [
+                    f'<h3> Error in morphological agreement for <b> {", ".join(erro_feats)} </b> i.e. the ***-marked tokens should have matching gender values </h3>'
+                ]
+                conll_str += [f"<div class='bibtex' id='{idx}'>"]
+                conll_str += [get_conll_str(sent, token.id)]
+                conll_str += ["</div>"]
 
-        if isAssignmentError:
-            casemarking_examples_per_rules = findWordsWhereMarkingNotFollowed(
-                assignment_rules_not_followed, sent, sent_tokens, token, relation_map
-            )
+            if isWordOrderError:
+                wordorder_examples_per_rules = findWordsWhereWordOrderNotFollowed(
+                    wordorder_rules_not_followed, sent, sent_tokens, token, relation_map
+                )
+                erro_feats = list(wordorder_examples_per_rules.keys())
+                conll_str += [
+                    f'<h3> Error in word order for <b> {", ".join(erro_feats)} </b> i.e. the token and its syntactic head are not in the correct order </h3>'
+                ]
+                conll_str += [f"<div class='bibtex' id='{idx}'>"]
+                conll_str += [get_conll_str(sent, token.id)]
+                conll_str += ["</div>"]
 
-            erro_feats = list(casemarking_examples_per_rules.keys())
-            conll_str += [
-                f'<h3> Error in case marking for <b> {", ".join(erro_feats)} </b> i.e. the case value for *** marked token is not correct </h3>'
-            ]
-            conll_str += [f"<div class='bibtex' id='{idx}'>"]
-            conll_str += [get_conll_str(sent, token.id)]
-            conll_str += ["</div>"]
+            if isAssignmentError:
+                casemarking_examples_per_rules = findWordsWhereMarkingNotFollowed(
+                    assignment_rules_not_followed, sent, sent_tokens, token, relation_map
+                )
 
+                erro_feats = list(casemarking_examples_per_rules.keys())
+                conll_str += [
+                    f'<h3> Error in case marking for <b> {", ".join(erro_feats)} </b> i.e. the case value for *** marked token is not correct </h3>'
+                ]
+                conll_str += [f"<div class='bibtex' id='{idx}'>"]
+                conll_str += [get_conll_str(sent, token.id)]
+                conll_str += ["</div>"]
+        except Exception as e:
+            continue
         idx += 1
     return "\n".join(conll_str)
 
@@ -313,30 +316,30 @@ def findWordsWhereWordOrderNotFollowed(rules_not_followed, sent, sent_tokens, to
     for model, info in rules_not_followed.items():
         if len(info) == 0:
             continue
-        (one_active, one_nonactive, label) = info
-        dep, head = model.split("-")[0], model.split("-")[1]
-        if head == "noun":
-            head = "nominal"
-        if label == "before":
-            not_label = "after"
-        else:
-            not_label = "before"
+        for (one_active, one_nonactive, label) in info:
+            dep, head = model.split("-")[0], model.split("-")[1]
+            if head == "noun":
+                head = "nominal"
+            if label == "before":
+                not_label = "after"
+            else:
+                not_label = "before"
 
-        sent_example_tokens = deepcopy(sent_tokens)
-        sent_example_tokens[token_num] = "***" + sent_example_tokens[token_num] + f"({dep})***"
+            sent_example_tokens = deepcopy(sent_tokens)
+            sent_example_tokens[token_num] = "***" + sent_example_tokens[token_num] + f"({dep})***"
 
-        token_head_num = id2index[token.head]
-        sent_example_tokens[token_head_num] = "***" + sent_example_tokens[token_head_num] + f"({head})***"
+            token_head_num = id2index[token.head]
+            sent_example_tokens[token_head_num] = "***" + sent_example_tokens[token_head_num] + f"({head})***"
 
-        # sent_error_examples.append(f'Example: {" ".join(sent_example_tokens)}\n')
-        # sent_error_examples.append(
-        #     f"{model} order not followed for tokens marked ***, predicted order is {label} but observed is {not_label}. because following rule was not satisfied:\n"
-        # )
-        # Readable active features
-        active_text, nonactive_text = getActiveFeatures(
-            one_active, one_nonactive, "wordorder", model, relation_map
-        )
-        rules_per_features[model] = (sent_example_tokens, active_text, nonactive_text, None, None)
+            # sent_error_examples.append(f'Example: {" ".join(sent_example_tokens)}\n')
+            # sent_error_examples.append(
+            #     f"{model} order not followed for tokens marked ***, predicted order is {label} but observed is {not_label}. because following rule was not satisfied:\n"
+            # )
+            # Readable active features
+            active_text, nonactive_text = getActiveFeatures(
+                one_active, one_nonactive, "wordorder", model, relation_map
+            )
+            rules_per_features[model] = (sent_example_tokens, active_text, nonactive_text, None, None)
     return rules_per_features
 
 
