@@ -203,6 +203,7 @@ def checkWordOrderScores(
         ) in (
             rulesPerWordOrder.items()
         ):  # subject-verb:[], object-verb:[], adjective-noun:[], noun-adposition:[], numeral-noun:[]
+            wordorder_rules_per_sent[model] = []
             obsWordOrder = utils.checkModelApplicable(task, model, token, sent)
             if (
                 obsWordOrder != -1
@@ -226,7 +227,7 @@ def checkWordOrderScores(
 
                         else:
                             wordorder_aggr[model][0] += 1
-                            wordorder_rules_per_sent[model] = (one_rule_active, one_rule_nonactive, label)
+                            wordorder_rules_per_sent[model].append((one_rule_active, one_rule_nonactive, label))
                             sent_wordorder_aggr[model][0] += 1
                             error = True
                         wordorder_aggr[model][2] += 1
@@ -249,6 +250,7 @@ def checkAssignmentScores(
             if (
                 obsCase != -1
             ):  # -1 denotes that rule is not applicable to this datapoint e.g. for testing subject-verb agreement, subj is not present
+                assignment_rules_per_sent[model] = []
                 if token.head == "0" and token.head:
                     agr_type = None
                 else:
@@ -284,7 +286,7 @@ def checkAssignmentScores(
                         else:
                             assignment_aggr[model][0] += 1
                             sent_assignment_aggr[model][0] += 1
-                            assignment_rules_per_sent[model] = (one_rule_active, one_rule_nonactive, label)
+                            assignment_rules_per_sent[model].append((one_rule_active, one_rule_nonactive, label))
                             if agr_type:
                                 argstruct_aggr[agr_type]["depd"]["counts"][0] += 1
                             error = True
@@ -371,7 +373,7 @@ def get_doc_score(data, lang_rule_all, verbose: bool = False):
     argstruct_aggr = {}
     wordorder_aggr = {}
     assignment_aggr = {}
-    sent_score_examples = []
+    sent_error_examples = []
     for sent in tqdm(data, disable=not verbose):
 
         # Add the head-dependents
@@ -386,7 +388,6 @@ def get_doc_score(data, lang_rule_all, verbose: bool = False):
         sent_argstruct_aggr = {}
         sent_wordorder_aggr = {}
         sent_assignment_aggr = {}
-        sent_error_examples = []
         for token_num, token in enumerate(sent):
 
             featuresInDatapoint = utils.extractFeatures(
