@@ -1,14 +1,12 @@
 import argparse
 import logging
-from pathlib import Path
 import subprocess
+from pathlib import Path
+
 import pyconll
 
+from lambre import RELATION_MAP, rule_utils, score_utils_chaudhary, score_utils_pratapa, visualize
 from lambre.parse_utils import get_depd_tree
-from lambre import rule_utils
-from lambre import score_utils_pratapa, score_utils_chaudhary
-from lambre import visualize
-from lambre import RELATION_MAP
 
 
 def parse_args():
@@ -22,11 +20,15 @@ def parse_args():
         help="rule set name (chaudhary-etal-2021 or pratapa-etal-2021)",
     )
     parser.add_argument(
+        "--output",
+        type=Path,
+        default="out",
+        help="specify path to output directory. Stores parser output and error visualizations.",
+    )
+    parser.add_argument(
         "--ssplit", action="store_true", help="perform sentence segmentation in addition to tokenization"
     )
-    parser.add_argument("--conllu", action="store_true", help="expect CoNLL-U input, instead of text")
     parser.add_argument("--report", action="store_true", help="report scores per rule")
-    parser.add_argument("--visualize", type=Path, default=None, help="directory path to write errors")
     parser.add_argument(
         "--rules-path", type=Path, default=Path.home() / "lambre_files" / "rules", help="path to rule sets"
     )
@@ -67,7 +69,8 @@ def main():
     Scorer expects CoNLL-U file with morphological feature values and (SUD) dependency parse 
     """
 
-    if args.conllu:
+    args.output.mkdir(exist_ok=True)
+    if args.input.suffix == ".conllu":
         # input CoNLL-U file, directly load the file
         sentences = pyconll.load_from_file(args.input)
     else:
@@ -80,6 +83,10 @@ def main():
             verbose=args.verbose,
         )
         sentences = pyconll.load_from_string(depd_tree)
+        parser_out_path = f"{args.output / f'{args.input.stem}.conllu'}"
+        logging.info(f"storing .conllu file at {parser_out_path}")
+        with open(parser_out_path, "w") as wf:
+            wf.write(depd_tree)
 
     """
     Load rule sets and score
@@ -112,28 +119,33 @@ def main():
         for rule, score in doc_report.items():
             logging.info(f"{rule}\t{score:.4f}")
 
-    if args.visualize:
-        args.visualize.mkdir(exist_ok=True, parents=True)
-        if args.rule_set == "pratapa-etal-2021":
-            out_spans, out_depds = visualize.visualize_errors(error_tuples)
-            visualize.write_visualizations(args.visualize / "errors.txt", out_spans, out_depds)
-            out_conll_str = visualize.visualize_conll_errors(error_tuples)
-            visualize.write_html_visualizations(args.visualize / "errors.html", out_conll_str)
-        elif args.rule_set == "chaudhary-etal-2021":
-            relation_map = {}
-            with open(RELATION_MAP, "r") as inp:
-                for line in inp.readlines():
-                    info = line.strip().split(";")
-                    key = info[0].lower()
-                    value = info[1]
-                    relation_map[key] = (value, info[-1])
-                    if "@x" in key:
-                        relation_map[key.split("@x")[0]] = (value, info[-1])
+    """
+    output txt and html visualizations of the grammatical errors
+    """
+    errors_path = args.output / "errors"
+    errors_path.mkdir(exist_ok=True, parents=True)
+    logging.info(f"writing grammatical errors to {errors_path}")
 
-            out_spans, out_depds = visualize.visualize_errors_chau(error_tuples, relation_map)
-            visualize.write_visualizations(args.visualize / "errors.txt", out_spans, out_depds)
-            out_conll_str = visualize.visualize_conll_errors_chau(error_tuples, relation_map)
-            visualize.write_html_visualizations(args.visualize / "errors.html", out_conll_str)
+    if args.rule_set == "pratapa-etal-2021":
+        out_spans, out_depds = visualize.visualize_errors(error_tuples)
+        visualize.write_visualizations(errors_path / "errors.txt", out_spans, out_depds)
+        out_conll_str = visualize.visualize_conll_errors(error_tuples)
+        visualize.write_html_visualizations(errors_path / "errors.html", out_conll_str)
+    elif args.rule_set == "chaudhary-etal-2021":
+        relation_map = {}
+        with open(RELATION_MAP, "r") as inp:
+            for line in inp.readlines():
+                info = line.strip().split(";")
+                key = info[0].lower()
+                value = info[1]
+                relation_map[key] = (value, info[-1])
+                if "@x" in key:
+                    relation_map[key.split("@x")[0]] = (value, info[-1])
+
+        out_spans, out_depds = visualize.visualize_errors_chau(error_tuples, relation_map)
+        visualize.write_visualizations(errors_path / "errors.txt", out_spans, out_depds)
+        out_conll_str = visualize.visualize_conll_errors_chau(error_tuples, relation_map)
+        visualize.write_html_visualizations(errors_path / "errors.html", out_conll_str)
 
 
 if __name__ == "__main__":

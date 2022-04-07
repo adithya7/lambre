@@ -1,10 +1,11 @@
+from collections import defaultdict
+from copy import deepcopy
 from pathlib import Path
 from typing import List, Tuple
 
 import pyconll
-from ipymarkup import format_span_ascii_markup, format_dep_ascii_markup
-from copy import deepcopy
-from collections import defaultdict
+from ipymarkup import format_dep_ascii_markup, format_span_ascii_markup
+
 from lambre import rule_utils
 
 
@@ -208,8 +209,6 @@ def visualize_conll_errors_chau(error_tuples, relation_map):
                 dep_data_token[token_.head].append(token_.id)
                 sent_tokens.append(token_.form)
 
-
-
             if isAgreeError:
                 agreement_examples_per_rules = findWordsWhereAgreementNotFollowed(
                     agreement_rules_not_followed, sent, sent_tokens, token, relation_map
@@ -255,9 +254,9 @@ def visualize_conll_errors_chau(error_tuples, relation_map):
 def write_html_visualizations(file_path: Path, conll_examples: str):
 
     # load header and footer content
-    with open("lambre/html_templates/header.html", "r") as rf:
+    with open(f"{Path(__file__).parent.resolve()}/html_templates/header.html", "r") as rf:
         HEADER = "".join(rf.readlines())
-    with open("lambre/html_templates/footer.html", "r") as rf:
+    with open(f"{Path(__file__).parent.resolve()}/html_templates/footer.html", "r") as rf:
         FOOTER = "".join(rf.readlines())
 
     with open(file_path, "w") as wf:
