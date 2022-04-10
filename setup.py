@@ -21,4 +21,5 @@ setup(
     python_requires=">=3.8",
     package_data={"lambre": ["html_templates/header.html", "html_templates/footer.html", "relation_map"]},
     entry_points={"console_scripts": ["lambre=lambre.metric:main", "lambre-download=lambre.download:main"]},
+    package_data={"lambre": ["html_templates/header.html", "html_templates/footer.html", "relation_map", "rule_links"]},
 )
