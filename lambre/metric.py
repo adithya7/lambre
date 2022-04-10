@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pyconll
 
-from lambre import RELATION_MAP, rule_utils, score_utils_chaudhary, score_utils_pratapa, visualize
+from lambre import RELATION_MAP, rule_utils, score_utils_chaudhary, score_utils_pratapa, visualize, RULE_LINKS
 from lambre.parse_utils import get_depd_tree
 
 
@@ -119,33 +119,38 @@ def main():
         for rule, score in doc_report.items():
             logging.info(f"{rule}\t{score:.4f}")
 
-    """
-    output txt and html visualizations of the grammatical errors
-    """
-    errors_path = args.output / "errors"
-    errors_path.mkdir(exist_ok=True, parents=True)
-    logging.info(f"writing grammatical errors to {errors_path}")
+    if args.visualize:
+        args.visualize.mkdir(exist_ok=True, parents=True)
+        if args.rule_set == "pratapa-etal-2021":
+            out_spans, out_depds = visualize.visualize_errors(error_tuples)
+            visualize.write_visualizations(args.visualize / "errors.txt", out_spans, out_depds)
+            out_conll_str = visualize.visualize_conll_errors(error_tuples)
+            visualize.write_html_visualizations(args.visualize / "errors.html", out_conll_str)
+        elif args.rule_set == "chaudhary-etal-2021":
+            relation_map = {}
+            with open(RELATION_MAP, "r") as inp:
+                for line in inp.readlines():
+                    info = line.strip().split(";")
+                    key = info[0].lower()
+                    value = info[1]
+                    relation_map[key] = (value, info[-1])
+                    if "@x" in key:
+                        relation_map[key.split("@x")[0]] = (value, info[-1])
+            rule_links = {}
+            with open(RULE_LINKS, 'r') as inp:
+                for line in inp.readlines():
+                    info = line.strip().split(":")
+                    rule_links[info[0]] = info[1]
 
-    if args.rule_set == "pratapa-etal-2021":
-        out_spans, out_depds = visualize.visualize_errors(error_tuples)
-        visualize.write_visualizations(errors_path / "errors.txt", out_spans, out_depds)
-        out_conll_str = visualize.visualize_conll_errors(error_tuples)
-        visualize.write_html_visualizations(errors_path / "errors.html", out_conll_str)
-    elif args.rule_set == "chaudhary-etal-2021":
-        relation_map = {}
-        with open(RELATION_MAP, "r") as inp:
-            for line in inp.readlines():
-                info = line.strip().split(";")
-                key = info[0].lower()
-                value = info[1]
-                relation_map[key] = (value, info[-1])
-                if "@x" in key:
-                    relation_map[key.split("@x")[0]] = (value, info[-1])
-
-        out_spans, out_depds = visualize.visualize_errors_chau(error_tuples, relation_map)
-        visualize.write_visualizations(errors_path / "errors.txt", out_spans, out_depds)
-        out_conll_str = visualize.visualize_conll_errors_chau(error_tuples, relation_map)
-        visualize.write_html_visualizations(errors_path / "errors.html", out_conll_str)
+            out_spans, out_depds, error_types = visualize.visualize_errors_chau(error_tuples, relation_map)
+            visualize.write_visualizations(args.visualize / "errors.txt", out_spans, out_depds)
+            out_conll_str_agree, out_conll_str_wordorder, out_conll_str_assignment = visualize.visualize_conll_errors_chau(error_tuples, relation_map, rule_links[args.lg])
+            if len(out_conll_str_agree) > 0:
+                visualize.write_html_visualizations(args.visualize / "errors_agreement.html", out_conll_str_agree)
+            if len(out_conll_str_wordorder) > 0:
+                visualize.write_html_visualizations(args.visualize / "errors_wordorder.html", out_conll_str_wordorder)
+            if len(out_conll_str_assignment) > 0:
+                visualize.write_html_visualizations(args.visualize / "errors_marking.html", out_conll_str_assignment)
 
 
 if __name__ == "__main__":

@@ -138,7 +138,9 @@ def checkAgreementScores(
         rulesPerAgreement = lang_rule_all[task]
 
         agreement_rules_per_sent, error = {}, False
-        for model, rules in rulesPerAgreement.items():  # Gender:[], Person:[], Number:[]
+        for model, rules in rulesPerAgreement.items():  # gender-NOUN:[], Person:[], Number:[]
+            #model_feature = model.split("-")[0].title()
+            #if model_feature not in agreement_rules_per_sent:
             agreement_rules_per_sent[model] = []
             obsAgreement = utils.checkModelApplicable(task, model, token, sent)
             if (
@@ -329,14 +331,14 @@ def get_sent_score(data, lang_rule_all, verbose: bool = False):
             )
 
             # Checking agreement for Gender, Person, Number
-            checkAgreementScores(lang_rule_all, token, sent, featuresInDatapoint, agreement_aggr)
+            agreement_rules_per_sent, _ = checkAgreementScores(lang_rule_all, token, sent, featuresInDatapoint, agreement_aggr, {})
 
             # Checking word order for subject-verb, object-verb, adj-noun, noun-adp, numeral-noun
-            checkWordOrderScores(lang_rule_all, token, sent, featuresInDatapoint, wordorder_aggr)
+            wordorder_rules_per_sent, _ = checkWordOrderScores(lang_rule_all, token, sent, featuresInDatapoint, wordorder_aggr, {})
 
             # Checking casemarking for nouns, propernouns, pronouns,
-            checkAssignmentScores(
-                lang_rule_all, token, sent, featuresInDatapoint, assignment_aggr, argstruct_aggr
+            assignment_rules_per_sent, _  = checkAssignmentScores(
+                lang_rule_all, token, sent, featuresInDatapoint, assignment_aggr, argstruct_aggr, {}
             )
 
         agr_score, agr_report = compute_score(agreement_aggr, task="agreement", argstruct_aggr=None)
@@ -356,6 +358,9 @@ def get_sent_score(data, lang_rule_all, verbose: bool = False):
                 "assignment_report": am_report,
                 "joint": score,
                 "joint_report": report,
+                "agreement_errors": agreement_rules_per_sent,
+                "wordorder_errors": wordorder_rules_per_sent,
+                "assignment_errors": assignment_rules_per_sent,
             }
         )
 
