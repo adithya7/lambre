@@ -1,10 +1,11 @@
+from collections import defaultdict
+from copy import deepcopy
 from pathlib import Path
 from typing import List, Tuple
 
 import pyconll
-from ipymarkup import format_span_ascii_markup, format_dep_ascii_markup
-from copy import deepcopy
-from collections import defaultdict
+from ipymarkup import format_dep_ascii_markup, format_span_ascii_markup
+
 from lambre import rule_utils
 
 
@@ -105,7 +106,7 @@ def visualize_errors_chau(error_tuples, relation_map) -> Tuple[List, List, List]
                         f"{sent[token_idx].deprel} (depd: {feat}={token_feat_value}, head: {feat}={head_feat_value})",
                     )
                 )
-                error_types.append(f'agreement-{feat}')
+                error_types.append(f"agreement-{feat}")
         if isWordOrderError:
             for feat, _ in wordorder_examples_per_rules.items():
                 """depd anns with dependency label and feature values for depd and head tokens"""
@@ -116,7 +117,7 @@ def visualize_errors_chau(error_tuples, relation_map) -> Tuple[List, List, List]
                         f"{sent[token_idx].deprel} (word order violated)",
                     )
                 )
-                error_types.append(f'wordorder-{feat}')
+                error_types.append(f"wordorder-{feat}")
         if isAssignmentError:
             for feat, (_, _, _, token_feat_value, expected_label) in casemarking_examples_per_rules.items():
                 """depd anns with dependency label and feature values for depd and head tokens"""
@@ -127,7 +128,7 @@ def visualize_errors_chau(error_tuples, relation_map) -> Tuple[List, List, List]
                         f"{sent[token_idx].deprel} (depd: Case={token_feat_value}, expected label: Case={expected_label})",
                     )
                 )
-                error_types.append(f'assignment-{feat}')
+                error_types.append(f"assignment-{feat}")
 
         out_depds += [list(format_dep_ascii_markup(sent_tokens, depd_anns))]
 
@@ -217,79 +218,79 @@ def visualize_conll_errors_chau(error_tuples, relation_map, lang_id):
         dep_data_token = defaultdict(list)
         sent_tokens = []
         error_types = []
-        autolex_page = f'https://aditi138.github.io/auto-lex-learn/'
-        #try:
+        autolex_page = f"https://aditi138.github.io/auto-lex-learn/"
+        try:
 
-        for token_num, token_ in enumerate(sent):
-            dep_data_token[token_.head].append(token_.id)
-            sent_tokens.append(token_.form)
+            for token_num, token_ in enumerate(sent):
+                dep_data_token[token_.head].append(token_.id)
+                sent_tokens.append(token_.form)
 
+            if isAgreeError:
+                agreement_examples_per_rules = findWordsWhereAgreementNotFollowed(
+                    agreement_rules_not_followed, sent, sent_tokens, token, relation_map
+                )
+                erro_feats = list(agreement_examples_per_rules.keys())
 
+                agreement_conll_strs += [
+                    f'<h3> Error in morphological agreement for <b> {", ".join(erro_feats)} </b> i.e. the ***-marked tokens should have matching gender values </h3>\n'
+                ]
+                agreement_conll_strs += [f"<table>\n"]
+                for erro_feat in erro_feats:
+                    prop = erro_feat.split("-")[0].title()
+                    pos = erro_feat.split("-")[1]
+                    rule_page = f"{autolex_page}/{lang_id}/Agreement/{prop}/{pos}/{pos}.html"
+                    agreement_conll_strs += [
+                        f'<tr> {prop} agreement in {pos} </tr> <tr> <a href="{rule_page}">Click here</a></tr>\n'
+                    ]
+                    error_types.append(f"agreement-{erro_feat}")
+                agreement_conll_strs += [f"</table>"]
+                agreement_conll_strs += [f"<div class='bibtex' id='{idx}'>"]
+                agreement_conll_strs += [get_conll_str(sent, token.id)]
+                agreement_conll_strs += ["</div>"]
 
-        if isAgreeError:
-            agreement_examples_per_rules = findWordsWhereAgreementNotFollowed(
-                agreement_rules_not_followed, sent, sent_tokens, token, relation_map
-            )
-            erro_feats = list(agreement_examples_per_rules.keys())
-
-            agreement_conll_strs += [
-                f'<h3> Error in morphological agreement for <b> {", ".join(erro_feats)} </b> i.e. the ***-marked tokens should have matching gender values </h3>\n'
-            ]
-            agreement_conll_strs += [f'<table>\n']
-            for erro_feat in erro_feats:
-                prop = erro_feat.split("-")[0].title()
-                pos = erro_feat.split("-")[1]
-                rule_page = f'{autolex_page}/{lang_id}/Agreement/{prop}/{pos}/{pos}.html'
-                agreement_conll_strs += [f'<tr> {prop} agreement in {pos} </tr> <tr> <a href="{rule_page}">Click here</a></tr>\n']
-                error_types.append(f'agreement-{erro_feat}')
-            agreement_conll_strs += [f'</table>']
-            agreement_conll_strs += [f"<div class='bibtex' id='{idx}'>"]
-            agreement_conll_strs += [get_conll_str(sent, token.id)]
-            agreement_conll_strs += ["</div>"]
-
-        if isWordOrderError:
-            wordorder_examples_per_rules = findWordsWhereWordOrderNotFollowed(
-                wordorder_rules_not_followed, sent, sent_tokens, token, relation_map
-            )
-            erro_feats = list(wordorder_examples_per_rules.keys())
-            wordorder_conll_strs += [
-                f'<h3> Error in word order for <b> {", ".join(erro_feats)} </b> i.e. the token and its syntactic head are not in the correct order </h3>'
-            ]
-            wordorder_conll_strs += [
-                f'<table>\n']
-
-            for erro_feat in erro_feats:
-                rule_page = f'{autolex_page}/{lang_id}/WordOrder/{erro_feat}/{erro_feat}.html'
+            if isWordOrderError:
+                wordorder_examples_per_rules = findWordsWhereWordOrderNotFollowed(
+                    wordorder_rules_not_followed, sent, sent_tokens, token, relation_map
+                )
+                erro_feats = list(wordorder_examples_per_rules.keys())
                 wordorder_conll_strs += [
-                    f'<tr> word order for {erro_feat} </tr> <tr> <a href="{rule_page}">Click here</a></tr>\n']
-                error_types.append(f'wordorder-{erro_feat}')
-            wordorder_conll_strs += [f'</table>']
-            wordorder_conll_strs += [f"<div class='bibtex' id='{idx}'>"]
-            wordorder_conll_strs += [get_conll_str(sent, token.id)]
-            wordorder_conll_strs += ["</div>"]
+                    f'<h3> Error in word order for <b> {", ".join(erro_feats)} </b> i.e. the token and its syntactic head are not in the correct order </h3>'
+                ]
+                wordorder_conll_strs += [f"<table>\n"]
 
-        if isAssignmentError:
-            casemarking_examples_per_rules = findWordsWhereMarkingNotFollowed(
-                assignment_rules_not_followed, sent, sent_tokens, token, relation_map
-            )
-            erro_feats = list(casemarking_examples_per_rules.keys())
-            casemarking_conll_strs += [
-                f'<h3> Error in case marking for <b> {", ".join(erro_feats)} </b> i.e. the case value for *** marked token is not correct </h3>'
-            ]
-            casemarking_conll_strs += [
-                f'<table>\n']
+                for erro_feat in erro_feats:
+                    rule_page = f"{autolex_page}/{lang_id}/WordOrder/{erro_feat}/{erro_feat}.html"
+                    wordorder_conll_strs += [
+                        f'<tr> word order for {erro_feat} </tr> <tr> <a href="{rule_page}">Click here</a></tr>\n'
+                    ]
+                    error_types.append(f"wordorder-{erro_feat}")
+                wordorder_conll_strs += [f"</table>"]
+                wordorder_conll_strs += [f"<div class='bibtex' id='{idx}'>"]
+                wordorder_conll_strs += [get_conll_str(sent, token.id)]
+                wordorder_conll_strs += ["</div>"]
 
-            for erro_feat in erro_feats:
-                rule_page = f'{autolex_page}/{lang_id}/CaseMarking/{erro_feat}/{erro_feat}.html'
+            if isAssignmentError:
+                casemarking_examples_per_rules = findWordsWhereMarkingNotFollowed(
+                    assignment_rules_not_followed, sent, sent_tokens, token, relation_map
+                )
+                erro_feats = list(casemarking_examples_per_rules.keys())
                 casemarking_conll_strs += [
-                    f'<tr> case marking for {erro_feat} </tr> <tr> <a href="{rule_page}">Click here</a></tr>\n']
-                error_types.append(f'assignment-{erro_feat}')
-            casemarking_conll_strs += [f'</table>']
-            casemarking_conll_strs += [f"<div class='bibtex' id='{idx}'>"]
-            casemarking_conll_strs += [get_conll_str(sent, token.id)]
-            casemarking_conll_strs += ["</div>"]
-        # except Exception as e:
-        #     continue
+                    f'<h3> Error in case marking for <b> {", ".join(erro_feats)} </b> i.e. the case value for *** marked token is not correct </h3>'
+                ]
+                casemarking_conll_strs += [f"<table>\n"]
+
+                for erro_feat in erro_feats:
+                    rule_page = f"{autolex_page}/{lang_id}/CaseMarking/{erro_feat}/{erro_feat}.html"
+                    casemarking_conll_strs += [
+                        f'<tr> case marking for {erro_feat} </tr> <tr> <a href="{rule_page}">Click here</a></tr>\n'
+                    ]
+                    error_types.append(f"assignment-{erro_feat}")
+                casemarking_conll_strs += [f"</table>"]
+                casemarking_conll_strs += [f"<div class='bibtex' id='{idx}'>"]
+                casemarking_conll_strs += [get_conll_str(sent, token.id)]
+                casemarking_conll_strs += ["</div>"]
+        except Exception as e:
+            continue
         idx += 1
     return "\n".join(agreement_conll_strs), "\n".join(wordorder_conll_strs), "\n".join(casemarking_conll_strs)
 
@@ -297,9 +298,9 @@ def visualize_conll_errors_chau(error_tuples, relation_map, lang_id):
 def write_html_visualizations(file_path: Path, conll_examples: str):
 
     # load header and footer content
-    with open("lambre/html_templates/header.html", "r") as rf:
+    with open(f"{Path(__file__).parent.resolve()}/html_templates/header.html", "r") as rf:
         HEADER = "".join(rf.readlines())
-    with open("lambre/html_templates/footer.html", "r") as rf:
+    with open(f"{Path(__file__).parent.resolve()}/html_templates/footer.html", "r") as rf:
         FOOTER = "".join(rf.readlines())
 
     with open(file_path, "w") as wf:
