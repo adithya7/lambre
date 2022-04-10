@@ -8,7 +8,7 @@ from lambre.parse_utils import get_depd_tree
 from lambre import rule_utils
 from lambre import score_utils_pratapa, score_utils_chaudhary
 from lambre import visualize
-from lambre import RELATION_MAP
+from lambre import RELATION_MAP, RULE_LINKS
 
 
 def parse_args():
@@ -129,11 +129,21 @@ def main():
                     relation_map[key] = (value, info[-1])
                     if "@x" in key:
                         relation_map[key.split("@x")[0]] = (value, info[-1])
+            rule_links = {}
+            with open(RULE_LINKS, 'r') as inp:
+                for line in inp.readlines():
+                    info = line.strip().split(":")
+                    rule_links[info[0]] = info[1]
 
-            out_spans, out_depds = visualize.visualize_errors_chau(error_tuples, relation_map)
+            out_spans, out_depds, error_types = visualize.visualize_errors_chau(error_tuples, relation_map)
             visualize.write_visualizations(args.visualize / "errors.txt", out_spans, out_depds)
-            out_conll_str = visualize.visualize_conll_errors_chau(error_tuples, relation_map)
-            visualize.write_html_visualizations(args.visualize / "errors.html", out_conll_str)
+            out_conll_str_agree, out_conll_str_wordorder, out_conll_str_assignment = visualize.visualize_conll_errors_chau(error_tuples, relation_map, rule_links[args.lg])
+            if len(out_conll_str_agree) > 0:
+                visualize.write_html_visualizations(args.visualize / "errors_agreement.html", out_conll_str_agree)
+            if len(out_conll_str_wordorder) > 0:
+                visualize.write_html_visualizations(args.visualize / "errors_wordorder.html", out_conll_str_wordorder)
+            if len(out_conll_str_assignment) > 0:
+                visualize.write_html_visualizations(args.visualize / "errors_marking.html", out_conll_str_assignment)
 
 
 if __name__ == "__main__":

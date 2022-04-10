@@ -35,7 +35,8 @@ def load_chaudhury_etal_2021_rules(file_path: Path):
 
     rules = {}
     with open(file_path, "r") as rf:
-        # tr      chaudhary-etal-2021     agreement       Person  req-agree       depheadpos_NOUN ### deppos_VERB depheadpos_PUNCT ### headpos_VERB       71
+        # tr      chaudhary-etal-2021     wordorder       subject-verb  before      depheadpos_NOUN ### deppos_VERB depheadpos_PUNCT ### headpos_VERB       71
+        # tr      chaudhary-etal-2021     agreement       gender-AUX req-agree       depheadpos_NOUN ### deppos_VERB depheadpos_PUNCT ### headpos_VERB       71
         for line in rf:
             line_txt = line.strip().split("\t")
             lang, _, task, model, label, active, non_active, total_samples = line_txt
@@ -266,7 +267,10 @@ def isValidLemma(lemma, upos):
 def checkModelApplicable(task, model, token, sent):
     if task == "agreement":
         # If the model (e.g. gender,person, number) in the head and dep, only then check for agreement match
-        if isPropertyPresent(model, token) and isPropertyPresent(model, sent[token.head], isHead=True):
+        # model == gender-NOUN
+        model_feature = model.split("-")[0].lower().title()
+        pos = model.split("-")[1]
+        if isPropertyPresent(model_feature, token) and isPropertyPresent(model_feature, sent[token.head], isHead=True) and token.upos == pos:
             dep_value = getFeatureValue(model, token.feats)
             head_value = getFeatureValue(model, sent[token.head].feats)
 
