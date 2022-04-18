@@ -112,13 +112,16 @@ def main():
         doc_score, error_tuples = score_utils_chaudhary.get_doc_score(
             sentences, lang_rules, verbose=args.verbose
         )
-
+    f = open(args.output / "score.txt", "w")
     logging.info(f"lambre score: {doc_score['joint_score']:.4f}")
+    f.write(f"lambre score: {doc_score['joint_score']:.4f}")
+
     if args.report:
         doc_report = doc_score["joint_report"]
         for rule, score in doc_report.items():
             logging.info(f"{rule}\t{score:.4f}")
-
+            f.write(f"\n{rule}\t{score:.4f}")
+    f.close()
     """
     output txt and html visualizations of the grammatical errors
     """

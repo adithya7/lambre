@@ -18,6 +18,7 @@ For a given input text file, `lambre` computes a morpho-syntactic well-formednes
 # lambre <lg> <txt file>
 lambre ru data/txt/ru.txt # Russian
 lambre de data/txt/de.txt # German
+lambre en data/txt/en.txt # English
 ```
 
 Run `lambre --help` for more options.
