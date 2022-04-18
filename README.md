@@ -25,7 +25,7 @@ Run `lambre --help` for more options.
 
 ## Morpho-syntactic Rules
 
-`lambre` currently supports two rule sets, `chaudhury-etal-2021` (see [Chaudhury et al., 2020](https://aclanthology.org/2020.emnlp-main.422/), [2021](https://aclanthology.org/2021.emnlp-main.553/)) and `pratapa-etal-2021` (see [Pratapa et al., 2021](https://aclanthology.org/2021.emnlp-main.570)). The former is the default, but the rule set can be specified using `--rule-set` option.
+`lambre` currently supports two rule sets, `chaudhary-etal-2021` (see [Chaudhary et al., 2020](https://aclanthology.org/2020.emnlp-main.422/), [2021](https://aclanthology.org/2021.emnlp-main.553/)) and `pratapa-etal-2021` (see [Pratapa et al., 2021](https://aclanthology.org/2021.emnlp-main.570)). The former is the default, but the rule set can be specified using `--rule-set` option.
 
 ## Parser
 
@@ -68,7 +68,7 @@ If you find this toolkit helpful in your research, consider citing our paper,
 }
 ```
 
-We also encourage you to cite the original works for the `chaudhury-etal-2021` ruleset, [Chaudhury et al., 2020](https://aclanthology.org/2020.emnlp-main.422/) and [Chaudhury et al., 2021](https://aclanthology.org/2021.emnlp-main.553/).
+We also encourage you to cite the original works for the `chaudhary-etal-2021` ruleset, [Chaudhary et al., 2020](https://aclanthology.org/2020.emnlp-main.422/) and [Chaudhary et al., 2021](https://aclanthology.org/2021.emnlp-main.553/).
 
 ## License
 
