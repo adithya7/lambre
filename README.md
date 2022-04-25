@@ -4,24 +4,28 @@ L'AMBRE is a tool to measure the grammatical well-formedness of texts generated 
 
 ## Getting Started
 
-### Install dependencies
+### Install
 
 ```bash
-python setup.py install
+python -m pip install -e .
 ```
 
 ### Try L'AMBRE
 
-For a given input text file, `lambre` computes a morpho-syntactic well-formedness score [0-1]. The following command first downloads the parsers and rule sets for the specified language before computing the document-level score.
+For a given input text file, `lambre` computes a morpho-syntactic well-formedness score [0-1]. The following method first downloads the parsers and rule sets for the specified language before computing the document-level score. See the output folder (`out`) for error visualizations.
 
-```bash
-# lambre <lg> <txt file>
-lambre ru data/txt/ru.txt # Russian
-lambre de data/txt/de.txt # German
-lambre en data/txt/en.txt # English
+```python
+import lambre
+lambre.score("ru", "data/txt/ru.txt") # Russian
+# lambre.score("de", "data/txt/de.txt")
+# lambre.score("en", "data/txt/en.txt")
 ```
 
-Run `lambre --help` for more options.
+L'AMBRE can also be used from command line. See `lambre --help` for more options.
+
+```bash
+lambre ru data/txt/ru.txt
+```
 
 ## Morpho-syntactic Rules
 
@@ -33,7 +37,7 @@ We provide SUD parsers trained using [Stanza](https://stanfordnlp.github.io/stan
 
 ## Supported Languages
 
-We currently support the following languages. `lambre` command automatically downloads the necessary language-specific resources (when available). Alternatively, `lambre-download <lg>` command can be used to download the same.
+We currently support the following languages. `lambre` automatically downloads the necessary language-specific resources (when available).
 
 | Language     | Code | Language     | Code | Language     | Code | Language     | Code |
 | --------     | ---- | --------     | ---- | --------     | ---- | --------     | ---- |
@@ -43,6 +47,13 @@ We currently support the following languages. `lambre` command automatically dow
 | German       | de   | French       | fr   | Polish       | pl   | Ukrainian    | uk   |
 | Greek        | el   | Hindi        | hi   | Portuguese   | pt   | Urdu         | ur   |
 | English      | en   | Indonesian   | id   | Romanian     | ro   |              |      |
+
+To manually download rules or parsers for a given language,
+
+```python
+import lambre
+lambre.download("ru") # Russian
+```
 
 ## Reference
 

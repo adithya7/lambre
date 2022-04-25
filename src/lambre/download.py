@@ -1,15 +1,25 @@
 import argparse
 import json
 import logging
-from pathlib import Path
 import subprocess
-from typing import Dict
+from pathlib import Path
 
-URL_REMOTE_PATH = "https://cmu.box.com/shared/static/lsww58ezotrpvnpo7foq9efskxz5nq7c.json"
+URL_REMOTE_PATH = (
+    "https://cmu.box.com/shared/static/lsww58ezotrpvnpo7foq9efskxz5nq7c.json"
+)
 
 
 def download_url_file(dir_path: Path):
-    subprocess.run(["wget", "-q", "--show-progress", URL_REMOTE_PATH, "-O", dir_path / "lambre_urls.json"])
+    subprocess.run(
+        [
+            "wget",
+            "-q",
+            "--show-progress",
+            URL_REMOTE_PATH,
+            "-O",
+            dir_path / "lambre_urls.json",
+        ]
+    )
 
 
 def load_resource_paths(dir_path: Path):
@@ -20,16 +30,48 @@ def load_resource_paths(dir_path: Path):
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="download parsers and rules for the input language")
+    parser = argparse.ArgumentParser(
+        description="download parsers and rules for the input language"
+    )
     parser.add_argument("lg", type=str, help="language ISO 639-1 code")
     parser.add_argument(
-        "--dir", type=Path, default=Path.home() / "lambre_files", help="path to store lambre related files"
+        "--dir",
+        type=Path,
+        default=Path.home() / "lambre_files",
+        help="path to store lambre related files",
     )
 
     return parser.parse_args()
 
 
-def download_lambre_files(lg: str, resource_mapping: Dict, parser_dir: Path, rules_dir: Path):
+def download_lambre_files(lg: str, dir: Path = Path.home() / "lambre_files"):
+
+    logging.basicConfig(
+        format="%(message)s",
+        level=logging.INFO,
+        handlers=[logging.StreamHandler()],
+    )
+
+    dir.mkdir(exist_ok=True, parents=True)
+
+    resource_mapping = load_resource_paths(dir)
+
+    if lg not in resource_mapping:
+        logging.warning(f"Language {lg} is not supported!")
+        logging.warning(
+            "Current supported languages: "
+            + ", ".join(
+                [
+                    f'{v["name"]} ({k})'
+                    for k, v in resource_mapping.items()
+                    if "name" in v
+                ]
+            )
+        )
+        return
+
+    rules_dir = dir / "rules"
+    parser_dir = dir / "lambre_stanza_resources"
 
     logging.info(f"downloading parser and rules for language: {lg}")
 
@@ -81,39 +123,23 @@ def download_lambre_files(lg: str, resource_mapping: Dict, parser_dir: Path, rul
 
     # download parser and decompress
     subprocess.run(
-        ["wget", "-q", "--show-progress", resource_mapping[lg]["parser"], "-O", parser_dir / f"{lg}.tar.gz"]
+        [
+            "wget",
+            "-q",
+            "--show-progress",
+            resource_mapping[lg]["parser"],
+            "-O",
+            parser_dir / f"{lg}.tar.gz",
+        ]
     )
     subprocess.run(["tar", "-xf", parser_dir / f"{lg}.tar.gz", "-C", parser_dir])
     subprocess.run(["rm", parser_dir / f"{lg}.tar.gz"])
 
-    return
-
 
 def main():
 
-    logging.basicConfig(
-        format="%(message)s",
-        level=logging.INFO,
-        handlers=[logging.StreamHandler()],
-    )
-
     args = parse_args()
-
-    args.dir.mkdir(exist_ok=True, parents=True)
-
-    resources_mapping = load_resource_paths(args.dir)
-
-    if args.lg not in resources_mapping:
-        logging.warning(f"Language {args.lg} is not supported!")
-        logging.warning(
-            "Current supported languages: "
-            + ", ".join([f'{v["name"]} ({k})' for k, v in resources_mapping.items() if "name" in v])
-        )
-        exit(1)
-
-    download_lambre_files(
-        args.lg, resources_mapping, args.dir / "lambre_stanza_resources", args.dir / "rules"
-    )
+    download_lambre_files(**vars(args))
 
 
 if __name__ == "__main__":

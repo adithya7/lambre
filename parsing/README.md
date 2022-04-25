@@ -1,6 +1,6 @@
 # Training Robust Dependency Parsers
 
-To train dependency parses that are robust to morphology-related errors in text, we recommend using the UniMorph resource and Stanza training framework.
+To train dependency parses that are robust to morphology-related errors in text, we recommend using the UniMorph resource and Stanza training framework. This code is adapted from the original [Stanza]((https://stanfordnlp.github.io/stanza/)) code.
 
 ## Prepare Data
 
