@@ -53,7 +53,7 @@ writing grammatical errors to out/errors
 ```
 This will generatee separate html files for word order, agreement and case marking.
 Sample Visualization output of word order:
-![errors in word order](/examples/wordorder.jpeg "word order").
+![errors in word order](examples/wordorder.png "word order").
 
 ## Parser
 
