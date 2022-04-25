@@ -41,7 +41,7 @@ Input sentence: संख्या की स्टाफ प्रशिक्�
 ```
 Command:
 ``` 
-lambre hi examples/ocr_hi_sents_1k.txt --rule-set chaudhary-etal-2021 ```
+lambre hi examples/hi_sents_1k.txt --rule-set chaudhary-etal-2021 ```
 ```
 Example Output:
 ```
@@ -53,8 +53,9 @@ writing grammatical errors to out/errors
 ```
 This will generatee separate html files for word order, agreement and case marking, as shown in `examples/`.
 Sample Visualization output of word order:
-![errors in word order](examples/wordorder.png "word order").
+![errors in word order](examples/wordorder_1.png "word order").
 
+![errors in word order](examples/wordorder_2.png "word order").
 ## Parser
 
 We provide SUD parsers trained using [Stanza](https://stanfordnlp.github.io/stanza/) toolkit. See section 4 in [our paper](https://aclanthology.org/2021.emnlp-main.570) for more details.
