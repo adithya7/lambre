@@ -27,6 +27,34 @@ Run `lambre --help` for more options.
 
 `lambre` currently supports two rule sets, `chaudhary-etal-2021` (see [Chaudhary et al., 2020](https://aclanthology.org/2020.emnlp-main.422/), [2021](https://aclanthology.org/2021.emnlp-main.553/)) and `pratapa-etal-2021` (see [Pratapa et al., 2021](https://aclanthology.org/2021.emnlp-main.570)). The former is the default, but the rule set can be specified using `--rule-set` option.
 
+## Visualization Examples
+
+In addition to the metric, we output the erroneous sentences in two formats:i) `errors.txt` and ii) `errors*.html`. These are stored in the `out/errors`.
+`errors.txt` shows the errors in a txt file, while the `*html` file visualizes the errors in a html which you can visualize by simply opening it using any browser.
+Here is a snippet of how a sample output looks like, we ran the metric on 1000 example sentences from the [Samanantar corpus](https://indicnlp.ai4bharat.org/samanantar/) for Hindi, and here are some examples of erroneous sentences:
+```
+Input sentence: संख्या की स्टाफ प्रशिक्षित में हिंदी/वाले जानने हिंदी
+                 (Stenography Hindi in trained persons of No.)
+                 
+                 तीनवर्षतक अग्रनीत किए| जाने के बाद व्यपगत हुए| आरक्षणों की| संख्या
+                 (of after forward No. reservations lapsed carrying for 3 years)
+```
+Command:
+``` 
+lambre hi examples/ocr_hi_sents_1k.txt --rule-set chaudhary-etal-2021 ```
+```
+Example Output:
+```
+generating SUD parse for the input document
+storing .conllu file at out/ocr_hi_sents_1k.conllu
+computing document-level lambre score
+lambre score: 0.8821
+writing grammatical errors to out/errors
+```
+This will generatee separate html files for word order, agreement and case marking.
+Sample Visualization output of word order:
+![errors in word order](/examples/wordorder.jpeg "word order").
+
 ## Parser
 
 We provide SUD parsers trained using [Stanza](https://stanfordnlp.github.io/stanza/) toolkit. See section 4 in [our paper](https://aclanthology.org/2021.emnlp-main.570) for more details.
