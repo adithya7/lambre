@@ -15,8 +15,8 @@ python -m pip install -e .
 For a given input text file, `lambre` computes a morpho-syntactic well-formedness score [0-1]. The following method first downloads the parsers and rule sets for the specified language before computing the document-level score. See the output folder (`out`) for error visualizations.
 
 ```python
-import lambre
-lambre.score("ru", "data/txt/ru.txt") # Russian
+>>> import lambre
+>>> lambre.score("ru", "data/txt/ru.txt") # Russian
 # lambre.score("de", "data/txt/de.txt")
 # lambre.score("en", "data/txt/en.txt")
 ```
@@ -33,9 +33,22 @@ lambre ru data/txt/ru.txt
 
 ## Visualization Examples
 
-In addition to the metric, we output the erroneous sentences in two formats:i) `errors.txt` and ii) `errors*.html`. These are stored in the `out/errors`.
-`errors.txt` shows the errors in a txt file, while the `*html` file visualizes the errors in a html which you can visualize by simply opening it using any browser.
-Here is a snippet of how a sample output looks like, we ran the metric on 1000 example sentences from the [Samanantar corpus](https://indicnlp.ai4bharat.org/samanantar/) for Hindi, and here are some examples of erroneous sentences:
+Along with the overall L'AMBRE score, we write the erroneous sentences to the output folder `out/errors`. We provide two visualizations, i) plain text (`errors.txt`), ii) HTML (`errors/*.html`). For plain text visualization, we use the [ipymarkup](https://github.com/natasha/ipymarkup) tool. We use [brat](https://brat.nlplab.org/) for HTML visualizations.
+
+Below is a sample run on 1000 example Hindi sentences from the [Samanantar corpus](https://indicnlp.ai4bharat.org/samanantar/). 
+
+```python
+>>> import lambre
+>>> lambre.score("hi", "examples/hi_sents_1k.txt")
+generating SUD parse for the input document
+storing .conllu file at out/hi_sents_1k.conllu
+computing document-level lambre score
+lambre score: 0.8821
+writing grammatical errors to out/errors
+```
+
+A few erroneous sentences from this corpus (as detected by L'AMBRE):
+
 ```
 Input sentence: संख्या की स्टाफ प्रशिक्षित में हिंदी/वाले जानने हिंदी
                  (Stenography Hindi in trained persons of No.)
@@ -43,23 +56,13 @@ Input sentence: संख्या की स्टाफ प्रशिक्�
                  तीनवर्षतक अग्रनीत किए| जाने के बाद व्यपगत हुए| आरक्षणों की| संख्या
                  (of after forward No. reservations lapsed carrying for 3 years)
 ```
-Command:
-``` 
-lambre hi examples/hi_sents_1k.txt --rule-set chaudhary-etal-2021 ```
-```
-Example Output:
-```
-generating SUD parse for the input document
-storing .conllu file at out/ocr_hi_sents_1k.conllu
-computing document-level lambre score
-lambre score: 0.8821
-writing grammatical errors to out/errors
-```
-This will generatee separate html files for word order, agreement and case marking, as shown in `examples/`.
-Sample Visualization output of word order:
-![errors in word order](examples/wordorder_1.png "word order").
 
-![errors in word order](examples/wordorder_2.png "word order").
+Below, we show the visualizations of word order related errors for the above two sentences. We also generate separate files for agreement and case marking (see [examples/](examples/) for full HTML outputs).
+
+![errors in word order](examples/wordorder_1.png "word order")
+
+![errors in word order](examples/wordorder_2.png "word order")
+
 ## Parser
 
 We provide SUD parsers trained using [Stanza](https://stanfordnlp.github.io/stanza/) toolkit. See section 4 in [our paper](https://aclanthology.org/2021.emnlp-main.570) for more details.
@@ -80,8 +83,8 @@ We currently support the following languages. `lambre` automatically downloads t
 To manually download rules or parsers for a given language,
 
 ```python
-import lambre
-lambre.download("ru") # Russian
+>>> import lambre
+>>> lambre.download("ru") # Russian
 ```
 
 ## Reference
