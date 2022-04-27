@@ -33,9 +33,9 @@ lambre ru data/txt/ru.txt
 
 ## Visualization Examples
 
-Along with the overall L'AMBRE score, we write the erroneous sentences to the output folder `out/errors`. We provide two visualizations, i) plain text (`errors.txt`), ii) HTML (`errors/*.html`). For plain text visualization, we use the [ipymarkup](https://github.com/natasha/ipymarkup) tool. We use [brat](https://brat.nlplab.org/) for HTML visualizations.
+Along with the overall L'AMBRE score, we write the erroneous sentences to the output folder `out/errors`. We provide two visualizations, i) plain text (`errors.txt`), ii) HTML (`errors/*.html`). For plain text visualization, we use the [ipymarkup](https://github.com/natasha/ipymarkup) tool. We use [brat](https://brat.nlplab.org/) and [Universal Dependencies](https://universaldependencies.org/introduction.html#contributors) for HTML visualizations.
 
-Below is a sample run on 1000 example Hindi sentences from the [Samanantar corpus](https://indicnlp.ai4bharat.org/samanantar/). 
+Below is a sample run on 1000 example Hindi sentences from the [Samanantar corpus](https://indicnlp.ai4bharat.org/samanantar/).
 
 ```python
 >>> import lambre

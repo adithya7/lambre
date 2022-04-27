@@ -1,6 +1,7 @@
+import logging
 from collections import defaultdict
 from copy import deepcopy
-import logging
+
 import numpy as np
 from tqdm import tqdm
 
@@ -15,7 +16,9 @@ def getFeatureValue(feat, feats):
 
 
 def get_feat_str(feat_dict):
-    return "|".join(["%s=%s" % (feat, ",".join(list(feat_dict[feat]))) for feat in feat_dict])
+    return "|".join(
+        ["%s=%s" % (feat, ",".join(list(feat_dict[feat]))) for feat in feat_dict]
+    )
 
 
 def compute_argstruct_score(argstruct_aggr):
@@ -26,7 +29,9 @@ def compute_argstruct_score(argstruct_aggr):
     for depd_type in argstruct_aggr:
         for feat in argstruct_aggr[depd_type]:
             for token_type in argstruct_aggr[depd_type][feat]:
-                mismatch, match, total = argstruct_aggr[depd_type][feat][token_type]["counts"]
+                mismatch, match, total = argstruct_aggr[depd_type][feat][token_type][
+                    "counts"
+                ]
                 if mismatch + match > 0 and total > 0:
                     score, weight = float(match) / (match + mismatch), 1
                     weights.append(weight)
@@ -36,7 +41,12 @@ def compute_argstruct_score(argstruct_aggr):
     total_weight = np.sum(weights)
     if total_weight > 0:
         return (
-            np.sum([score * weight / total_weight for score, weight in zip(scores, weights)]),
+            np.sum(
+                [
+                    score * weight / total_weight
+                    for score, weight in zip(scores, weights)
+                ]
+            ),
             report,
         )
     # no errors or correct examples found for the pre-specified rules
@@ -62,7 +72,12 @@ def compute_agreement_score(agreement_aggr):
     total_weight = np.sum(agr_weights)
     if total_weight > 0:
         return (
-            np.sum([score * weight / total_weight for score, weight in zip(agr_scores, agr_weights)]),
+            np.sum(
+                [
+                    score * weight / total_weight
+                    for score, weight in zip(agr_scores, agr_weights)
+                ]
+            ),
             agr_report,
         )
     # no agreements nor disagreements found for the pre-specified rules
@@ -86,12 +101,14 @@ def compute_joint_score(agreement_aggr, argstruct_aggr):
                 scores.append(agr_score)
                 dim_score_match[dim] += match
                 dim_score_total[dim] += total
-                report["agr=%s:%s" % (agr_type, dim)] = agr_score * 100.0
+                report["agr=%s:%s" % (agr_type, dim)] = agr_score
 
     for depd_type in argstruct_aggr:
         for feat in argstruct_aggr[depd_type]:
             for token_type in argstruct_aggr[depd_type][feat]:
-                mismatch, match, total = argstruct_aggr[depd_type][feat][token_type]["counts"]
+                mismatch, match, total = argstruct_aggr[depd_type][feat][token_type][
+                    "counts"
+                ]
                 if mismatch + match > 0 and total > 0:
                     score, weight = float(match) / (match + mismatch), 1
                     weights.append(weight)
@@ -103,12 +120,17 @@ def compute_joint_score(agreement_aggr, argstruct_aggr):
     for dim, match in dim_score_match.items():
         total = dim_score_total[dim]
         percentage_match = float(match) / total
-        report[f"model: {dim}"] = percentage_match * 100.0
+        report[f"model: {dim}"] = percentage_match
 
     total_weight = np.sum(weights)
     if total_weight > 0:
         return (
-            np.sum([score * weight / total_weight for score, weight in zip(scores, weights)]),
+            np.sum(
+                [
+                    score * weight / total_weight
+                    for score, weight in zip(scores, weights)
+                ]
+            ),
             report,
         )
     else:
@@ -127,18 +149,30 @@ def check_argstruct_rule(token, head_token_idx, argstruct_dict, sent):
     if depd_type in argstruct_dict:
         for feat in argstruct_dict[depd_type]:
             token_feat_value = token.feats[feat] if feat in token.feats else None
-            head_feat_value = sent[head_token_idx].feats[feat] if feat in sent[head_token_idx].feats else None
+            head_feat_value = (
+                sent[head_token_idx].feats[feat]
+                if feat in sent[head_token_idx].feats
+                else None
+            )
             isRuleErrorDepd, isRuleErrorHead = False, False
 
             depd_dict_value = argstruct_dict[depd_type][feat]["depd"]
             if token_feat_value != None and depd_dict_value["feat_value"] != "-":
-                if len(token_feat_value & set(depd_dict_value["feat_value"].split(","))) == 0:
+                if (
+                    len(
+                        token_feat_value & set(depd_dict_value["feat_value"].split(","))
+                    )
+                    == 0
+                ):
                     isRuleErrorDepd = True
 
             """ checking for error in argument structure rule w.r.t head """
             head_dict_value = argstruct_dict[depd_type][feat]["head"]
             if head_feat_value != None and head_dict_value["feat_value"] != "-":
-                if len(head_feat_value & set(head_dict_value["feat_value"].split(","))) == 0:
+                if (
+                    len(head_feat_value & set(head_dict_value["feat_value"].split(",")))
+                    == 0
+                ):
                     isRuleErrorHead = True
 
             """ depd argument structure rule """
@@ -178,11 +212,24 @@ def check_agreement(token, head_token_idx, agreement_dict, sent):
         for feat in agreement_dict[agr_type]:
             isDisagreement = False
             token_feat_value = token.feats[feat] if feat in token.feats else None
-            head_feat_value = sent[head_token_idx].feats[feat] if feat in sent[head_token_idx].feats else None
+            head_feat_value = (
+                sent[head_token_idx].feats[feat]
+                if feat in sent[head_token_idx].feats
+                else None
+            )
             if token_feat_value != None and head_feat_value != None:
                 if len(token_feat_value & head_feat_value) == 0:
                     isDisagreement = True
-                    errors += [(sent, feat, token.id, token_feat_value, head_token_idx, head_feat_value)]
+                    errors += [
+                        (
+                            sent,
+                            feat,
+                            token.id,
+                            token_feat_value,
+                            head_token_idx,
+                            head_feat_value,
+                        )
+                    ]
 
             if not isDisagreement:
                 agreement_dict[agr_type][feat][1] += 1
@@ -203,15 +250,16 @@ def get_sent_score(data, lang_agr, lang_argstruct, verbose: bool = False):
     logging.info(f"computing sentence-level lambre score")
 
     scores = []
-    sent_examples = []
+    error_tuples = []
 
     for sent in tqdm(data, disable=not verbose):
-        id2index = sent._ids_to_indexes
+
         agreement_aggr = {}
         for agr_type in lang_agr:
             agreement_aggr[agr_type] = {}
-            for dim_type, _, _ in lang_agr[agr_type]:
+            for dim_type in lang_agr[agr_type]:
                 agreement_aggr[agr_type][dim_type] = [0] * 3
+
         argstruct_aggr = {}
         for depd_type in lang_argstruct:
             argstruct_aggr[depd_type] = {}
@@ -231,81 +279,43 @@ def get_sent_score(data, lang_agr, lang_argstruct, verbose: bool = False):
         sent_tokens = []
         for token in sent:
             sent_tokens.append(token.form)
-        print_examples = []
+
         for token in sent:
-            new_sent_tokens = deepcopy(sent_tokens)
             if token.head != "0" and token.head is not None:
                 anns = [token.upos, token.deprel, sent[token.head].upos]
                 if not None in anns:
-                    errors_in_features, _ = check_agreement(
+                    token_error_feats, token_error_tuples = check_agreement(
                         token,
                         token.head,
                         agreement_aggr,
                         sent,
                     )
-                    arg_errors_in_features, _ = check_argstruct_rule(
+                    error_tuples.extend(token_error_tuples)
+                    token_error_feats, token_error_tuples = check_argstruct_rule(
                         token,
                         token.head,
                         argstruct_aggr,
                         sent,
                     )
-                    if len(errors_in_features) > 0:
-                        for feature in errors_in_features:
-                            new_sent_tokens = deepcopy(sent_tokens)
-                            token_num = id2index[token.id]
-                            token_feature_value = getFeatureValue(feature, token.feats)
-                            new_sent_tokens[token_num] = (
-                                "***" + new_sent_tokens[token_num] + f"({feature}={token_feature_value})***"
-                            )
-
-                            token_head_num = id2index[token.head]
-                            token_feature_value = getFeatureValue(feature, sent[token.head].feats)
-                            new_sent_tokens[token_head_num] = (
-                                "***"
-                                + new_sent_tokens[token_head_num]
-                                + f"({feature}={token_feature_value})***"
-                            )
-                            print_examples.append(" ".join(new_sent_tokens) + "\n")
-                            print_examples.append(f"{feature} agreement not followed by tokens ***\n")
-                            print_examples.append("\n")
-
-                    if len(arg_errors_in_features) > 0:
-                        for feature in arg_errors_in_features:
-                            new_sent_tokens = deepcopy(sent_tokens)
-                            token_num = id2index[token.id]
-                            token_feature_value = getFeatureValue(feature, token.feats)
-                            new_sent_tokens[token_num] = (
-                                "***" + new_sent_tokens[token_num] + f"({feature}={token_feature_value})***"
-                            )
-
-                            token_head_num = id2index[token.head]
-                            token_feature_value = getFeatureValue(feature, sent[token.head].feats)
-                            new_sent_tokens[token_head_num] = (
-                                "***"
-                                + new_sent_tokens[token_head_num]
-                                + f"({feature}={token_feature_value})***"
-                            )
-                            print_examples.append(" ".join(new_sent_tokens) + "\n")
-                            print_examples.append(f"{feature} argstruct not followed by tokens ***\n")
-                            print_examples.append("\n")
+                    error_tuples.extend(token_error_tuples)
 
         agr_score, agr_report = compute_agreement_score(agreement_aggr)
         argstruct_score, argstruct_report = compute_argstruct_score(argstruct_aggr)
         score, report = compute_joint_score(agreement_aggr, argstruct_aggr)
+
         scores.append(
             {
-                "agr": agr_score,
+                "agr_score": agr_score,
                 "agr_report": agr_report,
-                "argstruct": argstruct_score,
+                "argstruct_score": argstruct_score,
                 "argstruct_report": argstruct_report,
-                "joint": score,
+                "joint_score": score,
                 "joint_report": report,
                 "sent": " ".join(sent_tokens),
-                "examples": "".join(print_examples),
             }
         )
 
-    return scores
+    return scores, error_tuples
 
 
 def get_doc_score(data, lang_agr, lang_argstruct, verbose: bool = False):
