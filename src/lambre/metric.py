@@ -37,7 +37,7 @@ def parse_args():
         help="specify path to output directory. Stores parser output and error visualizations.",
     )
     parser.add_argument(
-        "--score_sent", action="store_true", help="return sentence level scores"
+        "--score-sent", action="store_true", help="return sentence level scores"
     )
     parser.add_argument(
         "--ssplit",

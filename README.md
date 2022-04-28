@@ -7,7 +7,7 @@ L'AMBRE is a tool to measure the grammatical well-formedness of texts generated 
 ### Install
 
 ```bash
-python -m pip install -e .
+python -m pip install .
 ```
 
 ### Try L'AMBRE
