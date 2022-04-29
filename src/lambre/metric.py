@@ -2,6 +2,7 @@ import argparse
 import logging
 import subprocess
 from pathlib import Path
+from re import L
 
 import pyconll
 
@@ -36,6 +37,9 @@ def parse_args():
         help="specify path to output directory. Stores parser output and error visualizations.",
     )
     parser.add_argument(
+        "--score-sent", action="store_true", help="return sentence level scores"
+    )
+    parser.add_argument(
         "--ssplit",
         action="store_true",
         help="perform sentence segmentation in addition to tokenization",
@@ -63,6 +67,7 @@ def compute_metric(
     input: Path,
     rule_set: str = "chaudhary-etal-2021",
     output: Path = "out",
+    score_sent: bool = False,
     ssplit: bool = False,
     report: bool = False,
     rules_path: Path = Path.home() / "lambre_files" / "rules",
@@ -133,25 +138,59 @@ def compute_metric(
         lang_agr, lang_argstruct = rule_utils.load_pratapa_etal_2021_rules(
             rules_file_path
         )
-        doc_score, error_tuples = score_utils_pratapa.get_doc_score(
-            sentences, lang_agr, lang_argstruct, verbose=verbose
-        )
+        if score_sent:
+            sent_scores, error_tuples = score_utils_pratapa.get_sent_score(
+                sentences, lang_agr, lang_argstruct, verbose=verbose
+            )
+        else:
+            doc_score, error_tuples = score_utils_pratapa.get_doc_score(
+                sentences, lang_agr, lang_argstruct, verbose=verbose
+            )
 
     elif rule_set == "chaudhary-etal-2021":
         lang_rules = rule_utils.load_chaudhury_etal_2021_rules(rules_file_path)
-        doc_score, error_tuples = score_utils_chaudhary.get_doc_score(
-            sentences, lang_rules, verbose=verbose
-        )
-    f = open(output / "score.txt", "w")
-    logging.info(f"lambre score: {doc_score['joint_score']:.4f}")
-    f.write(f"lambre score: {doc_score['joint_score']:.4f}")
+        if score_sent:
+            sent_scores, error_tuples = score_utils_chaudhary.get_sent_score(
+                sentences, lang_rules, verbose=verbose
+            )
+        else:
+            doc_score, error_tuples = score_utils_chaudhary.get_doc_score(
+                sentences, lang_rules, verbose=verbose
+            )
 
+    scores_path = output / "score.txt"
+    f = open(scores_path, "w")
+
+    # write L'AMBRE scores
+    f.write("L'AMBRE scores\n")
+    if score_sent:
+        logging.info(f"writing sentence-level L'AMBRE scores to {scores_path}")
+        for idx, _item in enumerate(sent_scores):
+            f.write(
+                f"sent_idx: {idx}\tlambre_score: {_item['joint_score']:.4f}\tsent: {_item['sent']}\n"
+            )
+    else:
+        logging.info(f"lambre_score: {doc_score['joint_score']:.4f}")
+        f.write(f"lambre_score: {doc_score['joint_score']:.4f}\n")
+
+    # write L'AMBRE scores per rule
     if report:
-        doc_report = doc_score["joint_report"]
-        for rule, score in doc_report.items():
-            logging.info(f"{rule}\t{score:.4f}")
-            f.write(f"\n{rule}\t{score:.4f}")
+        logging.info(f"writing sentence-level report to {scores_path}")
+        f.write("\nL'AMBRE score per rule\n")
+        if score_sent:
+            for idx, _item in enumerate(sent_scores):
+                f.write(f"\n# sent_idx: {idx}")
+                f.write(f"\n# sent: {_item['sent']}")
+                for rule, score in _item["joint_report"].items():
+                    f.write(f"\n{rule}\t{score:.4f}")
+
+        else:
+            doc_report = doc_score["joint_report"]
+            for rule, score in doc_report.items():
+                f.write(f"\n{rule}\t{score:.4f}")
+
     f.close()
+
     """
     output txt and html visualizations of the grammatical errors
     """
