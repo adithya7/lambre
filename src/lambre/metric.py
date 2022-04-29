@@ -162,14 +162,16 @@ def compute_metric(
     f = open(scores_path, "w")
 
     # write L'AMBRE scores
-    f.write("Overall L'AMBRE scores\n")
+    f.write("L'AMBRE scores\n")
     if score_sent:
         logging.info(f"writing sentence-level L'AMBRE scores to {scores_path}")
         for idx, _item in enumerate(sent_scores):
-            f.write(f"sent idx: {idx}\tlambre score: {_item['joint_score']:.4f}\n")
+            f.write(
+                f"sent_idx: {idx}\tlambre_score: {_item['joint_score']:.4f}\tsent: {_item['sent']}\n"
+            )
     else:
-        logging.info(f"lambre score: {doc_score['joint_score']:.4f}")
-        f.write(f"lambre score: {doc_score['joint_score']:.4f}\n")
+        logging.info(f"lambre_score: {doc_score['joint_score']:.4f}")
+        f.write(f"lambre_score: {doc_score['joint_score']:.4f}\n")
 
     # write L'AMBRE scores per rule
     if report:
@@ -177,7 +179,8 @@ def compute_metric(
         f.write("\nL'AMBRE score per rule\n")
         if score_sent:
             for idx, _item in enumerate(sent_scores):
-                f.write(f"\n# sent idx: {idx}")
+                f.write(f"\n# sent_idx: {idx}")
+                f.write(f"\n# sent: {_item['sent']}")
                 for rule, score in _item["joint_report"].items():
                     f.write(f"\n{rule}\t{score:.4f}")
 

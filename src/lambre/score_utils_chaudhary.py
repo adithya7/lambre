@@ -442,6 +442,7 @@ def get_sent_score(data, lang_rule_all, verbose: bool = False):
                 "assignment_report": am_report,
                 "joint_score": score,
                 "joint_report": report,
+                "sent": " ".join(sent_tokens),
             }
         )
 
