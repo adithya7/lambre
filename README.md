@@ -4,10 +4,10 @@ L'AMBRE is a tool to measure the grammatical well-formedness of texts generated 
 
 ## Getting Started
 
-### Install
+### Install from PyPI
 
 ```bash
-python -m pip install .
+python -m pip install lambre
 ```
 
 ### Try L'AMBRE
