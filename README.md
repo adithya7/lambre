@@ -16,9 +16,10 @@ For a given input text file, `lambre` computes a morpho-syntactic well-formednes
 
 ```python
 >>> import lambre
->>> lambre.score("ru", "data/txt/ru.txt") # Russian
-# lambre.score("de", "data/txt/de.txt")
-# lambre.score("en", "data/txt/en.txt")
+>>> with open("data/txt/ru.txt", "r") as rf:
+...     data = rf.readlines()
+>>> lambre.score("ru", data)
+0.9962
 ```
 
 L'AMBRE can also be used from command line. See `lambre --help` for more options.
@@ -39,12 +40,10 @@ Below is a sample run on 1000 example Hindi sentences from the [Samanantar corpu
 
 ```python
 >>> import lambre
->>> lambre.score("hi", "examples/hi_sents_1k.txt")
-generating SUD parse for the input document
-storing .conllu file at out/hi_sents_1k.conllu
-computing document-level lambre score
-lambre score: 0.8821
-writing grammatical errors to out/errors
+>>> with open("examples/hi_sents_1k.txt", "r") as rf:
+...     data = rf.readlines()
+>>> lambre.score("hi", data)
+0.8821
 ```
 
 A few erroneous sentences from this corpus (as detected by L'AMBRE):
