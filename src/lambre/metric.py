@@ -2,7 +2,7 @@ import argparse
 import logging
 import subprocess
 from pathlib import Path
-from re import L
+from typing import List
 
 import pyconll
 
@@ -62,17 +62,55 @@ def parse_args():
     return parser.parse_args()
 
 
-def compute_metric(
+def check_lang(lg: str, stanza_path: Path) -> bool:
+    """Check language support"""
+    lang_parser_path = stanza_path / lg
+    if not lang_parser_path.is_dir():
+        # try download
+        try:
+            subprocess.run(["lambre-download", lg], check=True)
+        except:
+            logging.warning(f"skipping scorer")
+            return False
+    return True
+
+
+def parse_doc(
+    doc: str,
     lg: str,
-    input: Path,
-    rule_set: str = "chaudhary-etal-2021",
-    output: Path = "out",
-    score_sent: bool = False,
-    ssplit: bool = False,
-    report: bool = False,
-    rules_path: Path = Path.home() / "lambre_files" / "rules",
-    stanza_path: Path = Path.home() / "lambre_files" / "lambre_stanza_resources",
-    verbose: bool = False,
+    stanza_path: Path,
+    output: Path,
+    ssplit: bool,
+    verbose: bool,
+    file_name: str = None,
+):
+
+    depd_tree = get_depd_tree(
+        doc=doc,
+        lg=lg,
+        stanza_model_path=stanza_path,
+        ssplit=ssplit,
+        verbose=verbose,
+    )
+    sentences = pyconll.load_from_string(depd_tree)
+    if file_name:
+        parser_out_path = output / f"{file_name}.conllu"
+        logging.info(f"storing .conllu file at {parser_out_path}")
+        with open(parser_out_path, "w") as wf:
+            wf.write(depd_tree)
+
+    return sentences
+
+
+def compute_metric(
+    sentences,
+    lg: str,
+    score_sent: bool,
+    rule_set: str,
+    rules_path: Path,
+    report: bool,
+    verbose: bool,
+    output: Path,
 ):
 
     logging.basicConfig(
@@ -81,45 +119,9 @@ def compute_metric(
         handlers=[logging.StreamHandler()],
     )
 
-    input = Path(input)
-    output = Path(output)
-    rules_path = Path(rules_path)
-    stanza_path = Path(stanza_path)
-
-    """
-    Check language support
-    """
-    lang_parser_path = stanza_path / lg
-    if not lang_parser_path.is_dir():
-        # try download
-        try:
-            subprocess.run(["lambre-download", lg], check=True)
-        except subprocess.CalledProcessError:
-            logging.warning(f"skipping scorer")
-            return
-
     """
     Scorer expects CoNLL-U file with morphological feature values and (SUD) dependency parse 
     """
-
-    output.mkdir(exist_ok=True)
-    if input.suffix == ".conllu":
-        # input CoNLL-U file, directly load the file
-        sentences = pyconll.load_from_file(input)
-    else:
-        # input txt file, parse
-        depd_tree = get_depd_tree(
-            txt_path=input,
-            lg=lg,
-            stanza_model_path=stanza_path,
-            ssplit=ssplit,
-            verbose=verbose,
-        )
-        sentences = pyconll.load_from_string(depd_tree)
-        parser_out_path = output / f"{input.stem}.conllu"
-        logging.info(f"storing .conllu file at {parser_out_path}")
-        with open(parser_out_path, "w") as wf:
-            wf.write(depd_tree)
 
     """
     Load rule sets and score
@@ -219,7 +221,7 @@ def compute_metric(
                 info = line.strip().split(":")
                 rule_links[info[0]] = info[1]
 
-        out_spans, out_depds, error_types = visualize.visualize_errors_chau(
+        out_spans, out_depds = visualize.visualize_errors_chau(
             error_tuples, relation_map
         )
         visualize.write_visualizations(errors_path / "errors.txt", out_spans, out_depds)
@@ -243,10 +245,93 @@ def compute_metric(
                 errors_path / "errors_marking.html", out_conll_str_assignment
             )
 
+    if score_sent:
+        return [round(sent_score["joint_score"], 4) for sent_score in sent_scores]
+    else:
+        return round(doc_score["joint_score"], 4)
+
+
+def score(
+    lg: str,
+    doc: List[str],
+    rule_set: str = "chaudhary-etal-2021",
+    output: Path = "out",
+    score_sent: bool = False,
+    report: bool = False,
+    ssplit: bool = False,
+    rules_path: Path = Path.home() / "lambre_files" / "rules",
+    stanza_path: Path = Path.home() / "lambre_files" / "lambre_stanza_resources",
+    verbose: bool = False,
+):
+    if not check_lang(lg=lg, stanza_path=stanza_path):
+        return
+
+    if ssplit:
+        parser_input_doc = "".join(doc)
+    else:
+        parser_input_doc = "\n\n".join(doc)
+    sentences = parse_doc(
+        doc=parser_input_doc,
+        lg=lg,
+        stanza_path=stanza_path,
+        output=output,
+        ssplit=ssplit,
+        verbose=verbose,
+    )
+    scores = compute_metric(
+        sentences=sentences,
+        lg=lg,
+        score_sent=score_sent,
+        rule_set=rule_set,
+        rules_path=Path(rules_path),
+        report=report,
+        verbose=verbose,
+        output=Path(output),
+    )
+
+    return scores
+
 
 def main():
-    args = parse_args()
-    compute_metric(**vars(args))
+
+    args = vars(parse_args())
+
+    if not check_lang(lg=args["lg"], stanza_path=args["stanza_path"]):
+        return
+
+    input = Path(args["input"])
+    args["output"].mkdir(exist_ok=True)
+    if input.suffix == ".conllu":
+        # input CoNLL-U file, directly load the file
+        sentences = pyconll.load_from_file(input)
+    else:
+        # input txt file, parse
+        doc = ""
+        with open(input, "r") as rf:
+            for line in rf:
+                doc += line
+                if args["tokenize"] and not args["ssplit"]:
+                    doc += "\n"
+        sentences = parse_doc(
+            doc=doc,
+            lg=args["lg"],
+            stanza_path=args["stanza_path"],
+            output=args["output"],
+            ssplit=args["ssplit"],
+            verbose=args["verbose"],
+            file_name=input.stem,
+        )
+
+    compute_metric(
+        sentences=sentences,
+        lg=args["lg"],
+        score_sent=args["score_sent"],
+        rule_set=args["rule_set"],
+        rules_path=args["rules_path"],
+        report=args["report"],
+        verbose=args["verbose"],
+        output=args["output"],
+    )
 
 
 if __name__ == "__main__":
