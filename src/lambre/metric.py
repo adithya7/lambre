@@ -113,14 +113,8 @@ def compute_metric(
     output: Path,
 ):
 
-    logging.basicConfig(
-        format="%(message)s",
-        level=logging.INFO,
-        handlers=[logging.StreamHandler()],
-    )
-
     """
-    Scorer expects CoNLL-U file with morphological feature values and (SUD) dependency parse 
+    Scorer expects CoNLL-U file with morphological feature values and (SUD) dependency parse
     """
 
     """
@@ -294,6 +288,12 @@ def score(
 
 def main():
 
+    logging.basicConfig(
+        format="%(message)s",
+        level=logging.INFO,
+        handlers=[logging.StreamHandler()],
+    )
+
     args = vars(parse_args())
 
     if not check_lang(lg=args["lg"], stanza_path=args["stanza_path"]):
@@ -310,7 +310,7 @@ def main():
         with open(input, "r") as rf:
             for line in rf:
                 doc += line
-                if args["tokenize"] and not args["ssplit"]:
+                if not args["ssplit"]:
                     doc += "\n"
         sentences = parse_doc(
             doc=doc,
